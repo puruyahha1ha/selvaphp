@@ -82,7 +82,7 @@
     if ($password !== $password_check) {
         $errors['password_check_match'] = '※パスワードとパスワード確認が異なっています';
     }
-    
+
     // メールアドレスのバリデーション
     if (empty($mail)) {
         $errors['mail'] = '※メールアドレスは必須入力です';
@@ -154,7 +154,7 @@
             <input type="hidden" name="mail" value="<?php echo $_POST["mail"] ?>">
         </div>
         <div class="submit">
-            <input type="submit" name="confirm" value="確認画面へ" class="button">
+            <input type="submit" name="confirm" value="登録完了" class="button">
         </div>
         <div class="submit">
             <input type="button" onclick="history.back()" value="前に戻る" class="button_back">
