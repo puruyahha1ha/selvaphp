@@ -134,7 +134,7 @@ if (!empty($_SESSION['back'])) {
                 value="<?php if (!empty($last_name)) {echo htmlspecialchars($last_name);} ?>"
             >
         </div>
-        <div class="error">
+        <div class="error" style="color: red";>
             <?php 
                 if (!empty($errors['first_name'])) {
                     echo $errors['first_name']."<br>";
