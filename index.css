@@ -9,7 +9,7 @@ h1 {
     padding-left: 100px;
     margin: 20px;
 }
-.name,.gender,.address,.password,.password_confirm,.mail {
+.name,.gender,.address,.password,.password_check,.mail {
     display: flex;
     justify-content: flex-start;
     margin: 10px;
@@ -34,10 +34,14 @@ select {
     width: 295px;
     height: 20px;
 }
-.password input,.password_confirm input,.mail input {
+.password input,.password_check input,.mail input {
     width: 410px;
     height: 20px;
 }
+.other_prefecture {
+    display: flex;
+}
+
 .submit {
     margin-top: 20px;
     padding-left: 175px;
@@ -68,6 +72,8 @@ span {
     padding-left: 100px;
     width: 300px;
 }
-.hitoshi {
-    display: none;
+
+.error {
+    color: red;
+    margin-left: 150px;
 }
