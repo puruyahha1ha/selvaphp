@@ -101,6 +101,12 @@ if (!empty($_SESSION['back'])) {
     } else {
         $mail = $_SESSION['mail'];
     }
+    if (!empty($_SESSION['errors']['mail_filter'])) {
+        $errors['mail_filter'] = $_SESSION['errors']['mail_filter'];
+        $mail = $_SESSION['mail'];
+    } else {
+        $mail = $_SESSION['mail'];
+    }
 }
 
 ?>
@@ -299,7 +305,10 @@ if (!empty($_SESSION['back'])) {
         <div class="error">
             <?php 
                 if (!empty($errors['mail'])) {
-                    echo $errors['mail'];
+                    echo $errors['mail']."<br>";
+                }
+                if (!empty($errors['mail_filter'])) {
+                    echo $errors['mail_filter'];
                 }
             ?>
         </div>
