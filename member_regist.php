@@ -134,7 +134,7 @@ if (!empty($_SESSION['back'])) {
                 value="<?php if (!empty($last_name)) {echo htmlspecialchars($last_name);} ?>"
             >
         </div>
-        <div class="error" style="color: red";>
+        <div class="error" style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['first_name'])) {
                     echo $errors['first_name']."<br>";
@@ -166,7 +166,7 @@ if (!empty($_SESSION['back'])) {
             >
             <label for="女性">女性</label>
         </div>
-        <div class="error">
+        <div class="error"  style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['gender'])) {
                     echo $errors['gender'];
@@ -239,7 +239,7 @@ if (!empty($_SESSION['back'])) {
                 </div>
             </div>
         </div>
-        <div class="error">
+        <div class="error"  style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['prefecture'])) {
                     echo $errors['prefecture']."<br>";
@@ -257,7 +257,7 @@ if (!empty($_SESSION['back'])) {
                 value="<?php if (!empty($password)) {echo htmlspecialchars($password);} ?>"
             >
         </div>
-        <div class="error">
+        <div class="error"  style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['password'])) {
                     echo $errors['password']."<br>";
@@ -275,7 +275,7 @@ if (!empty($_SESSION['back'])) {
                 value="<?php if (!empty($password_check)) {echo htmlspecialchars($password_check);} ?>"
             >
         </div>
-        <div class="error">
+        <div class="error"  style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['password_check'])) {
                     echo $errors['password_check']."<br>";
@@ -296,7 +296,7 @@ if (!empty($_SESSION['back'])) {
                 value="<?php if (!empty($mail)) {echo htmlspecialchars($mail);} ?>"
             >
         </div>
-        <div class="error">
+        <div class="error"  style="color: red; margin-left: 150px;">
             <?php 
                 if (!empty($errors['mail'])) {
                     echo $errors['mail'];
