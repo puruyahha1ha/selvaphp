@@ -1,14 +1,12 @@
 <?php 
 session_start();
+//直リンクされた場合リダイレクト
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: member_regist.php");
+    exit;
+}
 
 if ($_POST['confirm'] === '登録完了') {
-    // $dsn = 'mysql:dbname=mysql;host=localhost';
-    // $user = 'root';
-    // $password = '';
-    // $db = new PDO($dsn, $user, $password);
-
-    // phpinfo();
-
     
     try {
         $dsn = 'mysql : dbname=mysql; host=localhost';

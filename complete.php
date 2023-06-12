@@ -1,4 +1,10 @@
-
+<?php
+//直リンクされた場合リダイレクト
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: member_regist.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
