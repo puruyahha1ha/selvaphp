@@ -2,74 +2,75 @@
 session_start();
 
 if ($_POST['confirm'] === '登録完了') {
-    $dsn = 'mysql:dbname=mysql;host=localhost';
-    $user = 'root';
-    $password = '';
-    $db = new PDO($dsn, $user, $password);
-    phpinfo();
+    // $dsn = 'mysql:dbname=mysql;host=localhost';
+    // $user = 'root';
+    // $password = '';
+    // $db = new PDO($dsn, $user, $password);
 
-    //
-    // try {
-    //     $dsn = 'mysql : dbname=mysql; host=localhost';
-    //     $user = 'root';
-    //     $password = 'kazuto060603';
+    // phpinfo();
 
-    //     $db = new PDO($dsn, $user, $password);
+    
+    try {
+        $dsn = 'mysql : dbname=mysql; host=localhost';
+        $user = 'root';
+        $password = '';
 
-    //     if (!empty($_POST['update'])) {
-    //         // 変更時の処理
+        $db = new PDO($dsn, $user, $password);
 
-    //     } else {
-    //         $email = $_POST['mail'];
-    //         $sql_select = "SELECT * from members where email = '$mail'";
+        if (!empty($_POST['update'])) {
+            // 変更時の処理
+
+        } else {
+            $email = $_POST['mail'];
+            $sql_select = "SELECT * from members where email = '$mail'";
         
-    //         $res = $mysqli->query($sql_select);
-    //         if (!$res) {
-    //             error_log($mysqli->error);
-    //             exit;
-    //         }
-    //         // 重複データの有無をチェック
-    //         if (mysqli_num_rows($res) == 0) {
-    //             // 重複するデータがない場合
-    //             // 登録時の処理
-    //             $sql = 'INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now())';
+            $res = $mysqli->query($sql_select);
+            if (!$res) {
+                error_log($mysqli->error);
+                exit;
+            }
+            // 重複データの有無をチェック
+            if (mysqli_num_rows($res) == 0) {
+                // 重複するデータがない場合
+                // 登録時の処理
+                $sql = 'INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now())';
             
-    //             $statement = $db->prepare($sql);
+                $statement = $db->prepare($sql);
             
-    //             $db->beginTransaction();
+                $db->beginTransaction();
             
-    //             $params = [
-    //                 ':name_sei' => $_POST['first_name'],
-    //                 ':name_mei' => $_POST['last_name'],
-    //                 ':gender' => $_POST['gender'],
-    //                 ':pref_name' => $_POST['prefecture'],
-    //                 ':address' => $_POST['other_prefecture'],
-    //                 ':password' => $_POST['password'],
-    //                 ':email' => $_POST['mail'],
-    //             ];
+                $params = [
+                    ':name_sei' => $_POST['first_name'],
+                    ':name_mei' => $_POST['last_name'],
+                    ':gender' => $_POST['gender'],
+                    ':pref_name' => $_POST['prefecture'],
+                    ':address' => $_POST['other_prefecture'],
+                    ':password' => $_POST['password'],
+                    ':email' => $_POST['mail'],
+                ];
             
-    //             $statement->execute($params);
-    //             $db->commit();
-    //             header('Location: complete.php', true, 307);
-    //             exit;        
-    //         }else{
-    //             // 重複するデータがある場合
-    //             $errors['mail'] = '※このメールアドレスはすでに使用されています';
+                $statement->execute($params);
+                $db->commit();
+                header('Location: complete.php', true, 307);
+                exit;        
+            }else{
+                // 重複するデータがある場合
+                $errors['mail'] = '※このメールアドレスはすでに使用されています';
             
-    //             header("Location: member_regist.php");
-    //             exit;
-    //         }
-    //     }
+                header("Location: member_regist.php");
+                exit;
+            }
+        }
 
-    //     $statement = null;
+        $statement = null;
 
-    // } catch (PDOException $e) {
-    //     if (!empty($db)) {
-    //         $db->rollback();
-    //     }
-    //     echo 'DB接続エラー:' . $e->getMessage();
-    //     return;
-    // }
+    } catch (PDOException $e) {
+        if (!empty($db)) {
+            $db->rollback();
+        }
+        echo 'DB接続エラー:' . $e->getMessage();
+        return;
+    }
 }
 if ($_POST['confirm'] === '前に戻る') {
     header('Location: member_regist.php', true, 307);
