@@ -5,7 +5,7 @@ if ($_POST['confirm'] === '登録完了') {
     $dsn = 'mysql : dbname=mysql; host=localhost';
     $user = 'root';
     $password = 'kazuto060603';
-    // $db = new PDO($dsn, $user, $password);
+    $db = new PDO($dsn, $user, $password);
     phpinfo();
 
     //
