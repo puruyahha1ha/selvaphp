@@ -2,7 +2,7 @@
 session_start();
 
 if ($_POST['confirm'] === '登録完了') {
-    $dsn = 'mysql : dbname=mysql; host=localhost';
+    $dsn = 'mysql : dbname=mysql; host=ik1-407-35703.vs.sakura.ne.jp';
     $user = 'root';
     $password = 'kazuto060603';
     $db = new PDO($dsn, $user, $password);
