@@ -9,7 +9,7 @@ h1 {
     padding-left: 100px;
     margin: 20px;
 }
-.name,.gender,.address,.password,.password_check,.mail {
+.name,.gender,.address,.password,.password_check,.email {
     display: flex;
     justify-content: flex-start;
     margin: 10px;
@@ -34,7 +34,7 @@ select {
     width: 295px;
     height: 20px;
 }
-.password input,.password_check input,.mail input {
+.password input,.password_check input,.email input {
     width: 410px;
     height: 20px;
 }
@@ -43,6 +43,8 @@ select {
 }
 
 .submit {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
     padding-left: 175px;
 }
@@ -61,11 +63,12 @@ select {
     width: 200px;
     height: 45px;
     border-radius: 10px;
+    margin-top: 30px;
 }
 span {
     width: 300px;
 }
-.mail_color {
+.email_color {
     color: blue;
 }
 .complete {

@@ -1,7 +1,4 @@
-<?php
-session_start();
-session_destroy();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,3 +14,4 @@ session_destroy();
     <p class="complete">会員登録が完了しました。</label>
 </body>
 </html>
+
