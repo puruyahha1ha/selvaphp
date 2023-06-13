@@ -11,9 +11,9 @@ if ($_POST['confirm'] === '登録完了') {
     try {
         $dsn = 'mysql : dbname=mysql; host=localhost';
         $user = 'root';
-        $password = '';
+        $password = 'kazuto060603';
 
-        // $db = new PDO($dsn, $user, $password);
+        $db = new PDO($dsn, $user, $password);
         phpinfo();
         if (!empty($_POST['update'])) {
             // 変更時の処理
