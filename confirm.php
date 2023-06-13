@@ -14,15 +14,17 @@ if ($_POST['confirm'] === '登録完了') {
         $password = 'kazuto060603';
 
         $db = new PDO($dsn, $user, $password);
-        printf("ok");
-        // if (!empty($_POST['update'])) {
-        //     // 変更時の処理
+        if (!empty($_POST['update'])) {
+            // 変更時の処理
 
-        // } else {
-        //     $email = $_POST['mail'];
-        //     $sql_select = "SELECT * from members where email = '$mail'";
+        } else {
+            $email = $_POST['mail'];
+            $sql_select = "SELECT * from members where email = '$mail'";
+            printf("ok");
         
-        //     $res = $mysqli->query($sql_select);
+            $res = $mysqli->query($sql_select);
+            printf("ok_res");
+
         //     if (!$res) {
         //         error_log($mysqli->error);
         //         exit;
@@ -58,7 +60,7 @@ if ($_POST['confirm'] === '登録完了') {
         //         header("Location: member_regist.php");
         //         exit;
         //     }
-        // }
+        }
 
         // $statement = null;
 
