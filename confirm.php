@@ -32,24 +32,23 @@ if ($_POST['confirm'] === '登録完了') {
             $prepare->bindValue(':email', $email, PDO::PARAM_STR);
             $prepare->execute();
 
-            $res = $prepare->fetch();
-            var_dump($res);
+            $prepare->debugDumpParams();
 
             if (!$res) {
                 // DBにメールアドレスがない場合
-                $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
+                $prepare1 = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
 
                 // 値をセット
-                $prepare->bindValue(':name_sei', $name_sei);
-                $prepare->bindValue(':name_mei', $name_mei);
-                $prepare->bindValue(':gender', $gender);
-                $prepare->bindValue(':pref_name', $pref_name);
-                $prepare->bindValue(':address', $address);
-                $prepare->bindValue(':password', $password);
-                $prepare->bindValue(':email', $email);
+                $prepare1->bindValue(':name_sei', $name_sei);
+                $prepare1->bindValue(':name_mei', $name_mei);
+                $prepare1->bindValue(':gender', $gender);
+                $prepare1->bindValue(':pref_name', $pref_name);
+                $prepare1->bindValue(':address', $address);
+                $prepare1->bindValue(':password', $password);
+                $prepare1->bindValue(':email', $email);
 
-                $prepare->execute();
-                $res = $prepare->fetch();
+                $prepare1->execute();
+                $res = $prepare1->fetch();
                 // header('Location: complete.php', true, 307);
             } else {
                 // DBにメールアドレスがある場合
