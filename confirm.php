@@ -34,8 +34,9 @@ if ($_POST['confirm'] === '登録完了') {
             $prepare->execute();
 
             $prepare->debugDumpParams();
+            $record = $prepare->fetch();
 
-            if (!$res) {
+            if (!$record) {
                 // DBにメールアドレスがない場合
                 $prepare1 = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
 
