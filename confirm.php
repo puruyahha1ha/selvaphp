@@ -26,7 +26,8 @@ if ($_POST['confirm'] === '登録完了') {
             $address = $_POST['address'];
             $password = $_POST['password'];
             $email = $_POST['mail'];
-
+            var_dump($_POST);
+            
             // SQL文をセット
             $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email;');
             $prepare->bindValue(':email', $email, PDO::PARAM_STR);
