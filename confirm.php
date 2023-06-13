@@ -33,6 +33,7 @@ if ($_POST['confirm'] === '登録完了') {
             $prepare->execute();
             
             $res = $prepare->fetch();
+            var_dump($res['email']);
 
             if (!$res) {
                 // DBにメールアドレスがない場合
@@ -48,7 +49,7 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare->bindValue(':email',$email);
 
                 $prepare->execute();
-                var_dump($prepare);
+                $res = $prepare->fetch();
                 // header('Location: complete.php', true, 307);
             } else {
                 // DBにメールアドレスがある場合
