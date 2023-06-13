@@ -13,56 +13,52 @@ if ($_POST['confirm'] === '登録完了') {
         $user = 'root';
         $password = 'kazuto060603';
 
-        $db = new PDO($dsn, $user, $password);
+        $pdo = new PDO($dsn, $user, $password);
+
         if (!empty($_POST['update'])) {
             // 変更時の処理
 
         } else {
+            $name_sei = $_POST['name_sei'];
+            $name_mei = $_POST['name_mei'];
+            $gender = $_POST['gender'];
+            $pref_name = $_POST['pref_name'];
+            $address = $_POST['address'];
+            $password = $_POST['password'];
             $email = $_POST['mail'];
-            $sql = "SELECT * FROM `members`;";
-        
-            $res = $db->query($sql);
-            printf('ok');
-            var_dump($res);
+
+            // SQL文をセット
+            $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email;');
+            $prepare->bindValue(':email', $email, PDO::PARAM_STR);
+            $prepare->execute();
+            
+            $res = $prepare->fetch();
+
             if (!$res) {
-        //         error_log($mysqli->error);
-        //         exit;
-                printf('$resがない');
+                // DBにメールアドレスがない場合
+                $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
+                
+                // 値をセット
+                $prepare->bindValue(':name_sei',$name_sei);
+                $prepare->bindValue(':name_mei',$name_mei);
+                $prepare->bindValue(':gender',$gender);
+                $prepare->bindValue(':pref_name',$pref_name);
+                $prepare->bindValue(':address',$address);
+                $prepare->bindValue(':password',$password);
+                $prepare->bindValue(':email',$email);
+
+                $prepare->execute();
+
+                header('Location: complete.php', true, 307);
+            } else {
+                // DBにメールアドレスがある場合
+                $errors['mail'] = '※このメールアドレスはすでに使用されています';
+                header("Location: member_regist.php");
             }
-        //     // 重複データの有無をチェック
-        //     if (mysqli_num_rows($res) == 0) {
-        //         // 重複するデータがない場合
-        //         // 登録時の処理
-        //         $sql = 'INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now())';
-            
-        //         $statement = $db->prepare($sql);
-            
-        //         $db->beginTransaction();
-            
-        //         $params = [
-        //             ':name_sei' => $_POST['first_name'],
-        //             ':name_mei' => $_POST['last_name'],
-        //             ':gender' => $_POST['gender'],
-        //             ':pref_name' => $_POST['prefecture'],
-        //             ':address' => $_POST['other_prefecture'],
-        //             ':password' => $_POST['password'],
-        //             ':email' => $_POST['mail'],
-        //         ];
-            
-        //         $statement->execute($params);
-        //         $db->commit();
-        //         header('Location: complete.php', true, 307);
-        //         exit;        
-        //     }else{
-        //         // 重複するデータがある場合
-        //         $errors['mail'] = '※このメールアドレスはすでに使用されています';
-            
-        //         header("Location: member_regist.php");
-        //         exit;
-        //     }
         }
 
-        // $statement = null;
+        $prepare = null;
+        exit;
 
     } catch (PDOException $e) {
         if (!empty($db)) {
