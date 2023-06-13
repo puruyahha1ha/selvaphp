@@ -14,7 +14,7 @@ if ($_POST['confirm'] === '登録完了') {
         $password = 'kazuto060603';
 
         $db = new PDO($dsn, $user, $password);
-        printf($db);
+        printf("ok");
         // if (!empty($_POST['update'])) {
         //     // 変更時の処理
 
