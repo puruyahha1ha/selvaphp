@@ -54,8 +54,7 @@ if ($_POST['confirm'] === '登録完了') {
                 // header('Location: complete.php', true, 307);
             } else {
                 // DBにメールアドレスがある場合
-                $errors['mail'] = '※このメールアドレスはすでに使用されています';
-                header("Location: member_regist.php");
+                $error = '※このメールアドレスはすでに使用されています';
             }
         }
 
@@ -121,6 +120,9 @@ if ($_POST['confirm'] === '前に戻る') {
             <p>メールアドレス</p>
             <span class="email_color"><?php echo htmlspecialchars($_POST["email"]); ?></span>
             <input type="hidden" name="email" value="<?php echo htmlspecialchars($_POST["email"]); ?>">
+        </div>
+        <div class="error">
+            <p><?php if (!empty($error)) { echo $error;}?></p>
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="登録完了" class="button">
