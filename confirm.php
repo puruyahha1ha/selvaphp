@@ -39,17 +39,17 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
 
                 // 値をセット
-                $prepare->bindValue(':name_sei', $name_sei);
-                $prepare->bindValue(':name_mei', $name_mei);
-                $prepare->bindValue(':gender', $gender);
-                $prepare->bindValue(':pref_name', $pref_name);
-                $prepare->bindValue(':address', $address);
-                $prepare->bindValue(':password', $password);
-                $prepare->bindValue(':email', $email);
+                $prepare->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
+                $prepare->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
+                $prepare->bindValue(':gender', $gender, PDO::PARAM_INT);
+                $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+                $prepare->bindValue(':address', $address, PDO::PARAM_STR);
+                $prepare->bindValue(':password', $password, PDO::PARAM_STR);
+                $prepare->bindValue(':email', $email, PDO::PARAM_STR);
 
                 $prepare->execute();
                 header('Location: complete.php', true, 307);
-
+                exit;
             } else {
                 // DBにメールアドレスがある場合
                 $error = '※このメールアドレスはすでに使用されています';
