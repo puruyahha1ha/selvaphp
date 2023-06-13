@@ -9,12 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 if ($_POST['confirm'] === '登録完了') {
     
     try {
-        $dsn = 'mysql : dbname=mysql; host=localhost';
+        $dsn = 'mysql:dbname=mysql;host=localhost';
         $user = 'root';
         $password = 'kazuto060603';
 
         $db = new PDO($dsn, $user, $password);
-        phpinfo();
+
         if (!empty($_POST['update'])) {
             // 変更時の処理
 
@@ -66,8 +66,8 @@ if ($_POST['confirm'] === '登録完了') {
         if (!empty($db)) {
             $db->rollback();
         }
-        phpinfo();
         echo 'DB接続エラー:' . $e->getMessage();
+        phpinfo();
         return;
     }
 }
