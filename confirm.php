@@ -13,8 +13,8 @@ if ($_POST['confirm'] === '登録完了') {
         $user = 'root';
         $password = '';
 
-        $db = new PDO($dsn, $user, $password);
-
+        // $db = new PDO($dsn, $user, $password);
+        phpinfo();
         if (!empty($_POST['update'])) {
             // 変更時の処理
 
