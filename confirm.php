@@ -48,8 +48,8 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare->bindValue(':email',$email);
 
                 $prepare->execute();
-
-                header('Location: complete.php', true, 307);
+                var_dump($prepare);
+                // header('Location: complete.php', true, 307);
             } else {
                 // DBにメールアドレスがある場合
                 $errors['mail'] = '※このメールアドレスはすでに使用されています';
