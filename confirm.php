@@ -20,15 +20,15 @@ if ($_POST['confirm'] === '登録完了') {
         } else {
             $email = $_POST['mail'];
             $sql_select = "SELECT * from members where email = '$mail'";
-            printf("ok");
         
             $res = $mysqli->query($sql_select);
-            printf("ok_res");
+            printf($res);
 
-        //     if (!$res) {
+            if (!$res) {
         //         error_log($mysqli->error);
         //         exit;
-        //     }
+                printf('$resがない');
+            }
         //     // 重複データの有無をチェック
         //     if (mysqli_num_rows($res) == 0) {
         //         // 重複するデータがない場合
