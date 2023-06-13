@@ -19,9 +19,9 @@ if ($_POST['confirm'] === '登録完了') {
 
         } else {
             $email = $_POST['mail'];
-            $sql_select = "SELECT email from members";
+            $sql = "SELECT * FROM `members`;";
         
-            $res = $db->query($sql_select);
+            $res = $db->query($sql);
             printf($res);
 
             if (!$res) {
