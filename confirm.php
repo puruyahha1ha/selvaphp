@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 //直リンクされた場合リダイレクト
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 if ($_POST['confirm'] === '登録完了') {
-    
+
     try {
         $dsn = 'mysql:dbname=mysql;host=localhost';
         $user = 'root';
@@ -31,22 +31,22 @@ if ($_POST['confirm'] === '登録完了') {
             $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email;');
             $prepare->bindValue(':email', $email, PDO::PARAM_STR);
             $prepare->execute();
-            
+
             $res = $prepare->fetch();
-            var_dump($res['email']);
+            var_dump($res);
 
             if (!$res) {
                 // DBにメールアドレスがない場合
                 $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
-                
+
                 // 値をセット
-                $prepare->bindValue(':name_sei',$name_sei);
-                $prepare->bindValue(':name_mei',$name_mei);
-                $prepare->bindValue(':gender',$gender);
-                $prepare->bindValue(':pref_name',$pref_name);
-                $prepare->bindValue(':address',$address);
-                $prepare->bindValue(':password',$password);
-                $prepare->bindValue(':email',$email);
+                $prepare->bindValue(':name_sei', $name_sei);
+                $prepare->bindValue(':name_mei', $name_mei);
+                $prepare->bindValue(':gender', $gender);
+                $prepare->bindValue(':pref_name', $pref_name);
+                $prepare->bindValue(':address', $address);
+                $prepare->bindValue(':password', $password);
+                $prepare->bindValue(':email', $email);
 
                 $prepare->execute();
                 $res = $prepare->fetch();
@@ -60,13 +60,11 @@ if ($_POST['confirm'] === '登録完了') {
 
         $prepare = null;
         exit;
-
     } catch (PDOException $e) {
         if (!empty($db)) {
             $db->rollback();
         }
         echo 'DB接続エラー:' . $e->getMessage();
-        phpinfo();
         return;
     }
 }
@@ -78,6 +76,7 @@ if ($_POST['confirm'] === '前に戻る') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,23 +85,28 @@ if ($_POST['confirm'] === '前に戻る') {
     <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <h1>会員情報確認画面</h1>
     <form action="confirm.php" method="post">
         <div class="name">
             <p>氏名</p>
-            <span><?php echo htmlspecialchars($_POST["name_sei"]."　".$_POST["name_mei"]); ?></span>
+            <span><?php echo htmlspecialchars($_POST["name_sei"] . "　" . $_POST["name_mei"]); ?></span>
             <input type="hidden" name="name_sei" value="<?php echo htmlspecialchars($_POST["name_sei"]); ?>">
             <input type="hidden" name="name_mei" value="<?php echo htmlspecialchars($_POST["name_mei"]); ?>">
         </div>
         <div class="gender">
             <p>性別</p>
-            <span><?php if ($_POST["gender"] === '1') {echo '男性'; } elseif ($_POST["gender"] === '2') {echo '女性'; }?></span>
+            <span><?php if ($_POST["gender"] === '1') {
+                        echo '男性';
+                    } elseif ($_POST["gender"] === '2') {
+                        echo '女性';
+                    } ?></span>
             <input type="hidden" name="gender" value="<?php echo htmlspecialchars($_POST["gender"]); ?>">
         </div>
         <div class="address">
             <p>住所</p>
-            <span><?php echo htmlspecialchars($_POST["pref_name"].$_POST["address"]); ?></span>
+            <span><?php echo htmlspecialchars($_POST["pref_name"] . $_POST["address"]); ?></span>
             <input type="hidden" name="pref_name" value="<?php echo htmlspecialchars($_POST["pref_name"]); ?>">
             <input type="hidden" name="address" value="<?php echo htmlspecialchars($_POST["address"]); ?>">
         </div>
@@ -123,4 +127,5 @@ if ($_POST['confirm'] === '前に戻る') {
         </div>
     </form>
 </body>
+
 </html>
