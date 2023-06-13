@@ -29,7 +29,7 @@ if ($_POST['confirm'] === '登録完了') {
             var_dump($_POST);
 
             // SQL文をセット
-            $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email;');
+            $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email');
             $prepare->bindValue(':email', $email, PDO::PARAM_STR);
             $prepare->execute();
 
@@ -59,7 +59,6 @@ if ($_POST['confirm'] === '登録完了') {
         }
 
         $prepare = null;
-        exit;
     } catch (PDOException $e) {
         if (!empty($db)) {
             $db->rollback();
@@ -122,7 +121,9 @@ if ($_POST['confirm'] === '前に戻る') {
             <input type="hidden" name="email" value="<?php echo htmlspecialchars($_POST["email"]); ?>">
         </div>
         <div class="error">
-            <p><?php if (!empty($error)) { echo $error;}?></p>
+            <p><?php if (!empty($error)) {
+                    echo $error;
+                } ?></p>
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="登録完了" class="button">
