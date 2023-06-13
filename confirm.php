@@ -23,7 +23,7 @@ if ($_POST['confirm'] === '登録完了') {
         
             $res = $db->query($sql);
             printf('ok');
-
+            var_dump($res);
             if (!$res) {
         //         error_log($mysqli->error);
         //         exit;
