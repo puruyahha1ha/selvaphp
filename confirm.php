@@ -66,6 +66,7 @@ if ($_POST['confirm'] === '登録完了') {
         if (!empty($db)) {
             $db->rollback();
         }
+        phpinfo();
         echo 'DB接続エラー:' . $e->getMessage();
         return;
     }
