@@ -26,32 +26,30 @@ if ($_POST['confirm'] === '登録完了') {
             $address = $_POST['address'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-            var_dump($_POST);
 
             // SQL文をセット
             $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email');
             $prepare->bindValue(':email', $email, PDO::PARAM_STR);
             $prepare->execute();
 
-            $prepare->debugDumpParams();
             $record = $prepare->fetch();
 
             if (!$record) {
                 // DBにメールアドレスがない場合
-                $prepare1 = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
+                $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
 
                 // 値をセット
-                $prepare1->bindValue(':name_sei', $name_sei);
-                $prepare1->bindValue(':name_mei', $name_mei);
-                $prepare1->bindValue(':gender', $gender);
-                $prepare1->bindValue(':pref_name', $pref_name);
-                $prepare1->bindValue(':address', $address);
-                $prepare1->bindValue(':password', $password);
-                $prepare1->bindValue(':email', $email);
+                $prepare->bindValue(':name_sei', $name_sei);
+                $prepare->bindValue(':name_mei', $name_mei);
+                $prepare->bindValue(':gender', $gender);
+                $prepare->bindValue(':pref_name', $pref_name);
+                $prepare->bindValue(':address', $address);
+                $prepare->bindValue(':password', $password);
+                $prepare->bindValue(':email', $email);
 
-                $prepare1->execute();
-                $res = $prepare1->fetch();
-                // header('Location: complete.php', true, 307);
+                $prepare->execute();
+                header('Location: complete.php', true, 307);
+
             } else {
                 // DBにメールアドレスがある場合
                 $error = '※このメールアドレスはすでに使用されています';
@@ -121,9 +119,9 @@ if ($_POST['confirm'] === '前に戻る') {
             <input type="hidden" name="email" value="<?php echo htmlspecialchars($_POST["email"]); ?>">
         </div>
         <div class="error">
-            <p><?php if (!empty($error)) {
-                    echo $error;
-                } ?></p>
+            <?php if (!empty($error)) {
+                echo $error;
+            } ?>
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="登録完了" class="button">
