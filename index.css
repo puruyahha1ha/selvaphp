@@ -79,3 +79,13 @@ span {
     color: red;
     margin-left: 150px;
 }
+
+
+.link {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fadcaf;
+}
+.link input {
+    background-color: #fadcaf;
+}
