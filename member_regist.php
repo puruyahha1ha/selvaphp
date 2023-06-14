@@ -283,7 +283,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!empty($errors['email'])) {
                     echo $errors['email']."<br>";
                 }
-                if (!empty($errors['email_filter']) && $errors['email'] === '※メールアドレスは２００字以内で入力してください') {
+                if (!empty($errors['email_filter']) && $errors['email'] !== '※メールアドレスは必須入力です') {
                     echo $errors['email_filter'];
                 }
             ?>
