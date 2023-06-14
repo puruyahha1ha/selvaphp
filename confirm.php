@@ -125,7 +125,7 @@ if ($_POST['confirm'] === '前に戻る') {
         </div>
         <div class="submit">
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <input type="submit" name="confirm" value="登録完了" class="button" onclick="<?php if (!$errors) {echo "disabled = true;";} ?>">
+            <input type="submit" name="confirm" value="登録完了" class="button" onclick="<?php if ($_POST['confirm'] === '登録完了') {echo "disabled = true;";} ?>">
             <input type="submit" name="confirm" value="前に戻る" class="button_back">
         </div>
     </form>
