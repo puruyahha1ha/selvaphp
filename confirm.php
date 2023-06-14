@@ -26,7 +26,7 @@ if ($_POST['confirm'] === '登録完了') {
             $address = $_POST['address'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-
+            printf($name_sei);
             // SQL文をセット
             $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email');
             $prepare->bindValue(':email', $email, PDO::PARAM_STR_CHAR);
@@ -48,7 +48,7 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare->bindValue(':email', $email, PDO::PARAM_STR_CHAR);
 
                 $prepare->execute();
-                header('Location: complete.php', true, 307);
+                // header('Location: complete.php', true, 307);
                 exit;
             } else {
                 // DBにメールアドレスがある場合
