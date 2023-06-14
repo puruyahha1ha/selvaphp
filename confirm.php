@@ -29,7 +29,7 @@ if ($_POST['confirm'] === '登録完了') {
 
             // SQL文をセット
             $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email');
-            $prepare->bindValue(':email', $email, PDO::PARAM_STR);
+            $prepare->bindValue(':email', $email, PDO::PARAM_STR_CHAR);
             $prepare->execute();
 
             $record = $prepare->fetch();
@@ -39,13 +39,13 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare = $pdo->prepare('INSERT into members (name_sei, name_mei, gender, pref_name, address, password, email, created_at) VALUES (:name_sei, :name_mei, :gender, :pref_name, :address, :password, :email, now());');
 
                 // 値をセット
-                $prepare->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
-                $prepare->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
+                $prepare->bindValue(':name_sei', $name_sei, PDO::PARAM_STR_CHAR);
+                $prepare->bindValue(':name_mei', $name_mei, PDO::PARAM_STR_CHAR);
                 $prepare->bindValue(':gender', $gender, PDO::PARAM_INT);
-                $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
-                $prepare->bindValue(':address', $address, PDO::PARAM_STR);
-                $prepare->bindValue(':password', $password, PDO::PARAM_STR);
-                $prepare->bindValue(':email', $email, PDO::PARAM_STR);
+                $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR_CHAR);
+                $prepare->bindValue(':address', $address, PDO::PARAM_STR_CHAR);
+                $prepare->bindValue(':password', $password, PDO::PARAM_STR_CHAR);
+                $prepare->bindValue(':email', $email, PDO::PARAM_STR_CHAR);
 
                 $prepare->execute();
                 header('Location: complete.php', true, 307);
