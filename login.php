@@ -4,23 +4,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
         // メールアドレス（ID）のバリデーション
-        if (empty($_POST['email'])) {
-            $errors['email'] = '※メールアドレス（ID）は必須入力です';
-        } elseif (mb_strlen($_POST['email']) > 200) {
-            $errors['email'] = '※メールアドレス（ID）は２００字以内で入力してください';
-        }
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors['email_filter'] = '※有効なメールアドレス（ID）を入力してください';
+        if (empty($_POST['email']) || mb_strlen($_POST['email']) > 200 || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['no_record'] = 'IDもしくはパスワードが間違っています';
         }
         // パスワードのバリデーション
-        if (empty($_POST['password'])) {
-            $errors['password'] = '※パスワードは必須入力です';
-        } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $_POST['password'])) {
-            $errors['password'] = '※パスワードは半角英数字のみを入力してください';
-        }
-        if ((mb_strlen($_POST['password']) < 8 || mb_strlen($_POST['password']) > 20) && $errors['password'] !== "※パスワードは必須入力です") {
-            $errors['password_length'] = '※パスワードは８〜２０字以内で入力してください';
-        }
+        if (empty($_POST['password']) || !preg_match("/^[a-zA-Z0-9]+$/", $_POST['password']) || (mb_strlen($_POST['password']) < 8 || mb_strlen($_POST['password']) > 20)) {
+            $errors['no_record'] = 'IDもしくはパスワードが間違っています';
+        } 
+
         if (empty($errors)) {
             try {
                 $dsn = 'mysql:dbname=mysql;host=localhost';
@@ -43,8 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($record) {
                     $_SESSION['name_sei'] = $record['name_sei'];
                     $_SESSION['name_mei'] = $record['name_mei'];
+                    $_SESSION['login'] = 'ログイン';
                     header('Location: top.php', true, 307);
                     exit;
+                } else {
+                    $errors['no_record'] = 'IDもしくはパスワードが間違っています';
                 }
             } catch (PDOException $e) {
                 if (!empty($pdo)) {
@@ -87,27 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>メールアドレス（ID）</p>
                 <input type="text" name="email" value="<?php if (!empty($_POST['email'])) {echo htmlspecialchars($_POST['email']);} ?>">
             </div>
-            <div class="error">
-                <?php
-                if (!empty($errors['email'])) {
-                    echo $errors['email'] . "<br>";
-                }
-                if (!empty($errors['email_filter']) && $errors['email'] !== '※メールアドレス（ID）は必須入力です') {
-                    echo $errors['email_filter'];
-                }
-                ?>
-            </div>
             <div class="password">
                 <p>パスワード</p>
                 <input type="password" name="password" value="">
             </div>
             <div class="error">
                 <?php
-                if (!empty($errors['password'])) {
-                    echo $errors['password'] . "<br>";
-                }
-                if (!empty($errors['password_length'])) {
-                    echo $errors['password_length'];
+                if (!empty($errors['no_record'])) {
+                    echo $errors['no_record'];
                 }
                 ?>
             </div>
