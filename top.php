@@ -3,6 +3,10 @@
     if (!empty($_POST['confirm'] && $_POST['confirm'] === 'ログアウト')) {
         unset($_SESSION['login']);
     }
+    if ($_POST['confirm'] === '新規会員登録') {
+        header('Location: member_regist.php', true, 307);
+        exit;
+    }
 ?>
 
 

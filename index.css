@@ -96,7 +96,7 @@ span {
     align-items: center;
 }
 
-a {
+.button_header {
     text-decoration: none;
     padding: 5px 10px;
     border:solid black 1px;
