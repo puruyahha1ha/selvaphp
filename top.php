@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if (!empty($_POST['confirm'] && $_POST['confirm'] === 'ログアウト')) {
+        unset($_SESSION['login']);
+    }
 ?>
 
 
