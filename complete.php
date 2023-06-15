@@ -1,10 +1,8 @@
 <?php
 //直リンクされた場合リダイレクト
-if ($_SERVER["REQUEST_METHOD"] !== "POST" && $_POST['confirm'] !== 'トップに戻る') {
-    var_dump($_POST);
-
-    // header("Location: member_regist.php");
-    // exit;
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: member_regist.php");
+    exit;
 }
 if ($_POST['confirm'] === 'トップに戻る') {
     header('Location: top.php', true, 307);
@@ -26,7 +24,7 @@ if ($_POST['confirm'] === 'トップに戻る') {
 <body>
     <h1>会員登録完了</h1>
     <p class="complete">会員登録が完了しました。</label>
-    <form action="complete.php">
+    <form action="complete.php" method="post">
         <div class="submit">
             <input type="submit" name="confirm" value="トップに戻る" class="button">
         </div>
