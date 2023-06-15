@@ -4,6 +4,10 @@ session_start();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['confirm'] === 'トップに戻る') {
+        header('Location: top.php', true, 307);
+        exit;
+    }
     // ポストデータの取得
     $posts = filter_input_array(INPUT_POST, $_POST);
 
@@ -290,6 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="確認画面へ" class="button">
+            <input type="submit" name="confirm" value="トップに戻る" class="button_back">
         </div>
     </form>
 </body>

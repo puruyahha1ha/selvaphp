@@ -82,10 +82,19 @@ span {
 
 
 .link {
+    height: 40px;
     display: flex;
     justify-content: flex-end;
     background-color: #fadcaf;
+    align-items: center;
 }
-.link input {
-    background-color: #fadcaf;
+
+a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border:solid black 1px;
+    margin-right: 10px;
+    color: black;
+    height: 30px;
+    line-height: 20px;
 }

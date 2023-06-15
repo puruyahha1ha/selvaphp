@@ -20,12 +20,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="link">
-            <a href="member_regist.php">新規会員登録</a>
-            <a href="login.php">ログイン</a>
-        </div>
-    </header>
+    <?php if (!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') {require_once('header_login.php'); } else {require_once('header.php');}?>
+
 </body>
 
 </html>

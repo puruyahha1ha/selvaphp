@@ -58,7 +58,7 @@ if ($_POST['confirm'] === '登録完了') {
 
         $prepare = null;
     } catch (PDOException $e) {
-        if (!empty($db)) {
+        if (!empty($pdo)) {
             $db->rollback();
         }
         echo 'DB接続エラー:' . $e->getMessage();

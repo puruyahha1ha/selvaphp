@@ -4,9 +4,14 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: member_regist.php");
     exit;
 }
+if ($_POST['confirm'] === 'トップに戻る') {
+    header('Location: top.php', true, 307);
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <h1>会員登録完了</h1>
     <p class="complete">会員登録が完了しました。</label>
+    <form action="complete.php">
+        <div class="submit">
+            <input type="submit" name="confirm" value="トップに戻る" class="button">
+        </div>
+    </form>
 </body>
-</html>
 
+</html>
