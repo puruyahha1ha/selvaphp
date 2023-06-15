@@ -1,6 +1,6 @@
 <?php
 //直リンクされた場合リダイレクト
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+if ($_SERVER["REQUEST_METHOD"] !== "POST" && $_POST['confirm'] !== 'トップに戻る') {
     header("Location: member_regist.php");
     exit;
 }
