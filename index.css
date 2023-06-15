@@ -88,12 +88,19 @@ span {
     background-color: #fadcaf;
     align-items: center;
 }
+.link_header {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fadcaf;
+    align-items: center;
+}
 
 a {
     text-decoration: none;
     padding: 5px 10px;
     border:solid black 1px;
-    margin-right: 10px;
+    margin: 0 10px;
     color: black;
     height: 30px;
     line-height: 20px;

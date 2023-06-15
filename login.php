@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
