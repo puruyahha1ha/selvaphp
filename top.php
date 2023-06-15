@@ -11,9 +11,6 @@
         header('Location: login.php', true, 307);
         exit;
     }
-    var_dump($_SESSION);
-    echo "<br>";
-    var_dump($_POST);
 ?>
 
 
