@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="password">
                 <p>パスワード</p>
-                <input type="password" name="password" value="<?php if (!empty($_POST['password'])) {echo htmlspecialchars($_POST['password']);} ?>">
+                <input type="password" name="password" value="">
             </div>
             <div class="error">
                 <?php
