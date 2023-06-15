@@ -1,10 +1,14 @@
 <?php
     session_start();
-    if (!empty($_POST['confirm'] && $_POST['confirm'] === 'ログアウト')) {
+    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
         unset($_SESSION['login']);
     }
-    if ($_POST['confirm'] === '新規会員登録') {
+    if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規会員登録') {
         header('Location: member_regist.php', true, 307);
+        exit;
+    }
+    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログイン') {
+        header('Location: login.php', true, 307);
         exit;
     }
 ?>
