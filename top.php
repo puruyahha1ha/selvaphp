@@ -1,16 +1,16 @@
 <?php
-    session_start();
-    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
-        unset($_SESSION['login']);
-    }
-    if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規会員登録') {
-        header('Location: member_regist.php', true, 307);
-        exit;
-    }
-    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログイン') {
-        header('Location: login.php', true, 307);
-        exit;
-    }
+session_start();
+if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
+    unset($_SESSION['login']);
+}
+if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規会員登録') {
+    header('Location: member_regist.php', true, 307);
+    exit;
+}
+if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログイン') {
+    header('Location: login.php', true, 307);
+    exit;
+}
 ?>
 
 
@@ -28,7 +28,11 @@
 </head>
 
 <body>
-    <?php if (!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') {require_once('header_login.php'); } else {require_once('header.php');}?>
+    <?php if ((!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') || (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン')) {
+        require_once('header_login.php');
+    } else {
+        require_once('header.php');
+    } ?>
 
 </body>
 
