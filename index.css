@@ -95,6 +95,14 @@ span {
     background-color: #fadcaf;
     align-items: center;
 }
+.link_header form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.link_header form p {
+    width: 200px;
+}
 
 .button_header {
     text-decoration: none;
@@ -104,4 +112,5 @@ span {
     color: black;
     height: 30px;
     line-height: 20px;
+    background-color: #fadcaf;
 }
