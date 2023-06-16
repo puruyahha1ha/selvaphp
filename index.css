@@ -9,7 +9,7 @@ h1 {
     padding-left: 100px;
     margin: 20px;
 }
-.name,.gender,.address,.password,.password_check,.email {
+.name,.gender,.address,.password,.password_check,.email,.title,.content {
     display: flex;
     justify-content: flex-start;
     margin: 10px;

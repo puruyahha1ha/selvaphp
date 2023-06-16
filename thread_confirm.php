@@ -25,7 +25,9 @@
         </div>
         <div class="content">
             <p>コメント</p>
-            <span><?php echo htmlspecialchars($_POST["content"]); ?></span>
+            <textarea name="content" id="" cols="30" rows="10">
+                <?php echo htmlspecialchars($_POST["content"]); ?>
+            </textarea>
             <input type="hidden" name="content" value="<?php echo $_POST["content"]; ?>">
         </div>
         <div class="submit">

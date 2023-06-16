@@ -23,8 +23,10 @@
             <input type="text" name="title" value="<?php if (!empty($_POST['title'])) {echo htmlspecialchars($_POST['title']);} ?>">
         </div>
         <div class="content">
-            <p>スレッドタイトル</p>
-            <input type="content" name="content" value="<?php if (!empty($_POST['content'])) {echo htmlspecialchars($_POST['content']);} ?>">
+            <p>コメント</p>
+            <textarea name="content" id="" cols="30" rows="10">
+                <?php if (!empty($_POST['content'])) {echo htmlspecialchars($_POST['content']);} ?>
+            </textarea>
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="確認画面へ" class="button">
