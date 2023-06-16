@@ -11,6 +11,10 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログイン') {
     header('Location: login.php', true, 307);
     exit;
 }
+if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
+    header('Location: thread_regist.php', true, 307);
+    exit;
+}
 ?>
 
 
