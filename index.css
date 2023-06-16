@@ -103,9 +103,7 @@ span {
 .link_header form p {
     width: 200px;
 }
-
 .button_header {
-    text-decoration: none;
     padding: 5px 10px;
     border:solid black 1px;
     margin: 0 10px;
@@ -113,4 +111,8 @@ span {
     height: 30px;
     line-height: 20px;
     background-color: #fadcaf;
+}
+.content input {
+    width: 410px;
+    height: 350px;
 }

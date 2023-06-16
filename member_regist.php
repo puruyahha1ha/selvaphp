@@ -87,10 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if ($posts['confirm'] === '前に戻る') {
-        // confirm.phpからの遷移時は画面を維持
+        // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
         // エラーの有無チェック
-        header('Location: confirm.php', true, 307);
+        header('Location: member_confirm.php', true, 307);
         exit;
     }
 }
