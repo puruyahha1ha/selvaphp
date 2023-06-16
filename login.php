@@ -42,9 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['name_sei'] = $record['name_sei'];
                     $_SESSION['name_mei'] = $record['name_mei'];
                     $_SESSION['login'] = 'ログイン';
-                    var_dump($_SESSION);
-                    // header('Location: top.php', true, 307);
-                    // exit;
+                    header('Location: top.php', true, 307);
+                    exit;
                 } else {
                     $errors['no_record'] = 'IDもしくはパスワードが間違っています';
                 }
