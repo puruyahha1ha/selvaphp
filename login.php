@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errors)) {
             try {
-                $dsn = 'mysql:dbname=mysql;host=localhost';
+                $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
                 $user = 'root';
                 $password = 'kazuto060603';
 
