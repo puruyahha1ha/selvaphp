@@ -60,9 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="content">
             <p>コメント</p>
-            <textarea name="content" id="" cols="30" rows="10">
-                <?php if (!empty($_POST['content'])) {echo htmlspecialchars($_POST['content']);} ?>
-            </textarea>
+            <textarea name="content" id="" cols="30" rows="10"><?php if (!empty($_POST['content'])) {echo htmlspecialchars($_POST['content']);} ?></textarea>
         </div>
         <div class="error">
             <?php 
