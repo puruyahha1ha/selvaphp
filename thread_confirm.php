@@ -25,6 +25,7 @@ if ($_POST['confirm'] === 'スレッドを作成する') {
         $res = $prepare->execute();
 
         var_dump($res);
+        $sth->debugDumpParams();
         // header('Location: top.php', true, 307);
         // exit;
     } catch (PDOException $e) {
