@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if ($_POST['confirm'] === '前に戻る') {
     header('Location: thread_regist.php', true, 307);
     exit;
@@ -25,10 +24,8 @@ if ($_POST['confirm'] === 'スレッドを作成する') {
         $prepare->bindValue(':content', $content, PDO::PARAM_STR);
         $res = $prepare->execute();
 
-        var_dump($res);
-        $sth->debugDumpParams();
-        // header('Location: top.php', true, 307);
-        // exit;
+        header('Location: top.php', true, 307);
+        exit;
     } catch (PDOException $e) {
         if (!empty($pdo)) {
             $db->rollback();
