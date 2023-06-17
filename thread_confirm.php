@@ -60,7 +60,7 @@ if ($_POST['confirm'] === 'スレッドを作成する') {
         </div>
         <div class="content">
             <p>コメント</p>
-            <span><?php echo htmlspecialchars($_POST["content"]); ?></span>
+            <span><?php echo nl2br(htmlspecialchars($_POST['content']));?></span>
             <input type="hidden" name="content" value="<?php echo $_POST["content"]; ?>">
         </div>
         <div class="submit">
