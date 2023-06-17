@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (mb_strlen($_POST['content']) > 500) {
         $errors['content'] = '※コメントは５００字以内で入力してください';
     }
+
+    if (empty($errors)) {
+        header('Location: thread_confirm.php', true, 307);
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>
