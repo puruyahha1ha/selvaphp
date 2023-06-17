@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if ($_POST['confirm'] === '前に戻る') {
     header('Location: thread_regist.php', true, 307);
