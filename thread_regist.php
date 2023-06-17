@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['content'] = '※コメントは５００字以内で入力してください';
     }
 
-    if (empty($errors)) {
+    if (empty($errors) && $_POST['confirm'] !== '前に戻る') {
         header('Location: thread_confirm.php', true, 307);
         exit;
     }
