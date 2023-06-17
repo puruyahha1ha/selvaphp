@@ -22,10 +22,11 @@ if ($_POST['confirm'] === 'スレッドを作成する') {
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':title', $title, PDO::PARAM_STR);
         $prepare->bindValue(':content', $content, PDO::PARAM_STR);
-        $prepare->execute();
+        $res = $prepare->execute();
 
-        header('Location: top.php', true, 307);
-        exit;
+        var_dump($res);
+        // header('Location: top.php', true, 307);
+        // exit;
     } catch (PDOException $e) {
         if (!empty($pdo)) {
             $db->rollback();
