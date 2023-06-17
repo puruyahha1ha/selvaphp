@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-// ログイン状態の場合は、トップ画面に遷移
-if (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン') {
+// ログイン状態ではない場合は、トップ画面に遷移
+if (empty($_SESSION['login'])) {
     header('Location: top.php', true, 307);
     exit;
 }
