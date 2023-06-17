@@ -97,11 +97,9 @@ span {
 }
 .link_header form {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
-.link_header form p {
-    width: 200px;
+.link_header  p {
+    width: 350px;
 }
 .button_header {
     padding: 5px 10px;
