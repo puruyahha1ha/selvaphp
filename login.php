@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $record = $prepare->fetch();
                 var_dump($record);
                 if ($record) {
+                    $_SESSION['id'] = $record['id'];
                     $_SESSION['name_sei'] = $record['name_sei'];
                     $_SESSION['name_mei'] = $record['name_mei'];
                     $_SESSION['login'] = 'ログイン';

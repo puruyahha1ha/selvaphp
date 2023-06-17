@@ -1,5 +1,40 @@
 <?php
 
+if ($_POST['confirm'] === '前に戻る') {
+    header('Location: thread_regist.php', true, 307);
+    exit;
+}
+
+if ($_POST['confirm'] === 'スレッドを作成する') {
+    try {
+        $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
+        $user = 'root';
+        $password = 'kazuto060603';
+
+        $pdo = new PDO($dsn, $user, $password);
+
+        $member_id = $_SESSION['id'];
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+
+        // SQL文をセット
+        $prepare = $pdo->prepare('INSERT into threads (member_id, title, content, created_at) VALUES (:member_id, :title, :content, now());');
+        $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $prepare->bindValue(':title', $title, PDO::PARAM_STR);
+        $prepare->bindValue(':content', $content, PDO::PARAM_STR);
+        $prepare->execute();
+
+        header('Location: top.php', true, 307);
+        exit;
+    } catch (PDOException $e) {
+        if (!empty($pdo)) {
+            $db->rollback();
+        }
+        echo 'DB接続エラー:' . $e->getMessage();
+        return;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
