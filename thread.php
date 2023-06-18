@@ -78,7 +78,7 @@ try {
                 <?php foreach ($records as $record) : ?>
                     <form action="thread_detail.php" method="get">
                         <div class="record">
-                            ID: <input type="text" name="id" value="<?php echo htmlspecialchars($record['id']) ?>">
+                            ID: <input type="text" name="id" value="<?php echo htmlspecialchars($record['id']) ?>" readonly>
                             <input type="submit" value="<?php echo htmlspecialchars($record['title']) ?>">
                             <p class="created_at"><?php echo htmlspecialchars($record['created_at']) ?></p>
                         </div>
