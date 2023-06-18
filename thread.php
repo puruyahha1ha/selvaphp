@@ -13,7 +13,10 @@ try {
 
     // SQL文をセット
     $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads;');
-    $records = $prepare->execute();
+    $prepare->execute();
+    $prepare->debugDumpParams();
+
+    $records = $prepare->fetch();
 
 
 } catch (PDOException $e) {
