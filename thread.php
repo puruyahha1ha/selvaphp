@@ -28,14 +28,14 @@ try {
         $prepare->execute();
 
         $records = $prepare->fetchAll();
-
+        printf('search');
     } else {
         // SQL文をセット
         $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
         $prepare->execute();
 
         $records = $prepare->fetchAll();
-
+        printf('first');
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
