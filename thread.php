@@ -1,7 +1,14 @@
 <?php
+session_start();
+
 if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
     $_SESSION['login'] = 'ログイン';
     header('Location: thread_regist.php', true, 307);
+    exit;
+}
+if (!empty($_POST['confirm']) && $_POST['confirm'] === 'トップに戻る') {
+    $_SESSION['login'] = 'ログイン';
+    header('Location: top.php', true, 307);
     exit;
 }
 try {
@@ -11,14 +18,25 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
 
-    // SQL文をセット
-    $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads;');
-    $prepare->execute();
+    if (!empty($_POST['confirm']) && $_POST['confirm'] === 'スレッド検索') {
+        
+        $search = $_POST['search'];
 
-    $records = $prepare->fetchAll();
-    var_dump($records);
+        // SQL文をセット
+        $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads WHERE MATCH (title, content) AGAINST (:search IN BOOLEAN MODE) ORDER BY created_at DESC;');
+        $prepare->bindValue(':search', $search, PDO::PARAM_STR);
+        $prepare->execute();
 
+        $records = $prepare->fetchAll();
 
+    } else {
+        // SQL文をセット
+        $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
+        $prepare->execute();
+
+        $records = $prepare->fetchAll();
+
+    }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();

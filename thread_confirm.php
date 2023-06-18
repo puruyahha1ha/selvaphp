@@ -24,7 +24,7 @@ if ($_POST['confirm'] === 'スレッドを作成する') {
         $prepare->bindValue(':content', $content, PDO::PARAM_STR);
         $res = $prepare->execute();
 
-        header('Location: top.php', true, 307);
+        header('Location:  thread.php', true, 307);
         exit;
     } catch (PDOException $e) {
         if (!empty($pdo)) {
