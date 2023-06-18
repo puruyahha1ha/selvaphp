@@ -123,6 +123,7 @@ span {
 }
 .record {
     display: flex;
+    color: blue;
 }
 .created_at {
     width: 180px;
