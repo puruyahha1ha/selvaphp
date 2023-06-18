@@ -29,6 +29,7 @@ try {
 
         $records = $prepare->fetchAll();
         printf('search');
+        $prepare->debugDumpParams();
     } else {
         // SQL文をセット
         $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
