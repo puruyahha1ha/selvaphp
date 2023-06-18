@@ -23,13 +23,12 @@ try {
         $search = $_POST['search'];
 
         // SQL文をセット
-        $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads WHERE MATCH (title, content) AGAINST (:search IN BOOLEAN MODE) ORDER BY created_at DESC;');
+        $prepare = $pdo->prepare("SELECT id, title, created_at FROM threads WHERE title LIKE '%:te%' OR content LIKE '%:te%' ORDER BY created_at DESC;");
         $prepare->bindValue(':search', $search, PDO::PARAM_STR);
         $prepare->execute();
-
+        $prepare->debugDumpParams();
         $records = $prepare->fetchAll();
         printf('search');
-        $prepare->debugDumpParams();
     } else {
         // SQL文をセット
         $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
