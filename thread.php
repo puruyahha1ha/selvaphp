@@ -14,11 +14,11 @@ try {
     // SQL文をセット
     $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads;');
     $prepare->execute();
-    $prepare->debugDumpParams();
 
-    $records = $prepare->fetch();
+    $records = $prepare->fetchAll();
+    var_dump($records);
 
-
+    
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
