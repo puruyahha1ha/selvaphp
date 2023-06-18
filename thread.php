@@ -36,6 +36,7 @@ try {
 
         $records = $prepare->fetchAll();
         printf('first');
+        var_dump($_POST);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
