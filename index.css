@@ -121,3 +121,6 @@ span {
 .search .form {
     width: 350px;
 }
+.records {
+    display: flex;
+}
