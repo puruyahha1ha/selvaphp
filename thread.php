@@ -13,7 +13,7 @@ try {
 
     // SQL文をセット
     $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads;');
-    $res = $prepare->execute();
+    $records = $prepare->execute();
 
 
 } catch (PDOException $e) {
