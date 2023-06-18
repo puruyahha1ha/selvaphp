@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!empty($_POST['confirm']) && $_POST['confirm'] === '新規スレッド作成') {
+if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
     $_SESSION['login'] = 'ログイン';
     header('Location: thread_regist.php', true, 307);
     exit;
@@ -60,13 +60,16 @@ try {
 </head>
 
 <body>
-    <form action="thread.php" method="post">
+    <form action="thread.php" method="get">
         <header>
             <div class="link">
                 <input type="submit" name="confirm" value="新規スレッド作成" class="button_header">
             </div>
         </header>
-        <main>
+    </form>
+
+    <main>
+        <form action="thread.php" method="post">
             <div class="search">
                 <input type="text" name="search" class="form" value="">
                 <input type="submit" name="confirm" value="スレッド検索">
@@ -85,8 +88,8 @@ try {
             <div class="submit">
                 <input type="submit" name="confirm" value="トップに戻る" class="button_back">
             </div>
-        </main>
-    </form>
+        </form>
+    </main>
 </body>
 
 </html>
