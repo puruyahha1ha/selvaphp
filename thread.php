@@ -18,7 +18,7 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
 
-    if (!empty($_POST['confirm']) && $_POST['confirm'] === 'スレッド検索') {
+    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド検索') {
         
         $search = $_POST['search'];
 
