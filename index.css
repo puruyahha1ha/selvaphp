@@ -123,6 +123,7 @@ span {
 }
 .record {
     display: flex;
+    justify-content: space-around;
     color: blue;
 }
 .created_at {
@@ -137,4 +138,7 @@ span {
     border-radius: 0;
     font: inherit;
     outline: none;
+}
+.record input[type='text'] {
+    width: 30px;
 }
