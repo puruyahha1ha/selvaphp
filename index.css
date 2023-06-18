@@ -142,3 +142,6 @@ span {
 .record input[type='text'] {
     width: 30px;
 }
+.record input[type='submit'] {
+    width: 100px;
+}
