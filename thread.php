@@ -63,7 +63,7 @@ try {
     <form action="thread.php" method="get">
         <header>
             <div class="link">
-                <input type="submit" name="confirm" value="新規スレッド作成" class="button_header">
+                <?php if (($_SESSION['login']) && $_SESSION['login'] === 'ログイン') {echo "<input type='submit' name='confirm' value='新規スレッド作成' class='button_header'>"; }?>
             </div>
         </header>
     </form>
