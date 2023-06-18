@@ -11,8 +11,8 @@ if (empty($_SESSION['login'])) {
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['confirm'] === 'トップに戻る') {
-        header('Location: top.php', true, 307);
+    if ($_POST['confirm'] === '一覧に戻る') {
+        header('Location: thread.php', true, 307);
         exit;
     }
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="submit">
             <input type="submit" name="confirm" value="確認画面へ" class="button">
-            <input type="submit" name="confirm" value="トップに戻る" class="button_back">
+            <input type="submit" name="confirm" value="一覧に戻る" class="button_back">
         </div>
     </form>
 </body>
