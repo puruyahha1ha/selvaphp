@@ -127,3 +127,13 @@ span {
 .created_at {
     width: 180px;
 }
+.record input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font: inherit;
+    outline: none;
+}
