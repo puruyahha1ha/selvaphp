@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
+if (!empty($_POST['confirm']) && $_POST['confirm'] === '新規スレッド作成') {
     $_SESSION['login'] = 'ログイン';
     header('Location: thread_regist.php', true, 307);
     exit;
@@ -18,8 +18,8 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
 
-    if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド検索') {
-        
+    if (!empty($_POST['confirm']) && $_POST['confirm'] === 'スレッド検索') {
+
         $search = $_POST['search'];
 
         // SQL文をセット
@@ -44,8 +44,7 @@ try {
     echo 'DB接続エラー:' . $e->getMessage();
     return;
 }
-if (!empty($_POST['confirm']) && $_GET['confirm'] === 'スレッド検索') {
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,15 +59,13 @@ if (!empty($_POST['confirm']) && $_GET['confirm'] === 'スレッド検索') {
 </head>
 
 <body>
-    <header>
-        <div class="link">
-            <form action="thread.php" method="get">
+    <form action="thread.php" method="post">
+        <header>
+            <div class="link">
                 <input type="submit" name="confirm" value="新規スレッド作成" class="button_header">
-            </form>
-        </div>
-    </header>
-    <main>
-        <form action="thread.php" method="post">
+            </div>
+        </header>
+        <main>
             <div class="search">
                 <input type="text" name="search" class="form" value="">
                 <input type="button" name="confirm" value="スレッド検索">
@@ -87,8 +84,8 @@ if (!empty($_POST['confirm']) && $_GET['confirm'] === 'スレッド検索') {
             <div class="submit">
                 <input type="submit" name="confirm" value="トップに戻る" class="button_back">
             </div>
-        </form>
-    </main>
+        </main>
+    </form>
 </body>
 
 </html>
