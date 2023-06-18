@@ -24,17 +24,14 @@ try {
         $prepare = $pdo->prepare("SELECT id, title, created_at FROM threads WHERE title LIKE :search OR content LIKE :search ORDER BY created_at DESC;");
         $prepare->bindValue(':search', '%'. $search .'%', PDO::PARAM_STR);
         $prepare->execute();
-        $prepare->debugDumpParams();
+        
         $records = $prepare->fetchAll();
-        printf('search');
     } else {
         // SQL文をセット
         $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
         $prepare->execute();
 
         $records = $prepare->fetchAll();
-        printf('first');
-        var_dump($_POST);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
