@@ -22,9 +22,9 @@ try {
 
         // SQL文をセット
         $prepare = $pdo->prepare("SELECT id, title, created_at FROM threads WHERE title LIKE :search OR content LIKE :search ORDER BY created_at DESC;");
-        $prepare->bindValue(':search', '%'. $search .'%', PDO::PARAM_STR);
+        $prepare->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
         $prepare->execute();
-        
+
         $records = $prepare->fetchAll();
     } else {
         // SQL文をセット
@@ -58,7 +58,9 @@ try {
     <form action="thread.php" method="get">
         <header>
             <div class="link">
-                <?php if (($_SESSION['login']) && $_SESSION['login'] === 'ログイン') {echo "<input type='submit' name='confirm' value='新規スレッド作成' class='button_header'>"; }?>
+                <?php if (($_SESSION['login']) && $_SESSION['login'] === 'ログイン') {
+                    echo "<input type='submit' name='confirm' value='新規スレッド作成' class='button_header'>";
+                } ?>
             </div>
         </header>
     </form>
@@ -69,21 +71,27 @@ try {
                 <input type="text" name="search" class="form" value="">
                 <input type="submit" name="confirm" value="スレッド検索">
             </div>
-            <div class="list">
-                <div>
-                    <?php foreach ($records as $record) : ?>
+        </form>
+
+        <div class="list">
+            <div>
+                <?php foreach ($records as $record) : ?>
+                    <form action="thread_detail.php" method="get">
                         <div class="record">
-                            <p>ID:<?php echo $record['id'] ?></p>
-                            <p><?php echo $record['title'] ?></p>
-                            <p class="created_at"><?php echo $record['created_at'] ?></p>
+                            ID: <input type="text" name="id" value="<?php echo htmlspecialchars($record['id']) ?>">
+                            <input type="submit" value="<?php echo htmlspecialchars($record['title']) ?>">
+                            <p class="created_at"><?php echo htmlspecialchars($record['created_at']) ?></p>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </form>
+                <?php endforeach; ?>
             </div>
+        </div>
+        <form action="thread.php" method="post">
             <div class="submit">
                 <input type="submit" name="confirm" value="トップに戻る" class="button_back">
             </div>
         </form>
+
     </main>
 </body>
 
