@@ -18,7 +18,7 @@ try {
     $records = $prepare->fetchAll();
     var_dump($records);
 
-    
+
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
@@ -61,7 +61,7 @@ if (!empty($_POST['confirm']) && $_GET['confirm'] === 'スレッド検索') {
                         <div class="record">
                             <p>ID:<?php echo $record['id'] ?></p>
                             <p><?php echo $record['title'] ?></p>
-                            <p><?php echo $record['created_at'] ?></p>
+                            <p class="created_at"><?php echo $record['created_at'] ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>

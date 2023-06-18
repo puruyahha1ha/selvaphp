@@ -121,6 +121,9 @@ span {
 .search .form {
     width: 350px;
 }
-.records {
+.record {
     display: flex;
+}
+.created_at {
+    width: 180px;
 }
