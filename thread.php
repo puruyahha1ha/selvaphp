@@ -2,12 +2,10 @@
 session_start();
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
-    $_SESSION['login'] = 'ログイン';
     header('Location: thread_regist.php', true, 307);
     exit;
 }
 if (!empty($_POST['confirm']) && $_POST['confirm'] === 'トップに戻る') {
-    $_SESSION['login'] = 'ログイン';
     header('Location: top.php', true, 307);
     exit;
 }
