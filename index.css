@@ -138,6 +138,3 @@ span {
     font: inherit;
     outline: none;
 }
-.record input[type='submit'] {
-    cursor: pointer;
-}
