@@ -69,7 +69,7 @@ try {
         <main>
             <div class="search">
                 <input type="text" name="search" class="form" value="">
-                <input type="button" name="confirm" value="スレッド検索">
+                <input type="submit" name="confirm" value="スレッド検索">
             </div>
             <div class="list">
                 <div>
