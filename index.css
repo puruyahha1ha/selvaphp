@@ -138,6 +138,7 @@ span {
     border-radius: 0;
     font: inherit;
     outline: none;
+    color: blue;
 }
 .record input[type='text'] {
     width: 30px;
