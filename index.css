@@ -114,3 +114,10 @@ span {
     width: 410px;
     height: 350px;
 }
+.search {
+    margin: 50px 0;
+    text-align: center;
+}
+.search .form {
+    width: 350px;
+}
