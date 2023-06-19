@@ -55,7 +55,7 @@ if (!empty($_GET['id'])) {
         <main>
             <div class="title">
                 <h1><?php if (!empty($record)) {echo $record['title'];}?></h1>
-                <span><?php if (!empty($record)) {echo $record['created_at'];}?></span>
+                <span><?php if (!empty($record)) {echo $record['created_at']->format('m/d/Y H:i');}?></span>
             </div>
             <div class="gray"></div>
             <div class="content">
