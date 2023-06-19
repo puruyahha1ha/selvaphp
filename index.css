@@ -129,7 +129,7 @@ span {
 .created_at {
     width: 180px;
 }
-.record input {
+.record input button{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
