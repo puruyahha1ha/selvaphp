@@ -145,5 +145,5 @@ span {
 }
 .record input[type='submit'] {
     width: 250px;
-    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
