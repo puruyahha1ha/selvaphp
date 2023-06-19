@@ -144,5 +144,6 @@ span {
     width: 30px;
 }
 .record input[type='submit'] {
-    width: 100px;
+    width: 250px;
+    overflow-wrap: break-word;
 }
