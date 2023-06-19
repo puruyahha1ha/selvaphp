@@ -124,6 +124,7 @@ span {
 .record {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     color: blue;
 }
 .created_at {
@@ -140,10 +141,10 @@ span {
     outline: none;
     color: blue;
 }
-.record input[type='text'] {
+.record input {
     width: 30px;
 }
-.record input[type='submit'] {
-    width: 250px;
-    text-overflow: ellipsis;
+.record button {
+    width: 300px;
+    text-align: left;
 }
