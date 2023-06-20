@@ -47,7 +47,7 @@ if (!empty($_GET['id'])) {
 <body>
     <header>
         <div class="link">
-            <form action="top.php" method="get">
+            <form action="thread_detail.php" method="get">
                 <input type="submit" name="confirm" value="スレッド一覧に戻る" class="button_header">
             </form>
         </div>
