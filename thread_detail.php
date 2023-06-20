@@ -16,7 +16,7 @@ if (!empty($_GET['id'])) {
         $id = $_GET['id'];
 
         // SQL文をセット
-        $prepare = $pdo->prepare("SELECT threads.member_id, threads.title,threads.content,threads.created_at, members.name_sei, members.name_mei FROM threads LEFT JOIN members ON members.id = threads.member_id WHERE threads.id = :id;");
+        $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = 8;");
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->execute();
 
@@ -53,13 +53,16 @@ if (!empty($_GET['id'])) {
         </div>
         <main>
             <div class="title_thread">
-                <h1><?php if (!empty($record)) {echo $record['title'];}?></h1>
+                <h2><?php if (!empty($record)) {echo $record['title'];}?></h2>
                 <span><?php if (!empty($record)) {echo $record['created_at'];}?></span>
             </div>
             <div class="gray"></div>
             <div class="content_thread">
                 <p>投稿者：<?php if (!empty($record)) {echo $record['name_sei'].'　'.$record['name_mei'].'　'.$record['created_at'];}?></p>
-                <p><?php if (!empty($record)) {echo $record['content'];}?></p>
+                <p>
+                    <?php if (!empty($record)) {echo $record['comment_num'];}?>コメント
+                    <?php if (!empty($record)) {echo $record['content'];}?>
+                </p>
             </div>
             <div class="gray"></div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') :?>
