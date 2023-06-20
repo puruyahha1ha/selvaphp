@@ -16,7 +16,7 @@ if (!empty($_GET['id'])) {
         $id = $_GET['id'];
 
         // SQL文をセット
-        $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = 8;");
+        $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = :id;");
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->execute();
 
