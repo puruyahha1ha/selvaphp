@@ -192,3 +192,6 @@ span {
 h2 {
     text-align: center;
 }
+.under_title {
+    display: flex;
+}

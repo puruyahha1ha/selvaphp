@@ -54,8 +54,10 @@ if (!empty($_GET['id'])) {
         <main>
             <div class="title_thread">
                 <h2><?php if (!empty($record)) {echo $record['title'];} ?></h2>
-                <span><?php if (!empty($record)) {echo $record['comment_num'];} ?>コメント</span>
-                <span><?php if (!empty($record)) {echo $record['created_at'];} ?></span>
+                <div class="under_title">
+                    <span><?php if (!empty($record)) {echo $record['comment_num'];} ?>コメント</span>
+                    <span><?php if (!empty($record)) {echo $record['created_at'];} ?></span>
+                </div>
             </div>
             <div class="gray"></div>
             <div class="content_thread">
