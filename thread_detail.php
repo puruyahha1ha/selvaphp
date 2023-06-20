@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
-    $_SESSION['login'] = 'ログイン';
     header('Location: thread.php', true, 307);
     exit;
 }
