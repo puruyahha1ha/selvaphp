@@ -64,7 +64,7 @@ if (!empty($_GET['id'])) {
             <div class="gray"></div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') :?>
                 <form action="" method="post" class="comment">
-                <textarea name="comment" id="" cols="50" rows="10"></textarea>
+                <textarea name="comment" id="" rows="10"></textarea>
                 <input type="submit" name="confirm" value="コメントする" class="button">
                 </form>
             <?php endif ?>    
