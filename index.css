@@ -177,3 +177,12 @@ span {
     background-color: gainsboro;
     height: 30px;
 }
+.comment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px 30px;
+}
+.comment input {
+    margin-top: 10px;
+}
