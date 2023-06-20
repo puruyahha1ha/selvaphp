@@ -53,12 +53,12 @@ if (!empty($_GET['id'])) {
             </form>
         </div>
         <main>
-            <div class="title">
+            <div class="title_thread">
                 <h1><?php if (!empty($record)) {echo $record['title'];}?></h1>
                 <span><?php if (!empty($record)) {echo $record['created_at'];}?></span>
             </div>
             <div class="gray"></div>
-            <div class="content">
+            <div class="content_thread">
                 <p>投稿者：<?php if (!empty($record)) {echo $record['name_sei'].'　'.$record['name_mei'].'　'.$record['created_at'];}?></p>
                 <p><?php if (!empty($record)) {echo $record['content'];}?></p>
             </div>
