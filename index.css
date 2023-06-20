@@ -194,4 +194,5 @@ h2 {
 }
 .under_title {
     display: flex;
+    justify-content: flex-end;
 }
