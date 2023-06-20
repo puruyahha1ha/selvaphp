@@ -156,3 +156,8 @@ span {
     padding: 0;
     margin: 0;
 }
+.title_thread span {
+    width: auto;
+    text-align: end;
+    margin: 0 30px;
+}
