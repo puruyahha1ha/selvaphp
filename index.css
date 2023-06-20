@@ -183,6 +183,9 @@ span {
     align-items: flex-end;
     margin: 10px 30px;
 }
+.comment textarea {
+    width: 100%;
+}
 .comment input {
     margin-top: 10px;
 }
