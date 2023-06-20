@@ -161,3 +161,19 @@ span {
     text-align: end;
     margin: 0 30px;
 }
+.content_thread {
+    border: blue solid;
+    border-radius: 5px;
+    margin: 10px 30px;
+    color: blue;
+    text-align: center;
+}
+.content_thread p {
+    width: auto;
+    text-align: left;
+    margin: 0 10px;
+}
+.gray {
+    background-color: gainsboro;
+    height: 30px;
+}
