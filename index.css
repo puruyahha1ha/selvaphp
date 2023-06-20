@@ -163,7 +163,7 @@ span {
 }
 .content_thread {
     border: blue solid;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 10px 30px;
     color: blue;
     text-align: center;
@@ -188,4 +188,7 @@ span {
 }
 .comment input {
     margin-top: 10px;
+}
+h2 {
+    text-align: center;
 }
