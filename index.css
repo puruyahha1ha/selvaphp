@@ -163,10 +163,11 @@ span {
 }
 .content_thread {
     border: blue solid;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 10px 30px;
     color: blue;
     text-align: center;
+    min-height: 150px;
 }
 .content_thread p {
     width: auto;
