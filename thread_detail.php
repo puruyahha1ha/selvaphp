@@ -53,24 +53,28 @@ if (!empty($_GET['id'])) {
         </div>
         <main>
             <div class="title_thread">
-                <h2><?php if (!empty($record)) {echo $record['title'];}?></h2>
-                <span><?php if (!empty($record)) {echo $record['created_at'];}?></span>
+                <h2><?php if (!empty($record)) {echo $record['title'];} ?></h2>
+                <span>
+                    <?php if (!empty($record)) {echo $record['comment_num'];} ?>コメント
+                    <?php if (!empty($record)) {echo $record['created_at'];} ?>
+                </span>
             </div>
             <div class="gray"></div>
             <div class="content_thread">
-                <p>投稿者：<?php if (!empty($record)) {echo $record['name_sei'].'　'.$record['name_mei'].'　'.$record['created_at'];}?></p>
-                <p>
-                    <?php if (!empty($record)) {echo $record['comment_num'];}?>コメント
-                    <?php if (!empty($record)) {echo $record['content'];}?>
-                </p>
+                <p>投稿者：<?php if (!empty($record)) {
+                            echo $record['name_sei'] . '　' . $record['name_mei'] . '　' . $record['created_at'];
+                        } ?></p>
+                <p><?php if (!empty($record)) {
+                        echo $record['content'];
+                    } ?></p>
             </div>
             <div class="gray"></div>
-            <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') :?>
+            <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="" method="post" class="comment">
-                <textarea name="comment" id="" rows="10"></textarea>
-                <input type="submit" name="confirm" value="コメントする" class="button">
+                    <textarea name="comment" id="" rows="10"></textarea>
+                    <input type="submit" name="confirm" value="コメントする" class="button">
                 </form>
-            <?php endif ?>    
+            <?php endif ?>
         </main>
     </header>
 </body>
