@@ -21,7 +21,6 @@ if (!empty($_GET['id'])) {
         $prepare->execute();
 
         $record = $prepare->fetch();
-        var_dump($record);
     } catch (PDOException $e) {
         if (!empty($pdo)) {
             $db->rollback();
