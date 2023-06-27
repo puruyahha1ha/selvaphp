@@ -24,11 +24,16 @@ try {
     }
 
     // SQL文をセット
-    $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, comments.comment, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = :id;");
+    $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = :id;");
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
+    $prepare_comment = $pdo->prepare("SELECT * FROM comments WHERE thread_id = :id;");
+    $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
+    $prepare_comment->execute();
+
     $record = $prepare->fetch();
+    $comments = $prepare_comment->fetchAll();
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
@@ -82,7 +87,16 @@ try {
                     } ?></p>
             </div>
             <div class="comment">
-                    <?php if (!empty($record)) {echo $record['comment'];}?>
+                    <?php 
+                        if (!empty($record)) {
+                            $number = 0;
+                            foreach ($comments as $val) {
+                                $number += 1;
+                                echo $number;
+                                echo $val['comment'];
+                            }
+                        }
+                    ?>
             </div>
             <div class="gray"></div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
