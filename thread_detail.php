@@ -86,7 +86,7 @@ try {
                         echo $record['content'];
                     } ?></p>
             </div>
-            <div class="comment">
+            <div class="comments">
                     <?php 
                         if (!empty($record)) {
                             $number = 0;
