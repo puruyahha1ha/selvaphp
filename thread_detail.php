@@ -93,7 +93,7 @@ try {
                             foreach ($comments as $val) {
                                 $number += 1;
                                 echo $number.".　<br>";
-                                echo $val['comment'];
+                                echo $val['comment']."<br>";
                             }
                         }
                     ?>
