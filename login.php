@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // ログイン状態の場合は、トップ画面に遷移
 if (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン') {
     header('Location: top.php', true, 307);
