@@ -1,6 +1,7 @@
 <?php
 session_start();
 var_dump($_SESSION);
+var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
     header('Location: thread.php', true, 307);
