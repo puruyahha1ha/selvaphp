@@ -41,6 +41,7 @@ try {
 
     $record = $prepare->fetch();
     $comments = $prepare_comment->fetchAll();
+    var_dump($comments);
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
