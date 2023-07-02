@@ -18,19 +18,19 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
     // スレッドID
-    $id = !empty($_GET)? $_GET['id']: $_POST['id'];
+    $id = !empty($_GET) ? $_GET['id'] : $_POST['id'];
     // メンバーID
     $member_id = $_SESSION['id'];
 
     if (!empty($_POST) && $_POST['confirm'] === 'コメントする') {
-            // 姓のバリデーション
+        // 姓のバリデーション
         if ($_POST['comment'] === '') {
             $errors['comment'] = '※コメントは必須入力です';
         } elseif (mb_strlen($posts['comment']) > 500) {
             $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
         }
 
-        if(empty($errors)) {
+        if (empty($errors)) {
             $comment = $_POST['comment'];
             // SQL文をセット
             $prepare = $pdo->prepare("INSERT INTO comments (member_id, thread_id, comment, created_at) VALUES (:member_id, :id, :comment, now())");
@@ -106,23 +106,30 @@ try {
                     } ?></p>
             </div>
             <div class="comments">
-                    <?php 
-                        if (!empty($record)) {
-                            $number = 0;
-                            foreach ($comments as $val) {
-                                $number += 1;
-                                echo htmlspecialchars($number).".　<br>";
-                                echo nl2br(htmlspecialchars($val['comment']))."<br>";
-                            }
-                        }
-                    ?>
+                <?php
+                if (!empty($record)) {
+                    $number = 0;
+                    foreach ($comments as $val) {
+                        $number += 1;
+                        echo htmlspecialchars($number) . ".　<br>";
+                        echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
+                    }
+                }
+                ?>
             </div>
             <div class="gray"></div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
+                    <div class="error">
+                        <?php
+                        if (!empty($errors['gender'])) {
+                            echo $errors['gender'];
+                        }
+                        ?>
+                    </div>
                     <input type="submit" name="confirm" value="コメントする" class="button">
-                    <input type="hidden" name="id" value="<?php echo !empty($_GET)? $_GET['id']: $_POST['id'];?>">
+                    <input type="hidden" name="id" value="<?php echo !empty($_GET) ? $_GET['id'] : $_POST['id']; ?>">
                 </form>
             <?php endif ?>
         </main>
