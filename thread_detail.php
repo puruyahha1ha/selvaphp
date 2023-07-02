@@ -110,7 +110,7 @@ try {
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
                     <input type="submit" name="confirm" value="コメントする" class="button">
-                    <input type="hidden" name="id" value="<?php if($_SESSION) {echo $_SESSION['id'];}?>">
+                    <input type="hidden" name="id" value="<?php if($_GET) {echo $_GET['id'];}?>">
                 </form>
             <?php endif ?>
         </main>
