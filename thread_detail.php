@@ -1,5 +1,7 @@
 <?php
 session_start();
+// エラーメッセージの初期化
+$errors = [];
 var_dump($_SESSION);
 var_dump($_POST);
 
@@ -21,13 +23,22 @@ try {
     $member_id = $_SESSION['id'];
 
     if (!empty($_POST) && $_POST['confirm'] === 'コメントする') {
-        $comment = $_POST['comment'];
-        // SQL文をセット
-        $prepare = $pdo->prepare("INSERT INTO comments (member_id, thread_id, comment, created_at) VALUES (:member_id, :id, :comment, now())");
-        $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-        $prepare->bindValue(':comment', $comment, PDO::PARAM_STR);
-        $prepare->execute();
+            // 姓のバリデーション
+        if ($_POST['comment'] === '') {
+            $errors['comment'] = '※コメントは必須入力です';
+        } elseif (mb_strlen($posts['comment']) > 500) {
+            $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
+        }
+
+        if(empty($errors)) {
+            $comment = $_POST['comment'];
+            // SQL文をセット
+            $prepare = $pdo->prepare("INSERT INTO comments (member_id, thread_id, comment, created_at) VALUES (:member_id, :id, :comment, now())");
+            $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+            $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+            $prepare->bindValue(':comment', $comment, PDO::PARAM_STR);
+            $prepare->execute();
+        }
     }
 
     // SQL文をセット
