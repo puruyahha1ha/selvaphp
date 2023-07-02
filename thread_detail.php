@@ -123,8 +123,8 @@ try {
                     <textarea name="comment" id="" rows="10"></textarea>
                     <div class="error">
                         <?php
-                        if (!empty($errors['gender'])) {
-                            echo $errors['gender'];
+                        if (!empty($errors['comment'])) {
+                            echo $errors['comment'];
                         }
                         ?>
                     </div>
