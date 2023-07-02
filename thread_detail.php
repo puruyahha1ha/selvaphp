@@ -111,7 +111,7 @@ try {
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
                     <input type="submit" name="confirm" value="コメントする" class="button">
-                    <input type="hidden" name="id" value="<?php if($_GET) {echo $_GET['id'];}?>">
+                    <input type="hidden" name="id" value="<?php echo !empty($_GET)? $_GET['id']: $_POST['id'];?>">
                 </form>
             <?php endif ?>
         </main>
