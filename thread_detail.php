@@ -29,7 +29,7 @@ try {
         } elseif (mb_strlen($posts['comment']) > 500) {
             $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
         }
-
+        var_dump($errors);
         if (empty($errors)) {
             $comment = $_POST['comment'];
             // SQL文をセット
