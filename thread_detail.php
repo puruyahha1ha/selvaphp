@@ -14,15 +14,19 @@ try {
     $password = 'kazuto060603';
 
     $pdo = new PDO($dsn, $user, $password);
-
+    // スレッドID
     $id = !empty($_GET)? $_GET['id']: $_POST['id'];
+    // メンバーID
+    $member_id = $_SESSION['id'];
 
-    if (!empty($_POST)) {
-        $member_id = $_POST['member_id'];
+    if (!empty($_POST) && $_POST['confirm'] === 'コメントする') {
         $comment = $_POST['comment'];
         // SQL文をセット
         $prepare = $pdo->prepare("INSERT INTO comments (member_id, thread_id, comment, created_at) VALUES (:member_id, :id, :comment, now())");
+        $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->bindValue(':comment', $comment, PDO::PARAM_STR);
+        $prepare->execute();
     }
 
     // SQL文をセット
@@ -104,8 +108,6 @@ try {
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
-                    <input type="hidden" name="member_id" value="<?php if (!empty($record)) {echo $record['member_id'];}?>">
-                    <input type="hidden" name="member_id" value="<?php if (!empty($record)) {echo $record['member_id'];} else {echo $_GET['id'];}?>">
                     <input type="submit" name="confirm" value="コメントする" class="button">
                 </form>
             <?php endif ?>
