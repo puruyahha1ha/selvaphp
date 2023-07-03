@@ -55,7 +55,7 @@ try {
 
     // ページに応じてコメントを取得
     $limit = 5;
-    $offset = ((integer)$now - 1) * 5;
+    $offset = ((int)$now - 1) * 5;
     $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC LIMIT :limit OFFSET :offset;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare_comment->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -63,7 +63,6 @@ try {
     $prepare_comment->execute();
 
     $comments = $prepare_comment->fetchAll();
-    
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
@@ -142,9 +141,17 @@ try {
                     }
                     foreach ($comments as $val) {
                         $number += 1;
+                        $comment_id = $val['id'];
+                        // いいね数を取得
+                        $prepare_like = $pdo->prepare("SELECT COUNT(*) AS cnt FROM likes WHERE comment_id = :comment_id;");
+                        $prepare_like->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
+                        $prepare_like->execute();
+
+                        $like_count = $prepare_like->fetch();
+
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "<a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'></a>";
+                        echo "  <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'></a>.'$like_count'.";
                         echo "</div>";
                     }
                 }
