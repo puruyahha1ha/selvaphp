@@ -120,7 +120,7 @@ try {
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
-                    <div class="error">
+                    <div class="error_comment">
                         <?php
                         if (!empty($errors['comment'])) {
                             echo $errors['comment'];
