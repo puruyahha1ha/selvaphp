@@ -103,8 +103,8 @@ try {
             </div>
             <div class="gray">
                 <form action="thread_detail.php" method="post" class="page">
-                    <?php if($now > 1){$now -= 1; echo "<a href='thread_detail.php?page_id={$now}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
-                    <?php if($now < $max_page){$now += 1; echo "<a href='thread_detail.php?page_id={$now}'>次へ＞</a>";} else {echo '<span>次へ＞</span>';} ?>
+                    <?php if($now > 1){$now -= 1; echo "<a href='thread_detail.php?page_id={$now}id={$id}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
+                    <?php if($now < $max_page){$now += 1; echo "<a href='thread_detail.php?page_id={$now}id={$id}'>次へ＞</a>";} else {echo '<span>次へ＞</span>';} ?>
                 </form>
             </div>
             <div class="content_thread">
