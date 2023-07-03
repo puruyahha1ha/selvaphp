@@ -45,7 +45,7 @@ try {
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
-    $prepare_comment = $pdo->prepare("SELECT comments.* FROM comments WHERE thread_id = :id;");
+    $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = 16 ORDER BY comments.id ASC;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare_comment->execute();
 
