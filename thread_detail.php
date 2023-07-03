@@ -84,6 +84,7 @@ try {
     <title>スレッド詳細</title>
     <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
     <link rel="stylesheet" href="index.css">
+    <script src="animation.js" async></script>
 </head>
 
 <body>
@@ -143,8 +144,8 @@ try {
                         $number += 1;
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  <div class='likes'>";
-                        echo "      <div class='heart'></div>";
+                        echo "  <div class='Likes'>";
+                        echo "      <div class='LikesIcon'></div>";
                         echo "  </div>";
                         echo "</div>";
                     }
