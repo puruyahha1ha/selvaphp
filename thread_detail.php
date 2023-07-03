@@ -8,7 +8,6 @@ if(!isset($_GET['page_id'])){
     $now = $_GET['page_id'];
 }
 var_dump($now);
-var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
     header('Location: thread.php', true, 307);
@@ -34,7 +33,6 @@ try {
         } elseif (mb_strlen($_POST['comment']) > 500) {
             $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
         }
-        var_dump($errors);
         if (empty($errors)) {
             $comment = $_POST['comment'];
             // SQL文をセット
@@ -105,7 +103,7 @@ try {
             <div class="gray">
                 <form action="thread_detail.php" method="post" class="page">
                     <?php if($now > 1){$now -= 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
-                    <?php if($now < $max_page){$now += 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";} else {echo '<span>次へ＞</span>';} ?>
+                    <?php if($now === $max_page) {echo '<span>次へ＞</span>';} else {$now += 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";}?>
                 </form>
             </div>
             <div class="content_thread">
