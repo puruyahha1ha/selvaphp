@@ -215,8 +215,8 @@ h2 {
     color: blue;
 }
 .heart {
-    width: 100px;  /* 正方形を作る */
-    height: 100px; /* 正方形を作る */
+    width: 5px;  /* 正方形を作る */
+    height: 5px; /* 正方形を作る */
     position: relative;/* 基準位置とする */
   }
   .heart::before,
