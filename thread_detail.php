@@ -143,7 +143,9 @@ try {
                         $number += 1;
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  <div class='heart'></div>";
+                        echo "  <div class='likes'>";
+                        echo "      <div class='heart'></div>";
+                        echo "  </div>";
                         echo "</div>";
                     }
                 }
