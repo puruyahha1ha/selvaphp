@@ -110,7 +110,7 @@ try {
                     $number = 0;
                     foreach ($comments as $val) {
                         $number += 1;
-                        echo $number.".　<br>".$val['name_sei'].'　'.$val['name_mai'];
+                        echo $number.".　".$val['name_sei'].'　'.$val['name_mei'].'<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
                     }
                 }
