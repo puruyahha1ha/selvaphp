@@ -7,6 +7,7 @@ if(!isset($_GET['page_id'])){
 }else{
     $now = $_GET['page_id'];
 }
+var_dump($now);
 var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
