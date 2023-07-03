@@ -2,7 +2,11 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
-$now = 2;
+if(!isset($_GET['page_id'])){
+    $now = 1;
+}else{
+    $now = $_GET['page_id'];
+}
 var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
