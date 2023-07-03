@@ -148,7 +148,7 @@ try {
                         $prepare_like->execute();
 
                         $like = $prepare_like->fetch();
-
+                        
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
                         echo "  ";
