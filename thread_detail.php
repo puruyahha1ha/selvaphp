@@ -45,7 +45,7 @@ try {
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
-    $prepare_comment = $pdo->prepare("SELECT * FROM comments WHERE thread_id = :id;");
+    $prepare_comment = $pdo->prepare("SELECT comments.* FROM comments WHERE thread_id = :id;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare_comment->execute();
 
@@ -110,7 +110,7 @@ try {
                     $number = 0;
                     foreach ($comments as $val) {
                         $number += 1;
-                        echo htmlspecialchars($number) . ".　<br>";
+                        echo htmlspecialchars($number.".　<br>".$val['name_sei'].'　'.$val['name_mai']);
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
                     }
                 }
