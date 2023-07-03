@@ -30,7 +30,7 @@ try {
         if ($_POST['comment'] === '') {
             $errors['comment'] = '※コメントは必須入力です';
         } elseif (mb_strlen($_POST['comment']) > 500) {
-            $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
+            $errors['comment'] = '※コメントは５００字以内で入力してください';
         }
         // コメントの登録
         if (empty($errors)) {
@@ -54,7 +54,7 @@ try {
     $max_page = (string)ceil($record['comment_num'] / 5);
 
     // ページに応じてコメントを取得
-    $limit = (integer)$now * 5;
+    $limit = 5;
     $offset = ((integer)$now - 1) * 5;
     $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC LIMIT :limit OFFSET :offset;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
