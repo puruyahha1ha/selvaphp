@@ -26,7 +26,7 @@ try {
         // 姓のバリデーション
         if ($_POST['comment'] === '') {
             $errors['comment'] = '※コメントは必須入力です';
-        } elseif (mb_strlen($posts['comment']) > 500) {
+        } elseif (mb_strlen($_POST['comment']) > 500) {
             $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
         }
         var_dump($errors);
