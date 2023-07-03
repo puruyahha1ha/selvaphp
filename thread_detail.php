@@ -136,8 +136,11 @@ try {
             <div class="comments">
                 <?php
                 if (!empty($record)) {
-                    if ($now === 1) {}
-                    $number = 0;
+                    if ($now === 1) {
+                        $number = 0;
+                    } else {
+                        $number = ($now - 1) * 5 + 1;
+                    }
                     foreach ($comments as $val) {
                         $number += 1;
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
