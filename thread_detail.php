@@ -2,6 +2,7 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
+$now = 1;
 var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
@@ -95,7 +96,12 @@ try {
                             } ?></span>
                 </div>
             </div>
-            <div class="gray"></div>
+            <div class="gray">
+                <form action="thread_detail.php" method="post" class="page">
+                    <?php if($now > 1){echo "<a href='/thread_detail.php?page_id='.($now - 1).')>前へ</a>";} else {echo '前へ';} ?>
+                    <?php if($now < $max_page){echo "<a href='/thread_detail.php?page_id='.($now + 1).'')>次へ</a>";} else {echo '次へ';} ?>
+                </form>
+            </div>
             <div class="content_thread">
                 <p>投稿者：<?php if (!empty($record)) {
                             echo $record['name_sei'] . '　' . $record['name_mei'] . '　' . $record['created_at'];
@@ -110,17 +116,19 @@ try {
                     $number = 0;
                     foreach ($comments as $val) {
                         $number += 1;
-                        echo "<div class='comment'>".$number.".　".$val['name_sei'].'　'.$val['name_mei'].'　'.$val['created_at'].'<br>';
+                        echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br></div>";
                     }
                 }
                 ?>
             </div>
-            <div class="gray"></div>
+            <div class="gray">
+
+            </div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="thread_detail.php" method="post" class="comment">
                     <textarea name="comment" id="" rows="10"></textarea>
-                    <div class="error_comment">
+                    <div class="error">
                         <?php
                         if (!empty($errors['comment'])) {
                             echo $errors['comment'];
