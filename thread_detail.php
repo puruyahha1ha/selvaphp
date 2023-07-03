@@ -143,15 +143,17 @@ try {
                         $number += 1;
                         $comment_id = $val['id'];
                         // いいね数を取得
-                        $prepare_like = $pdo->prepare("SELECT COUNT(*) AS cnt FROM likes WHERE comment_id = :comment_id;");
+                        $prepare_like = $pdo->prepare("SELECT COUNT(*) AS cnt, member_id FROM likes WHERE comment_id = :comment_id;");
                         $prepare_like->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
                         $prepare_like->execute();
 
-                        $like_count = $prepare_like->fetch();
+                        $like = $prepare_like->fetch();
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'></a>{$like_count['cnt']}";
+                        echo "  <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'>";
+                        if($like['member_id'] === $member_id) {echo "      <img src='img\like.png'>";} else {echo "      <img src='img\unlike.png'>";}
+                        echo "  </a>{$like['cnt']}";
                         echo "</div>";
                     }
                 }
