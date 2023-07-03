@@ -46,6 +46,10 @@ try {
 
     // いいねの登録
     if ($_GET['like'] === '0') {
+        if (empty($_SESSION['login'])) {
+            header('Location: member_regist.php', true, 307);
+            exit;
+        }
 
         // SQL文をセット
         $prepare = $pdo->prepare("SELECT * FROM likes  WHERE member_id = :member_id AND comment_id = :comment_id");
