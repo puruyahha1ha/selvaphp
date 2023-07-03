@@ -176,16 +176,17 @@ try {
 
                         $like = $prepare_like->fetch();
                         // いいねをしているかのチェック
-                        $prepare_check = $pdo->prepare("SELECT member_id FROM likes WHERE comment_id = :comment_id;");
+                        $prepare_check = $pdo->prepare("SELECT COUNT(1) FROM likes WHERE member_id = :member_id AND comment_id = :comment_id;");
+                        $prepare_check->bindValue(':member_id', $member_id, PDO::PARAM_INT);
                         $prepare_check->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
                         $prepare_check->execute();
-                        $check = $prepare_check->fetchAll();
+                        $check = $prepare_check->fetch();
 
                         var_dump($like, $member_id,$check);
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        if (in_array($member_id, $check)) {
+                        if ($check['cnt'] === '1') {
                             echo "   <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=1&comment_id={$comment_id}'><img src='img\like.png'>";
                         } else {
                             echo " <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
