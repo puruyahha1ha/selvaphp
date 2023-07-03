@@ -56,6 +56,7 @@ try {
     $record = $prepare->fetch();
     $max_page = (string)ceil($record['comment_num'] / 5);
     var_dump($max_page);
+    var_dump($now === $max_page);
     $comments = $prepare_comment->fetchAll();
 } catch (PDOException $e) {
     if (!empty($pdo)) {
