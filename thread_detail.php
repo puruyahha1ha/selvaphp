@@ -144,9 +144,7 @@ try {
                         $number += 1;
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  <div class='Likes'>";
-                        echo "      <div class='LikesIcon'></div>";
-                        echo "  </div>";
+                        echo "<a href='thread_detail.php?page_id={$now}&id={$id}&like='1''><img src='img\like.png'></a>";
                         echo "</div>";
                     }
                 }
