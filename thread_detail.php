@@ -2,9 +2,9 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
-if(!isset($_GET['page_id'])){
+if (!isset($_GET['page_id'])) {
     $now = 1;
-}else{
+} else {
     $now = $_GET['page_id'];
 }
 var_dump($now);
@@ -103,8 +103,18 @@ try {
             </div>
             <div class="gray">
                 <form action="thread_detail.php" method="post" class="page">
-                    <?php if($now > 1) {$now -= 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
-                    <?php if($now === $max_page) {echo '<span>次へ＞</span>';} else {$now += 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";}?>
+                    <?php if ($now > 1) {
+                        $page = $now - 1;
+                        echo "<a href='thread_detail.php?page_id={$page}&id={$id}'>前へ＞</a>";
+                    } else {
+                        echo '<span>前へ＞</span>';
+                    } ?>
+                    <?php if ($now === $max_page) {
+                        echo '<span>次へ＞</span>';
+                    } else {
+                        $page = $now + 1;
+                        echo "<a href='thread_detail.php?page_id={$page}&id={$id}'>次へ＞</a>";
+                    } ?>
                 </form>
             </div>
             <div class="content_thread">
@@ -129,8 +139,18 @@ try {
             </div>
             <div class="gray">
                 <form action="thread_detail.php" method="post" class="page">
-                    <?php if($now > 1) {$now -= 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
-                    <?php if($now === $max_page) {echo '<span>次へ＞</span>';} else {$now += 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";}?>
+                    <?php if ($now > 1) {
+                        $now -= 1;
+                        echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>前へ＞</a>";
+                    } else {
+                        echo '<span>前へ＞</span>';
+                    } ?>
+                    <?php if ($now === $max_page) {
+                        echo '<span>次へ＞</span>';
+                    } else {
+                        $now += 1;
+                        echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";
+                    } ?>
                 </form>
             </div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
