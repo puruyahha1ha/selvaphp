@@ -51,17 +51,21 @@ try {
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
-    // ページに応じてコメントを取得
-    $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC;");
-    $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
-    $prepare_comment->execute();
-
     $record = $prepare->fetch();
     $max_page = (string)ceil($record['comment_num'] / 5);
-    $limit = (integer)$max_page * 5;
-    $offset = ((integer)$max_page - 1) * 5;
+
+    // ページに応じてコメントを取得
+    $limit = (integer)$now * 5;
+    $offset = ((integer)$now - 1) * 5;
     var_dump($limit,$offset);
+    $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC LIMIT :limit OFFSET :offset;");
+    $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
+    $prepare_comment->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $prepare_comment->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $prepare_comment->execute();
+
     $comments = $prepare_comment->fetchAll();
+    
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
