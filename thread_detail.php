@@ -177,7 +177,7 @@ try {
                         $like = $prepare_like->fetch();
                         // いいねをしているかのチェック
                         $prepare_check = $pdo->prepare("SELECT COUNT(member_id) FROM likes WHERE member_id = :member_id;");
-                        $prepare_check->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
+                        $prepare_check->bindValue(':member_id', $member_id, PDO::PARAM_INT);
                         $prepare_check->execute();
                         $check = $prepare_check->fetch();
 
