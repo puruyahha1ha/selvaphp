@@ -45,7 +45,7 @@ try {
     }
 
     // いいねの登録
-    if ($_GET['like'] === 0) {
+    if ($_GET['like'] === '0') {
         // SQL文をセット
         $prepare = $pdo->prepare("INSERT INTO likes (member_id, comment_id) VALUES (:member_id, :comment_id)");
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
