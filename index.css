@@ -208,4 +208,9 @@ h2 {
 }
 .page span {
     width: auto;
+    color: dimgrey;
+}
+.page a {
+    text-decoration: none;
+    color: blue;
 }
