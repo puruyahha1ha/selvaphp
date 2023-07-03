@@ -274,3 +274,7 @@ img {
 .like {
     display: flex;
 }
+.like a {
+    margin-top: 5px;
+    margin-right: 10px;
+}
