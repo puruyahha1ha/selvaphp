@@ -2,7 +2,6 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
-var_dump($_SESSION);
 var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
