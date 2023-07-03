@@ -128,7 +128,10 @@ try {
                 ?>
             </div>
             <div class="gray">
-
+                <form action="thread_detail.php" method="post" class="page">
+                    <?php if($now > 1) {$now -= 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
+                    <?php if($now === $max_page) {echo '<span>次へ＞</span>';} else {$now += 1; echo "<a href='thread_detail.php?page_id={$now}&id={$id}'>次へ＞</a>";}?>
+                </form>
             </div>
             <?php if (!empty($_SESSION) && $_SESSION['login'] === 'ログイン') : ?>
                 <form action="thread_detail.php" method="post" class="comment">
