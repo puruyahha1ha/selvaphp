@@ -175,7 +175,7 @@ try {
                         } else {
                             echo " <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
                         }
-                        echo "  </a>{$like['cnt']}</div>";
+                        echo "  </a><span>{$like['cnt']}</span></div>";
                         echo "</div>";
                     }
                 }
