@@ -51,6 +51,7 @@ try {
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
         $prepare->execute();
+        var_dump($member_id,$_GET['member_id']);
     }
 
     // 初期表示の情報を取得
