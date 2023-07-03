@@ -186,7 +186,7 @@ try {
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        if ($check['cnt'] === '1') {
+                        if ($check['COUNT(1)'] === '1') {
                             echo "   <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=1&comment_id={$comment_id}'><img src='img\like.png'>";
                         } else {
                             echo " <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
