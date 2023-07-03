@@ -151,8 +151,8 @@ try {
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'>";
-                        if($like['member_id'] === $member_id) {echo "      <img src='img\like.png'>";} else {echo "      <img src='img\unlike.png'>";}
+                        echo "  ";
+                        if($like['member_id'] === $member_id) {echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'>";} else {echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0'><img src='img\unlike.png'>";}
                         echo "  </a>{$like['cnt']}";
                         echo "</div>";
                     }
