@@ -53,6 +53,14 @@ try {
         $prepare->execute();
         var_dump($member_id,$_GET['member_id']);
     }
+    if ($_GET['like'] === '1') {
+        // SQL文をセット
+        $prepare = $pdo->prepare("DELETE FROM likes WHERE member_id = :member_id AND comment_id = :comment_id");
+        $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
+        $prepare->execute();
+        var_dump($member_id,$_GET['member_id']);
+    }
 
     // 初期表示の情報を取得
     // SQL文をセット
