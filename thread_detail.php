@@ -136,10 +136,10 @@ try {
             <div class="comments">
                 <?php
                 if (!empty($record)) {
-                    if ($now === 1) {
+                    if ($now === '1') {
                         $number = 0;
                     } else {
-                        $number = ($now - 1) * 5 + 1;
+                        $number = ($now - 1) * 5;
                     }
                     foreach ($comments as $val) {
                         $number += 1;
