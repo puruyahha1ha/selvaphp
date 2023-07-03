@@ -202,6 +202,7 @@ h2 {
     align-items: flex-start;
     padding-bottom: 10px;
 }
-.error_comment {
-    display: block;
+form .page {
+    display: flex;
+    justify-content: space-between;
 }
