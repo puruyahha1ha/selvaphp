@@ -54,7 +54,7 @@ try {
         $prepare->execute();
         $result = $prepare->fetch();
         // 重複チェック
-        if (!empty($result)) {
+        if (empty($result)) {
             // SQL文をセット
             $prepare = $pdo->prepare("INSERT INTO likes (member_id, comment_id) VALUES (:member_id, :comment_id)");
             $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
