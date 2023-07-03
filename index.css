@@ -199,4 +199,6 @@ h2 {
 }
 .comments .comment {
     border-bottom: 1px solid gray;
+    align-items: flex-start;
+    padding-bottom: 10px;
 }
