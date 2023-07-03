@@ -51,7 +51,7 @@ try {
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
         $prepare->execute();
-        var_dump($member_id,$_GET['member_id']);
+        var_dump($member_id, $_GET['member_id']);
     }
     if ($_GET['like'] === '1') {
         // SQL文をセット
@@ -59,7 +59,7 @@ try {
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
         $prepare->execute();
-        var_dump($member_id,$_GET['member_id']);
+        var_dump($member_id, $_GET['member_id']);
     }
 
     // 初期表示の情報を取得
@@ -170,13 +170,12 @@ try {
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
-                        echo "  ";
                         if ($like['member_id'] === $member_id) {
-                            echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1&comment_id={$comment_id}'><img src='img\like.png'>";
+                            echo "   <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=1&comment_id={$comment_id}'><img src='img\like.png'>";
                         } else {
-                            echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
+                            echo " <div class='like'><a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
                         }
-                        echo "  </a>{$like['cnt']}";
+                        echo "  </a>{$like['cnt']}</div>";
                         echo "</div>";
                     }
                 }
