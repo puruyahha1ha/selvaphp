@@ -170,12 +170,18 @@ try {
                         $number += 1;
                         $comment_id = $val['id'];
                         // いいね数を取得
-                        $prepare_like = $pdo->prepare("SELECT COUNT(*) AS cnt, member_id FROM likes WHERE comment_id = :comment_id;");
+                        $prepare_like = $pdo->prepare("SELECT COUNT(*) AS cnt FROM likes WHERE comment_id = :comment_id;");
                         $prepare_like->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
                         $prepare_like->execute();
 
                         $like = $prepare_like->fetch();
-                        var_dump($like, $member_id);
+                        // いいねをしているかのチェック
+                        $prepare_check = $pdo->prepare("SELECT COUNT(member_id) FROM likes WHERE member_id = :member_id;");
+                        $prepare_check->bindValue(':comment_id', $comment_id, PDO::PARAM_INT);
+                        $prepare_check->execute();
+                        $check = $prepare_check->fetch();
+
+                        var_dump($like, $member_id,$check);
 
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
