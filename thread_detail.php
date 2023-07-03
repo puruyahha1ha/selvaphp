@@ -148,11 +148,16 @@ try {
                         $prepare_like->execute();
 
                         $like = $prepare_like->fetch();
-                        
+                        var_dump($like, $member_id);
+
                         echo "<div class='comment'>" . $number . ".　" . $val['name_sei'] . '　' . $val['name_mei'] . '　' . $val['created_at'] . '<br>';
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
                         echo "  ";
-                        if($like['member_id'] === $member_id) {echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'>";} else {echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0'><img src='img\unlike.png'>";}
+                        if ($like['member_id'] === $member_id) {
+                            echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'>";
+                        } else {
+                            echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0'><img src='img\unlike.png'>";
+                        }
                         echo "  </a>{$like['cnt']}";
                         echo "</div>";
                     }
