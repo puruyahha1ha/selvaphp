@@ -44,6 +44,15 @@ try {
         }
     }
 
+    // いいねの登録
+    if ($_GET['like'] === 0) {
+        // SQL文をセット
+        $prepare = $pdo->prepare("INSERT INTO likes (member_id, comment_id) VALUES (:member_id, :comment_id)");
+        $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $prepare->bindValue(':comment_id', $$_GET['comment_id'], PDO::PARAM_INT);
+        $prepare->execute();
+    }
+
     // 初期表示の情報を取得
     // SQL文をセット
     $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = :id;");
@@ -154,9 +163,9 @@ try {
                         echo nl2br(htmlspecialchars($val['comment'])) . "<br>";
                         echo "  ";
                         if ($like['member_id'] === $member_id) {
-                            echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1'><img src='img\like.png'>";
+                            echo "   <a href='thread_detail.php?page_id={$now}&id={$id}&like=1&comment_id={$comment_id}'><img src='img\like.png'>";
                         } else {
-                            echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0'><img src='img\unlike.png'>";
+                            echo " <a href='thread_detail.php?page_id={$now}&id={$id}&like=0&comment_id={$comment_id}'><img src='img\unlike.png'>";
                         }
                         echo "  </a>{$like['cnt']}";
                         echo "</div>";
