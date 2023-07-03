@@ -7,7 +7,6 @@ if (!isset($_GET['page_id'])) {
 } else {
     $now = $_GET['page_id'];
 }
-var_dump($now);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
     header('Location: thread.php', true, 307);
@@ -57,7 +56,6 @@ try {
     // ページに応じてコメントを取得
     $limit = (integer)$now * 5;
     $offset = ((integer)$now - 1) * 5;
-    var_dump($limit,$offset);
     $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC LIMIT :limit OFFSET :offset;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare_comment->bindValue(':limit', $limit, PDO::PARAM_INT);
