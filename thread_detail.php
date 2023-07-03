@@ -46,12 +46,21 @@ try {
 
     // いいねの登録
     if ($_GET['like'] === '0') {
+
         // SQL文をセット
-        $prepare = $pdo->prepare("INSERT INTO likes (member_id, comment_id) VALUES (:member_id, :comment_id)");
+        $prepare = $pdo->prepare("SELECT * FROM likes  WHERE member_id = :member_id AND comment_id = :comment_id");
         $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
         $prepare->execute();
-        var_dump($member_id, $_GET['member_id']);
+        $result = $prepare->fetch();
+        // 重複チェック
+        if (!empty($result)) {
+            // SQL文をセット
+            $prepare = $pdo->prepare("INSERT INTO likes (member_id, comment_id) VALUES (:member_id, :comment_id)");
+            $prepare->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+            $prepare->bindValue(':comment_id', $_GET['comment_id'], PDO::PARAM_INT);
+            $prepare->execute();
+        }
     }
     if ($_GET['like'] === '1') {
         // SQL文をセット
