@@ -2,7 +2,7 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
-$now = 1;
+$now = 2;
 var_dump($_POST);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧に戻る') {
@@ -98,8 +98,8 @@ try {
             </div>
             <div class="gray">
                 <form action="thread_detail.php" method="post" class="page">
-                    <?php if($now > 1){echo "<a href='thread_detail.php?page_id='.($now - 1).')>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
-                    <?php if($now < $max_page){echo "<a href='thread_detail.php?page_id='.($now + 1).'')>次へ＞</a>";} else {echo '<span>次へ＞</span>';} ?>
+                    <?php if($now > 1){echo "<a href='thread_detail.php?page_id='.($now - 1)>前へ＞</a>";} else {echo '<span>前へ＞</span>';} ?>
+                    <?php if($now < $max_page){echo "<a href='thread_detail.php?page_id='.($now + 1)>次へ＞</a>";} else {echo '<span>次へ＞</span>';} ?>
                 </form>
             </div>
             <div class="content_thread">
