@@ -33,6 +33,7 @@ try {
         } elseif (mb_strlen($_POST['comment']) > 500) {
             $errors['comment'] = '※氏名(姓)は５００字以内で入力してください';
         }
+        // コメントの登録
         if (empty($errors)) {
             $comment = $_POST['comment'];
             // SQL文をセット
@@ -44,19 +45,22 @@ try {
         }
     }
 
+    // 初期表示の情報を取得
     // SQL文をセット
     $prepare = $pdo->prepare("SELECT threads.member_id, threads.title, threads.content, threads.created_at, members.name_sei, members.name_mei, COUNT(comments.comment) AS comment_num FROM threads LEFT JOIN members ON members.id = threads.member_id LEFT JOIN comments ON comments.thread_id = threads.id WHERE threads.id = :id;");
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
-    $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = 16 ORDER BY comments.id ASC;");
+    // ページに応じてコメントを取得
+    $prepare_comment = $pdo->prepare("SELECT comments.*, members.name_sei, members.name_mei FROM comments LEFT JOIN members ON members.id = comments.member_id WHERE thread_id = :id ORDER BY comments.id ASC;");
     $prepare_comment->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare_comment->execute();
 
     $record = $prepare->fetch();
     $max_page = (string)ceil($record['comment_num'] / 5);
-    var_dump($max_page);
-    var_dump($now === $max_page);
+    $limit = (integer)$max_page * 5;
+    $offset = ((integer)$max_page - 1) * 5;
+    var_dump($limit,$offset);
     $comments = $prepare_comment->fetchAll();
 } catch (PDOException $e) {
     if (!empty($pdo)) {
@@ -128,6 +132,7 @@ try {
             <div class="comments">
                 <?php
                 if (!empty($record)) {
+                    if ($now === 1) {}
                     $number = 0;
                     foreach ($comments as $val) {
                         $number += 1;
