@@ -43,7 +43,6 @@ session_start();
                 <div class="search_row">
                     <p>都道府県</p>
                     <div class="search_input">
-                        <label for="pref_name">都道府県</label>
                         <select name="pref_name">
                             <option value="" selected></option>
                             <option value="北海道" <?php if (!empty($posts['pref_name']) && $posts['pref_name'] === '北海道') {echo 'selected';} ?>>北海道</option>
