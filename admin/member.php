@@ -45,6 +45,7 @@ try {
     }
 
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
+        printf("ok");
         // SQL文をセット
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
         if (isset($id)) {
