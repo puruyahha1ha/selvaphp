@@ -3,6 +3,8 @@ session_start();
 var_dump($_SESSION);
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     $_SESSION = [];
+    header('Location: login.php', true, 307);
+    exit;
 }
 
 ?>
@@ -25,7 +27,7 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     <header>
         <h2>掲示板管理画面メインメニュー</h2>
         <span><?php echo "ようこそ{$_SESSION['name']}さん";?></span>
-        <form action="get">
+        <form action="top.php" action="get">
             <input type="submit" name="confirm" value="ログアウト" class="button_header">
         </form>
     </header>
