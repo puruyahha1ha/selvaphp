@@ -289,3 +289,8 @@ footer {
 main {
     height: 880px;
 }
+.withdrawal {
+    width: auto;
+    padding-left: 100px;
+    margin: 20px;
+}

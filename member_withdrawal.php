@@ -7,35 +7,35 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'トップに戻る') {
     exit;
 }
 
-// try {
-//     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
-//     $user = 'root';
-//     $password = 'kazuto060603';
+try {
+    $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
+    $user = 'root';
+    $password = 'kazuto060603';
 
-//     $pdo = new PDO($dsn, $user, $password);
+    $pdo = new PDO($dsn, $user, $password);
 
-//     if (!empty($_POST['confirm']) && $_POST['confirm'] === '退会する') {
+    if (!empty($_POST['confirm']) && $_POST['confirm'] === '退会する') {
 
-//         // SQL文をセット
-//         $prepare = $pdo->prepare("SELECT id, title, created_at FROM threads WHERE title LIKE :search OR content LIKE :search ORDER BY created_at DESC;");
-//         $prepare->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
-//         $prepare->execute();
+        // ソフトデリート(削除日時を更新)
+        $id = $_SESSION['id'];
 
-//         $records = $prepare->fetchAll();
-//     } else {
-//         // SQL文をセット
-//         $prepare = $pdo->prepare('SELECT id, title, created_at FROM threads ORDER BY created_at DESC;');
-//         $prepare->execute();
+        $prepare = $pdo->prepare("UPDATE members SET deleted_at = now() WHERE id = :id;");
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
 
-//         $records = $prepare->fetchAll();
-//     }
-// } catch (PDOException $e) {
-//     if (!empty($pdo)) {
-//         $db->rollback();
-//     }
-//     echo 'DB接続エラー:' . $e->getMessage();
-//     return;
-// }
+        // セッション情報を破棄し、トップページへ遷移
+        $_SESSION = [];
+        header('Location: top.php', true, 307);
+        exit;
+
+    } 
+} catch (PDOException $e) {
+    if (!empty($pdo)) {
+        $db->rollback();
+    }
+    echo 'DB接続エラー:' . $e->getMessage();
+    return;
+}
 
 ?>
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'トップに戻る') {
         </div>
     </header>
     <h1>退会</h1>
-    <p>退会しますか？</p>
+    <p class="withdrawal">退会しますか？</p>
     <form action="confirm.php" method="post">
         <div class="submit">
             <input type="submit" name="confirm" value="退会する" class="button">

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // パスワードのバリデーション
         if (empty($_POST['password']) || !preg_match("/^[a-zA-Z0-9]+$/", $_POST['password']) || (mb_strlen($_POST['password']) < 8 || mb_strlen($_POST['password']) > 20)) {
             $errors['no_record'] = 'IDもしくはパスワードが間違っています';
-        } 
+        }
 
         if (empty($errors)) {
             try {
@@ -37,7 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $record = $prepare->fetch();
                 var_dump($record);
-                if ($record) {
+                if (isset($record['deleted_at'])) {
+                    $errors['no_record'] = 'ログインできません';
+                } elseif ($record) {
                     $_SESSION['id'] = $record['id'];
                     $_SESSION['name_sei'] = $record['name_sei'];
                     $_SESSION['name_mei'] = $record['name_mei'];
@@ -86,7 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="login.php" method="post">
             <div class="email">
                 <p>メールアドレス（ID）</p>
-                <input type="text" name="email" value="<?php if (!empty($_POST['email'])) {echo htmlspecialchars($_POST['email']);} ?>">
+                <input type="text" name="email" value="<?php if (!empty($_POST['email'])) {
+                                                            echo htmlspecialchars($_POST['email']);
+                                                        } ?>">
             </div>
             <div class="password">
                 <p>パスワード</p>
