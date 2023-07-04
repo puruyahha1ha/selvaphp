@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (empty($_SESSION)) {
+    header('Location: top.php', true, 307);
+    exit;
+}
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'トップに戻る') {
     header('Location: top.php', true, 307);
     exit;
