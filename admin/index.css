@@ -41,3 +41,14 @@ footer {
     height: 50px;
     background-color: rgb(185, 185, 185);
 }
+
+
+.button_header {
+    padding: 5px 10px;
+    border: solid black 1px;
+    margin: 0 10px;
+    color: black;
+    height: 30px;
+    line-height: 20px;
+    background-color: #fadcaf;
+}

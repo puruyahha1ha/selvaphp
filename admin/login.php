@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['id'] = $record['id'];
                     $_SESSION['name'] = $record['name'];
                     $_SESSION['login_id'] = $record['login_id'];
-                    $_SESSION['login'] = 'ログイン';
                     header('Location: top.php', true, 307);
                     exit;
                 } else {

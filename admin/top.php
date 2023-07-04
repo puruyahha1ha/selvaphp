@@ -1,30 +1,10 @@
 <?php
 session_start();
-
+var_dump($_SESSION);
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     $_SESSION = [];
 }
-if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規会員登録') {
-    header('Location: member_regist.php', true, 307);
-    exit;
-}
-if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログイン') {
-    header('Location: login.php', true, 307);
-    exit;
-}
-if (!empty($_GET['confirm']) && $_GET['confirm'] === 'スレッド一覧') {
-    header('Location: thread.php', true, 307);
-    exit;
-}
-if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成') {
-    $_SESSION['login'] = 'ログイン';
-    header('Location: thread_regist.php', true, 307);
-    exit;
-}
-if (!empty($_GET['confirm']) && $_GET['confirm'] === '退会') {
-    header('Location: member_withdrawal.php', true, 307);
-    exit;
-}
+
 ?>
 
 
@@ -42,21 +22,14 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === '退会') {
 </head>
 
 <body>
-    <?php if ((!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') || (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン')) {
-        require_once('header_login.php');
-    } else {
-        require_once('header.php');
-    } ?>
+    <header>
+        <h2>掲示板管理画面メインメニュー</h2>
+        <span><?php echo "ようこそ{$_SESSION['name']}さん";?></span>
+        <form action="get">
+            <input type="submit" name="confirm" value="ログアウト" class="button_header">
+        </form>
+    </header>
 
-    <main>
-
-    </main>
-
-    <?php if ((!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') || (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン')) {
-        require_once('footer_login.php');
-    } else {
-        require_once('footer.php');
-    } ?>
 </body>
 
 </html>
