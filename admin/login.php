@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $prepare->execute();
 
                 $record = $prepare->fetch();
+                var_dump($login_id,$password,$record);
 
                 if (isset($record['deleted_at'])) {
                     $errors['no_record'] = 'ログインできません';
