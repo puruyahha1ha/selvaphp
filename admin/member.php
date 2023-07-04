@@ -5,7 +5,6 @@ if (!isset($_GET['page_id'])) {
 } else {
     $now = $_GET['page_id'];
 }
-var_dump($_POST);
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -47,17 +46,6 @@ try {
         }
         if (isset($free_word)) {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
-        }
-
-        $id_sort = "DESC";
-        if (isset($_POST['id_sort'])) {
-            if ($id_sort === "DESC") {
-                $id_sort = "ASC";
-                $sql .= " ORDER BY id ASC";
-            } else {
-                $id_sort = "DESC";
-                $sql .= " ORDER BY id DESC";
-            }
         }
 
         // ページに応じてコメントを取得
