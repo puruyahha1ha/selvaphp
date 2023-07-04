@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     $_SESSION = [];
     header('Location: login.php', true, 307);

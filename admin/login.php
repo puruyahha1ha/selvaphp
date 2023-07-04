@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
