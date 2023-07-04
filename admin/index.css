@@ -70,7 +70,17 @@ h2 {
     margin-right: 50%;
     padding-top: 8px;
 }
+
 span {
     padding-top: 12px;
     margin-right: 20px;
+}
+
+.button {
+    color: cornflowerblue;
+    background-color: white;
+    font-weight: 20px;
+    width: 200px;
+    height: 45px;
+    border-radius: 10px;
 }
