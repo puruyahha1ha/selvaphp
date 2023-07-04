@@ -1,7 +1,7 @@
 <?php
 session_start();
 $errors = [];
-var_dump($errors,$_SESSION,$_POST,isset($record['deleted_at']));
+var_dump($errors,$_SESSION,$_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $prepare->execute();
 
                 $record = $prepare->fetch();
-                var_dump($login_id,$password,$record);
+                var_dump($login_id,$password,$record,isset($record['deleted_at']),'ok');
 
                 if (isset($record['deleted_at'])) {
                     $errors['no_record'] = 'ログインできません';
