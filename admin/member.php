@@ -1,7 +1,10 @@
 <?php
 session_start();
-
-
+if (!isset($_GET['page_id'])) {
+    $now = 1;
+} else {
+    $now = $_GET['page_id'];
+}
 
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
@@ -45,7 +48,11 @@ try {
         if (isset($free_word)) {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
-        var_dump($id,$_POST,$sql);
+
+        // ページに応じてコメントを取得
+        $limit = 10;
+        $offset = ((int)$now - 1) * 10;    
+        $sql .= " LIMIT :limit OFFSET :offset;";
         $prepare = $pdo->prepare($sql);
         if (isset($id)) {
             $prepare->bindValue(':id', $id, PDO::PARAM_INT);
@@ -64,6 +71,10 @@ try {
         if (isset($free_word)) {
             $prepare->bindValue(':free_word',  '%'.$free_word.'%', PDO::PARAM_STR);
         }
+
+        $prepare_comment->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $prepare_comment->bindValue(':offset', $offset, PDO::PARAM_INT);
+    
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare,$records);
@@ -283,11 +294,13 @@ try {
 
         <table>
             <tr>
-                <th>ID</th>
-                <th>氏名</th>
-                <th>性別</th>
-                <th>住所</th>
-                <th>登録日時</th>
+                <form action="member.php" method="get">
+                    <th>ID<input type="submit" name="id_sort" value="▼"></th>
+                    <th>氏名</th>
+                    <th>性別</th>
+                    <th>住所</th>
+                    <th>登録日時</th>
+                </form>
             </tr>
             <?php foreach ($records as $val):?>
                 <tr>
