@@ -1,7 +1,7 @@
 <?php
 session_start();
 $errors = [];
-
+var_dump($errors,$_SESSION,$_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
