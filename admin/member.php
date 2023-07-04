@@ -45,7 +45,7 @@ try {
         if (isset($free_word)) {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
-        var_dump($sql);
+        var_dump($_POST,$sql);
         $prepare = $pdo->prepare($sql);
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->bindValue(':man', $man, PDO::PARAM_STR);
