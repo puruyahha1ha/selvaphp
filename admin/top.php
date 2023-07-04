@@ -32,7 +32,7 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     </header>
 
     <main>
-        <form action="top.php" method="get">
+        <form action="top.php" method="get" class="member">
             <input type="submit" name="confirm" value="会員一覧" class="button_re">
         </form>
     </main>
