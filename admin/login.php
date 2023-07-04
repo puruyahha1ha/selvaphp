@@ -1,19 +1,17 @@
 <?php
 session_start();
 $errors = [];
-var_dump($errors,$_SESSION,$_POST);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
         // ログインIDのバリデーション
         if (empty($_POST['login_id']) || (mb_strlen($_POST['login_id']) > 10 || mb_strlen($_POST['login_id']) < 7) || !preg_match("/^[a-zA-Z0-9]+$/", $_POST['login_id'])) {
             $errors['no_record'] = 'IDもしくはパスワードが間違っています';
-            var_dump("roguinnID");
         }
         // パスワードのバリデーション
         if (empty($_POST['password']) || !preg_match("/^[a-zA-Z0-9]+$/", $_POST['password']) || (mb_strlen($_POST['password']) < 8 || mb_strlen($_POST['password']) > 20)) {
             $errors['no_record'] = 'IDもしくはパスワードが間違っています';
-            var_dump('password');
         }
 
         if (empty($errors)) {
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $prepare->execute();
 
                 $record = $prepare->fetch();
-                var_dump($login_id,$password,$record,isset($record['deleted_at']),'ok');
 
                 if (isset($record['deleted_at'])) {
                     $errors['no_record'] = 'ログインできません';
