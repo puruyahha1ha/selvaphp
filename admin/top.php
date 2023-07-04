@@ -5,6 +5,11 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
     header('Location: login.php', true, 307);
     exit;
 }
+if (!empty($_GET['confirm']) && $_GET['confirm'] === '会員一覧') {
+    $_SESSION = [];
+    header('Location: member.php', true, 307);
+    exit;
+}
 
 ?>
 
