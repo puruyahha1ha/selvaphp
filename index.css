@@ -279,10 +279,13 @@ img {
     margin-top: 5px;
     margin-right: 10px;
 }
-header {
+footer {
     height: 40px;
     display: flex;
     justify-content: flex-end;
     background-color: #fadcaf;
     align-items: center;
+}
+main {
+    height: 90%;
 }

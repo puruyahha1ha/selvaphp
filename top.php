@@ -44,6 +44,10 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成')
         require_once('header.php');
     } ?>
 
+    <main>
+
+    </main>
+    
     <?php if ((!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') || (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン')) {
         require_once('footer_login.php');
     } else {
