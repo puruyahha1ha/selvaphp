@@ -109,8 +109,13 @@ span {
 select {
     width: 160px;
 }
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
 table {
     margin: auto;
+    text-align: center;
 }
 th, td {
     padding: 8px;
