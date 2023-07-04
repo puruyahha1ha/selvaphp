@@ -1,10 +1,6 @@
 <?php
 session_start();
-if (!isset($_GET['page_id'])) {
-    $now = 1;
-} else {
-    $now = $_GET['page_id'];
-}
+
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -89,7 +85,17 @@ try {
         // }
     } else {
 
-        $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL;');
+        $count = $pdo->prepare('SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL');
+        $count->execute();
+        $tatal_count = $count->fetch();
+        $pages = ceil($tatal_count['count'] / 10);
+        if (!isset($_GET['page_id'])) {
+            $now = 1;
+        } else {
+            $now = $_GET['page_id'];
+        }
+
+        $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
         $prepare->execute();
         $records = $prepare->fetchAll();
     }
