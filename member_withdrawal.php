@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'トップに戻る') {
     header('Location: top.php', true, 307);
@@ -53,14 +52,14 @@ try {
 <body>
     <header>
         <div class="link">
-            <form action="top.php" method="get">
+            <form action="member_withdrawal.php" method="get">
                 <input type="submit" name="confirm" value="トップに戻る" class="button_header">
             </form>
         </div>
     </header>
     <h1>退会</h1>
     <p class="withdrawal">退会しますか？</p>
-    <form action="confirm.php" method="post">
+    <form action="member_withdrawal.php" method="post">
         <div class="submit">
             <input type="submit" name="confirm" value="退会する" class="button">
         </div>
