@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!empty($_SESSION)) {
+    header('Location: top.php', true, 307);
+    exit;
+}
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
