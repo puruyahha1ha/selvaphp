@@ -5,7 +5,22 @@ if (!isset($_GET['page_id'])) {
 } else {
     $now = $_GET['page_id'];
 }
-
+// IDのソート
+$id_sort = "DESC";
+if (isset($_GET['id_sort'])) {
+    if ($id_sort === "DESC") {
+        $id_sort = "ASC";
+        $order_by = array_column($records, 'id');
+        array_multisort($order_by, SORT_ASC, $records);
+        var_export($records);
+    } else {
+        $id_sort = "DESC";
+        $order_by = array_column($records, 'id');
+        array_multisort($order_by, SORT_DESC, $records);
+        var_export($records);
+    }
+}
+var_dump($records);
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -49,18 +64,7 @@ try {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
-        // IDのソート
-        $id_sort = "DESC";
-        if (isset($_GET['id_sort'])) {
-            if ($id_sort === "DESC") {
-                $id_sort = "ASC";
-                $sql .= " ORDER BY id ASC";
-            } else {
-                $id_sort = "DESC";
-                $sql .= " ORDER BY id DESC";
-            }
-        }
-
+        
         // ページに応じてコメントを取得
         $limit = 10;
         $offset = ((int)$now - 1) * 10;    
