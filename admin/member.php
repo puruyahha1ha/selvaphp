@@ -5,7 +5,7 @@ if (!isset($_GET['page_id'])) {
 } else {
     $now = $_GET['page_id'];
 }
-
+var_dump($_POST);
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
