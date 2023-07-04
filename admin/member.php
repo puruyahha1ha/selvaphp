@@ -47,11 +47,23 @@ try {
         }
         var_dump($id,$_POST,$sql);
         $prepare = $pdo->prepare($sql);
-        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-        // $prepare->bindValue(':man', $man, PDO::PARAM_STR);
-        // $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
-        // $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
-        // $prepare->bindValue(':free_word',  '%'.$free_word.'%', PDO::PARAM_STR);
+        if (isset($id)) {
+            $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        }
+        if (isset($man) && isset($woman)) {
+            $prepare->bindValue(':man', $man, PDO::PARAM_STR);
+            $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+        } elseif (isset($man) && empty($woman)) {
+            $prepare->bindValue(':man', $man, PDO::PARAM_STR);
+        } elseif (empty($man) && isset($woman)) {
+            $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+        }
+        if (isset($pref_name)) {
+            $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+        }
+        if (isset($free_word)) {
+            $prepare->bindValue(':free_word',  '%'.$free_word.'%', PDO::PARAM_STR);
+        }
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare,$records);
