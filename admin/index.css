@@ -91,13 +91,17 @@ span {
 }
 .search_form {
     margin: 50px 35%;
+    border: black solid 2px;
 }
 .search_row {
     display: flex;
-    border: black solid 2px;
+    border-bottom: black solid 1px;
 }
 .search_row p {
-    width: 100px;
+    width: 120px;
     padding: 10px 5px;
-    border: black solid 1px;
+    border-right: black solid 1px;
+}
+.search_input {
+    padding: 5px 0 5px 50px;
 }
