@@ -13,8 +13,11 @@ try {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];
     }
-    if (!empty($_POST['gender'])) {
-        $gender = $_POST['gender'];
+    if (!empty($_POST['man'])) {
+        $man = $_POST['man'];
+    }
+    if (!empty($_POST['woman'])) {
+        $woman = $_POST['woman'];
     }
     if (!empty($_POST['pref_name'])) {
         $pref_name = $_POST['pref_name'];
@@ -25,7 +28,25 @@ try {
 
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
         // SQL文をセット
-        $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL;');
+        $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
+        if (isset($id)) {
+            $sql .= " AND id = :id";
+        }
+        if (isset($man) && isset($woman)) {
+            $sql .= " AND (gender = :man OR gender = :woman)";
+        } elseif (isset($man) && empty($woman)) {
+            $sql .= " AND gender = :man";
+        } elseif (empty($man) && isset($woman)) {
+            $sql .= " AND gender = :woman";
+        }
+        if (isset($pref_name)) {
+            $sql .= " AND pref_name = :pref_name";
+        }
+        if (isset($free_word)) {
+            $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
+        }
+        var_dump($sql);
+        $prepare = $pdo->prepare($sql);
 
     } else {
         // SQL文をセット
@@ -84,8 +105,8 @@ try {
                 <div class="search_row">
                     <p>性別</p>
                     <div class="search_input">
-                        <input type="radio" name="gender" value="1"><label for="1">男性</label>
-                        <input type="radio" name="gender" value="2"><label for="2">女性</label>
+                        <input type="checkbox" name="man" value="1"><label for="man">男性</label>
+                        <input type="checkbox" name="woman" value="2"><label for="woman">女性</label>
                     </div>
                 </div>
                 <div class="search_row">
@@ -262,7 +283,7 @@ try {
                     <td><?php echo $val['id']; ?></td>
                     <td><?php echo $val['name_sei'].'　'.$val['name_mei']; ?></td>
                     <td><?php if ($val['gender'] === '1') {echo '男性';} else {echo '女性';} ?></td>
-                    <td><?php echo $val['pref_name'].'　'.$val['address']; ?></td>
+                    <td><?php echo $val['pref_name'].$val['address']; ?></td>
                     <td><?php echo $val['created_at'] ?></td>
                 </tr>
             <?php endforeach; ?>
