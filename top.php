@@ -2,7 +2,7 @@
 session_start();
 
 if (!empty($_GET['confirm']) && $_GET['confirm'] === 'ログアウト') {
-    unset($_SESSION);
+    $_SESSION = [];
 }
 if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規会員登録') {
     header('Location: member_regist.php', true, 307);
