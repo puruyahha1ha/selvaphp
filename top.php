@@ -21,6 +21,10 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成')
     header('Location: thread_regist.php', true, 307);
     exit;
 }
+if (!empty($_GET['confirm']) && $_GET['confirm'] === '退会') {
+    header('Location: member_withdrawal.php', true, 307);
+    exit;
+}
 ?>
 
 
@@ -47,7 +51,7 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成')
     <main>
 
     </main>
-    
+
     <?php if ((!empty($_POST['confirm']) && $_POST['confirm'] === 'ログイン') || (!empty($_SESSION['login']) && $_SESSION['login'] === 'ログイン')) {
         require_once('footer_login.php');
     } else {
