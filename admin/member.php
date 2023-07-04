@@ -63,15 +63,6 @@ try {
         $records = $prepare->fetchAll();
     }
     
-    
-
-    if (!empty($id)) {
-        $prepare->bindValue(':login_id', $login_id, PDO::PARAM_STR);
-    }
-    $prepare->bindValue(':password', $password, PDO::PARAM_STR);
-    $prepare->execute();
-
-    $record = $prepare->fetch();
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
