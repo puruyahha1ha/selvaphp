@@ -21,6 +21,8 @@ if (!empty($_GET['confirm']) && $_GET['confirm'] === '新規スレッド作成')
     header('Location: thread_regist.php', true, 307);
     exit;
 }
+
+var_dump($_SESSION);
 ?>
 
 
