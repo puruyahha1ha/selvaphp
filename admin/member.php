@@ -28,7 +28,7 @@ try {
         $free_word = $_POST['free_word'];
     }
 
-    if (!empty($_POST['confirm']) && ($_POST['confirm'] === '検索する' || $_POST['$id_sort'] === '▼')) {
+    if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
         // SQL文をセット
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
         if (isset($id)) {
@@ -77,6 +77,16 @@ try {
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare, $records);
+        $id_sort = "ASC";
+        if (isset($_POST['id_sort'])) {
+            if ($id_sort === "ASC") {
+                $id_sort = "DESC";
+                $sql .= " ORDER BY id DESC";
+            } else {
+                $id_sort = "DESC";
+                $sql .= " ORDER BY id ASC";
+            }
+        }
     } else {
 
         $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL;');
@@ -193,31 +203,31 @@ try {
             <div class="submit">
                 <input type="submit" name="confirm" value="検索する" class="button_re">
             </div>
-
-
-            <table>
-                <tr>
-                    <th>ID<input type="submit" name="id_sort" value="▼"></th>
-                    <th>氏名</th>
-                    <th>性別</th>
-                    <th>住所</th>
-                    <th>登録日時</th>
-                </tr>
-                <?php foreach ($records as $val) : ?>
-                    <tr>
-                        <td><?php echo $val['id']; ?></td>
-                        <td><?php echo $val['name_sei'] . '　' . $val['name_mei']; ?></td>
-                        <td><?php if ($val['gender'] === '1') {
-                                echo '男性';
-                            } else {
-                                echo '女性';
-                            } ?></td>
-                        <td><?php echo $val['pref_name'] . $val['address']; ?></td>
-                        <td><?php echo $val['created_at'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
         </form>
+
+
+        <table>
+            <tr>
+                <th>ID<input type="submit" name="id_sort" value="▼"></th>
+                <th>氏名</th>
+                <th>性別</th>
+                <th>住所</th>
+                <th>登録日時</th>
+            </tr>
+            <?php foreach ($records as $val) : ?>
+                <tr>
+                    <td><?php echo $val['id']; ?></td>
+                    <td><?php echo $val['name_sei'] . '　' . $val['name_mei']; ?></td>
+                    <td><?php if ($val['gender'] === '1') {
+                            echo '男性';
+                        } else {
+                            echo '女性';
+                        } ?></td>
+                    <td><?php echo $val['pref_name'] . $val['address']; ?></td>
+                    <td><?php echo $val['created_at'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
 
     </main>
 
