@@ -1,0 +1,28 @@
+body {
+    height: 100%;
+}
+header {
+    height: 10%;
+    background-color: rgb(185, 185, 185);
+}
+h1 {
+    text-align: center;
+}
+.id, .password {
+    align-items: center;
+}
+.id p, .password p {
+    margin-right: 5px;
+}
+.id input,.password input {
+    margin-top: 50px;
+    width: 300px;
+}
+.submit {
+    align-items: center;
+    margin: 50px;
+}
+footer {
+    height: 10%;
+    background-color: rgb(185, 185, 185);
+}
