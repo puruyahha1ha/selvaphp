@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['confirm'] === 'ログイン') {
 
         // ログインIDのバリデーション
-        if (empty($_POST['email']) || mb_strlen($_POST['email']) > 200 || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        if (empty($_POST['login_id']) || (mb_strlen($_POST['login_id']) > 10 || mb_strlen($_POST['login_id']) < 7) || !preg_match("/^[a-zA-Z0-9]+$/", $_POST['login_id'])) {
             $errors['no_record'] = 'IDもしくはパスワードが間違っています';
         }
         // パスワードのバリデーション
@@ -21,12 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo = new PDO($dsn, $user, $password);
 
-                $email = $_POST['email'];
+                $login_id = $_POST['login_id'];
                 $password = $_POST['password'];
 
                 // SQL文をセット
-                $prepare = $pdo->prepare('SELECT * FROM members WHERE email = :email and password = :password');
-                $prepare->bindValue(':email', $email, PDO::PARAM_STR);
+                $prepare = $pdo->prepare('SELECT * FROM administers WHERE login_id = :login_id AND password = :password');
+                $prepare->bindValue(':login_id', $login_id, PDO::PARAM_STR);
                 $prepare->bindValue(':password', $password, PDO::PARAM_STR);
                 $prepare->execute();
 
@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $errors['no_record'] = 'ログインできません';
                 } elseif ($record) {
                     $_SESSION['id'] = $record['id'];
-                    $_SESSION['name_sei'] = $record['name_sei'];
-                    $_SESSION['name_mei'] = $record['name_mei'];
+                    $_SESSION['name'] = $record['name'];
+                    $_SESSION['login_id'] = $record['login_id'];
                     $_SESSION['login'] = 'ログイン';
                     header('Location: top.php', true, 307);
                     exit;
@@ -52,10 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 return;
             }
         }
-    }
-    if ($_POST['confirm'] === 'トップに戻る') {
-        header('Location: top.php', true, 307);
-        exit;
     }
 }
 
@@ -82,12 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>管理画面</h1>
 
         <form action="login.php" method="post">
-            <div class="id">
+            <div class="login_id">
                 <p>ログインID</p>
                 <input 
                     type="text" 
-                    name="id" 
-                    value="<?php if (!empty($_POST['id'])) { echo htmlspecialchars($_POST['id']);} ?>"
+                    name="login_id" 
+                    value="<?php if (!empty($_POST['login_id'])) { echo htmlspecialchars($_POST['login_id']);} ?>"
                 >
             </div>
 

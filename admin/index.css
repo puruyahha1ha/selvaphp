@@ -21,6 +21,10 @@ h1 {
 .id input,.password input {
     width: 300px;
 }
+.error {
+    color: red;
+    text-align: center;
+}
 .submit {
     text-align: center;
     margin: 100px 0;
