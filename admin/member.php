@@ -77,16 +77,16 @@ try {
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare, $records);
-        $id_sort = "ASC";
-        if (isset($_POST['id_sort'])) {
-            if ($id_sort === "ASC") {
-                $id_sort = "DESC";
-                $sql .= " ORDER BY id DESC";
-            } else {
-                $id_sort = "DESC";
-                $sql .= " ORDER BY id ASC";
-            }
-        }
+        // $id_sort = "ASC";
+        // if (isset($_POST['id_sort'])) {
+        //     if ($id_sort === "ASC") {
+        //         $id_sort = "DESC";
+        //         $sql .= " ORDER BY id DESC";
+        //     } else {
+        //         $id_sort = "DESC";
+        //         $sql .= " ORDER BY id ASC";
+        //     }
+        // }
     } else {
 
         $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL;');
