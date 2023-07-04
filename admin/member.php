@@ -47,9 +47,16 @@ try {
         }
         var_dump($sql);
         $prepare = $pdo->prepare($sql);
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->bindValue(':man', $man, PDO::PARAM_STR);
+        $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+        $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+        $prepare->bindValue(':free_word',  '%'.$free_word.'%', PDO::PARAM_STR);
+        $prepare->execute();
+        $records = $prepare->fetchAll();
 
     } else {
-        // SQL文をセット
+
         $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL;');
         $prepare->execute();
         $records = $prepare->fetchAll();
