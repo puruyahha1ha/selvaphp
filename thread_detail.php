@@ -2,6 +2,7 @@
 session_start();
 // エラーメッセージの初期化
 $errors = [];
+var_dump($_SESSION);
 if (!isset($_GET['page_id'])) {
     $now = 1;
 } else {
