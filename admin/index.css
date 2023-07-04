@@ -89,7 +89,9 @@ span {
     height: 70px;
     border-radius: 10px;
 }
-
+.search_form {
+    margin: 50px 100px;
+}
 .search_row {
     display: flex;
     justify-content: center;
