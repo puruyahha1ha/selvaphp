@@ -54,7 +54,7 @@ try {
         $prepare->bindValue(':free_word',  '%'.$free_word.'%', PDO::PARAM_STR);
         $prepare->execute();
         $records = $prepare->fetchAll();
-        var_dump($records);
+        var_dump($prepare,$records);
 
     } else {
 
