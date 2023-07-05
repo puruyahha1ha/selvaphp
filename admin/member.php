@@ -390,10 +390,10 @@ try {
 
         <table>
             <tr>
-                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "desc") {
-                                                                    echo "asc";
-                                                                } else {
+                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "asc") {
                                                                     echo "desc";
+                                                                } else {
+                                                                    echo "asc";
                                                                 } ?>" class="sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
