@@ -174,3 +174,6 @@ th {
 .email {
     display: flex;
 }
+.regist_form {
+    margin: 30px 35%;
+}
