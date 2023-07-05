@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_GET['confirm'] == 'トップに戻る') {
+if ($_GET['confirm'] == 'トップへ戻る') {
     $post = [];
     header('Location: top.php', true, 307);
     exit;
