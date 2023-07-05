@@ -242,7 +242,8 @@ try {
                     <td><?php echo $val['created_at'] ?></td>
                 </tr>
             <?php endforeach; ?>
-            <?php
+        </table>
+        <?php
             //ページネーションを表示
             for ( $n = 1; $n <= $pages; $n ++){
                 if ( $n === $now ){
@@ -252,7 +253,6 @@ try {
                 }
             }
         ?>
-        </table>
 
     </main>
 
