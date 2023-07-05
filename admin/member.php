@@ -55,32 +55,39 @@ try {
             $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
-        $count = $pdo->prepare($count_sql);
-        $count->execute();
-        $tatal_count = $count->fetch(PDO::FETCH_ASSOC);
-        $pages = ceil($tatal_count['count'] / $max_view);
-
         $sql .= " ORDER BY id ASC LIMIT 10";
 
         $prepare = $pdo->prepare($sql);
+        $count = $pdo->prepare($count_sql);
+
         if (isset($id)) {
             $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+            $count->bindValue(':id', $id, PDO::PARAM_INT);
         }
         if (isset($man) && isset($woman)) {
             $prepare->bindValue(':man', $man, PDO::PARAM_STR);
-            $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+            $prepare->bindValue(':man', $man, PDO::PARAM_STR);
+            $count->bindValue(':woman', $woman, PDO::PARAM_STR);
+            $count->bindValue(':woman', $woman, PDO::PARAM_STR);
         } elseif (isset($man) && empty($woman)) {
             $prepare->bindValue(':man', $man, PDO::PARAM_STR);
+            $count->bindValue(':man', $man, PDO::PARAM_STR);
         } elseif (empty($man) && isset($woman)) {
             $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+            $count->bindValue(':woman', $woman, PDO::PARAM_STR);
         }
         if (isset($pref_name)) {
             $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+            $count->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
         }
         if (isset($free_word)) {
             $prepare->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
+            $count->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
         }
 
+        $count->execute();
+        $tatal_count = $count->fetch(PDO::FETCH_ASSOC);
+        $pages = ceil($tatal_count['count'] / $max_view);
 
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
