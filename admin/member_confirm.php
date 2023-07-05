@@ -20,10 +20,8 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
 
         $pdo = new PDO($dsn, $user, $password);
 
-        if (!empty($_POST['update'])) {
-            // 変更時の処理
+        if ($_POST['confirm'] === '登録完了') {
 
-        } else {
             $name_sei = $_POST['name_sei'];
             $name_mei = $_POST['name_mei'];
             $gender = $_POST['gender'];
@@ -59,6 +57,8 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                 // DBにメールアドレスがある場合
                 $error = '※このメールアドレスはすでに使用されています';
             }
+        } else {
+            
         }
 
         $prepare = null;
@@ -100,7 +100,11 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
         <div class="confirm_form">
             <div class="id">
                 <p>ID</p>
-                <span><?php if ($_SESSION['confirm'] == "登録") {echo "登録後に自動採番";} else {echo $_POST['id'];} ?></span>
+                <span><?php if ($_SESSION['confirm'] == "登録") {
+                            echo "登録後に自動採番";
+                        } else {
+                            echo $_POST['id'];
+                        } ?></span>
             </div>
             <div class="name">
                 <p>氏名</p>
@@ -140,12 +144,13 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                 } ?>
             </div>
             <div class="submit">
-                <input 
-                    type="submit" 
-                    name="confirm" 
-                    value="<?php if ($_SESSION['confirm'] == "登録") {echo "登録完了"; } else {echo "編集完了"; } ?>" 
-                    class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了') {echo "disabled = true;";} ?>"
-                >
+                <input type="submit" name="confirm" value="<?php if ($_SESSION['confirm'] == "登録") {
+                                                                echo "登録完了";
+                                                            } else {
+                                                                echo "編集完了";
+                                                            } ?>" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了') {
+                                                                                                    echo "disabled = true;";
+                                                                                                } ?>">
             </div>
         </div>
     </form>

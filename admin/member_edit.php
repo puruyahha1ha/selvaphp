@@ -83,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email_filter'] = '※有効なメールアドレスを入力してください';
     }
 
+    var_dump($_POST,$record);
     if ($record['confirm'] === '前に戻る') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
