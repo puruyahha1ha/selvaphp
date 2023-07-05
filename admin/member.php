@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if ($_GET['confirm'] == 'トップに戻る') {
+    $post = [];
+    header('Location: top.php', true, 307);
+    exit;
+}
+
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -101,33 +107,46 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET);
     } elseif (isset($_GET['page_id'])) {
 
         $now = $_GET['page_id'];
 
-        $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
+        if (isset($post)) {
 
-        $prepare = $pdo->prepare($save_sql);
-        if (isset($post['id'])) {
-            $prepare->bindValue(':id', $post['id'], PDO::PARAM_INT);
+            $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
+
+            $prepare = $pdo->prepare($save_sql);
+
+            if (isset($post['id'])) {
+                $prepare->bindValue(':id', $post['id'], PDO::PARAM_INT);
+            }
+            if (isset($post['man']) && isset($post['woman'])) {
+                $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+                $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+            } elseif (isset($post['man']) && empty($post['woman'])) {
+                $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+            } elseif (empty($post['man']) && isset($post['woman'])) {
+                $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+            }
+            if (isset($post['pref_name'])) {
+                $prepare->bindValue(':pref_name', $post['pref_name'], PDO::PARAM_STR);
+            }
+            if (isset($post['free_word'])) {
+                $prepare->bindValue(':free_word',  '%' . $post['free_word'] . '%', PDO::PARAM_STR);
+            }
+            $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
+            $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
+            $prepare->execute();
+            $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+
+            $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
+            $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
+            $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
+            $prepare->execute();
+            $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
         }
-        if (isset($post['man']) && isset($post['woman'])) {
-            $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
-            $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
-        } elseif (isset($post['man']) && empty($post['woman'])) {
-            $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
-        } elseif (empty($post['man']) && isset($post['woman'])) {
-            $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
-        }
-        if (isset($pref_name)) {
-            $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
-        }
-        if (isset($free_word)) {
-            $prepare->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
-        }
-        $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
-        $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
 
         if ($now == 1 || $now == $pages) {
             $range = 2;
@@ -135,7 +154,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, $_POST, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET);
     } else {
 
         // 初期表示
@@ -154,7 +173,7 @@ try {
 
         $range = 2;
 
-        var_dump($tatal_count, $_POST, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
@@ -180,7 +199,7 @@ try {
 <body>
     <header>
         <h2>会員一覧</h2>
-        <form action="top.php" action="get" class="header_top">
+        <form action="member.php" action="get" class="header_top">
             <input type="submit" name="confirm" value="トップへ戻る" class="button_header">
         </form>
     </header>
