@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION);
 //直リンクされた場合リダイレクト
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: member_regist.php");
