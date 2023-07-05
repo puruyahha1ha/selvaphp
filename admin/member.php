@@ -55,6 +55,10 @@ try {
             $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
+        // sqlを保存
+        $save_sql = $sql;
+
+        // 初回検索時
         $sql .= " ORDER BY id ASC LIMIT 10";
 
         $prepare = $pdo->prepare($sql);
@@ -91,41 +95,47 @@ try {
 
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($records,$pages,$tatal_count);
+        var_dump($records, $pages, $tatal_count);
 
         $now = 1;
-        $range = 3;
+        $range = 2;
+    } elseif (isset($_GET['page_id'])) {
+
+        $now = $_GET['page_id'];
+
+        $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
+
+        $prepare = $pdo->prepare($save_sql);
+        $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
+        $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
+
+        if ($now == 1 || $now == $pages) {
+            $range = 2;
+        } else {
+            $range = 1;
+        }
+
     } else {
 
+        // 初期表示
         $count = $pdo->prepare('SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL');
         $count->execute();
         $tatal_count = $count->fetch();
         $pages = ceil($tatal_count['count'] / $max_view);
-        if (!isset($_GET['page_id'])) {
-            $now = 1;
-        } else {
-            $now = $_GET['page_id'];
-        }
+        $now = 1;
 
         $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
 
-        if ($now === 1) {
-            $prepare->bindValue(':start', $now - 1, PDO::PARAM_INT);
-            $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
-        } else {
-            $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
-            $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
-        }
+        $prepare->bindValue(':start', $now - 1, PDO::PARAM_INT);
+        $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
-    }
-    if($now == 1 || $now == $pages) {
-        $range = 4;
-    } elseif ($now == 2 || $now == $pages - 1) {
-        $range = 3;
-    } else {
+
         $range = 2;
+
     }
+
+
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
