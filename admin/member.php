@@ -97,10 +97,10 @@ try {
         }
 
         $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
-        
+
         if ($now === 1) {
-            $prepare->bindValue(':start',$now - 1, PDO::PARAM_INT);
-            $prepare->bindValue(':max',$max_view, PDO::PARAM_INT);
+            $prepare->bindValue(':start', $now - 1, PDO::PARAM_INT);
+            $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
         } else {
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
@@ -243,16 +243,18 @@ try {
                 </tr>
             <?php endforeach; ?>
         </table>
-        <?php
+        <div class="under_page">
+            <?php
             //ページネーションを表示
-            for ( $n = 1; $n <= $pages; $n ++){
-                if ( $n === $now ){
-                    echo "<span style='padding: 5px;'>$now</span>";
-                }else{
-                    echo "<a href='./member.php?page_id=$n' style='padding: 5px;'>$n</a>";
+            for ($n = 1; $n <= $pages; $n++) {
+                if ($n === $now) {
+                    echo "<span class='pagenation'>$now</span>";
+                } else {
+                    echo "<a href='./member.php?page_id=$n' class='pagenation'>$n</a>";
                 }
             }
-        ?>
+            ?>
+        </div>
 
     </main>
 
