@@ -135,9 +135,13 @@ try {
         $now = $_GET['page_id'];
         if (isset($_GET['id_sort'])) {
             $_SESSION['id_sort'] = $_GET['id_sort'];
+            $_SESSION['create_sort'] = null;
+
         }
         if (isset($_GET['create_sort'])) {
             $_SESSION['create_sort'] = $_GET['create_sort'];
+            $_SESSION['id_sort'] = null;
+
         }
 
         if (isset($_SESSION['search']) || isset($_GET['id_sort']) || isset($_GET['create_sort'])) {
