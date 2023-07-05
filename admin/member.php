@@ -190,7 +190,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
     } else {
 
         // 初期表示
@@ -209,7 +209,7 @@ try {
 
         $range = 2;
 
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
