@@ -108,6 +108,13 @@ try {
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
     }
+    if($now == 1 || $now == $pages) {
+        $range = 4;
+    } elseif ($now == 2 || $now == $pages - 1) {
+        $range = 3;
+    } else {
+        $range = 2;
+    }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
@@ -260,7 +267,7 @@ try {
                 <?php endif; ?>
             <?php endfor; ?>
 
-            <?php if ($now < $max_page) : ?>
+            <?php if ($now < $pages) : ?>
                 <a href="./member.php?page_id=<?php echo ($now + 1); ?>" class="pagenation">次へ＞</a>
             <?php else : ?>
                 <span></span>
