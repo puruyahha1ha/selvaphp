@@ -207,9 +207,11 @@ try {
             }
             if (isset($id_sort)) {
                 $prepare->bindValue(':id_sort', $id_sort, PDO::PARAM_STR);
+                var_dump("a");
             }
             if (isset($create_sort)) {
                 $prepare->bindValue(':create_sort', $create_sort, PDO::PARAM_STR);
+                var_dump("b");
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
