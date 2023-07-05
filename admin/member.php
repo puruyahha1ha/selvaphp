@@ -171,6 +171,7 @@ try {
 
             if (isset($id_sort)) {
                 $sql .= " ORDER BY id :id_sort LIMIT :start, :max;";
+                var_dump("id");
             } elseif (isset($create_sort)) {
                 $sql .= " ORDER BY created_at :create_sort LIMIT :start, :max;";
             } else {
@@ -206,11 +207,11 @@ try {
                 $count->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
             }
             if (isset($id_sort)) {
-                $prepare->bindValue(':id_sort', $id_sort, PDO::PARAM_STR);
+                $prepare->bindValue(':id_sort', $id_sort, PDO::PARAM_INT);
                 var_dump("a");
             }
             if (isset($create_sort)) {
-                $prepare->bindValue(':create_sort', $create_sort, PDO::PARAM_STR);
+                $prepare->bindValue(':create_sort', $create_sort, PDO::PARAM_INT);
                 var_dump("b");
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
