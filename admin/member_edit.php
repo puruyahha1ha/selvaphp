@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
         // エラーの有無チェック
+        $_SESSION['confirm'] = '編集';
         header('Location: member_confirm.php', true, 307);
         exit;
     }
@@ -146,7 +147,7 @@ try {
             <!-- ID -->
             <div class="id">
                 <p>ID</p>
-                <p><?php echo $record['id']; ?></p>
+                <input type="text" name="id" value="<?php if (!empty($record['id'])) {echo $record['id'];} ?>">
             </div>
             <!-- 氏名 -->
             <div class="name">

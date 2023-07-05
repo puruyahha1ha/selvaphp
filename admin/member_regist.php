@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
         // エラーの有無チェック
+        $_SESSION['confirm'] = '登録';
         header('Location: member_confirm.php', true, 307);
         exit;
     }

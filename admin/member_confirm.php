@@ -86,13 +86,21 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
 
 <body>
     <header>
-        <h2>会員登録</h2>
+        <h2><?php if ($_SESSION['confirm'] == "登録") {
+                echo "会員登録";
+            } else {
+                echo "会員編集";
+            } ?></h2>
         <form action="member.php" action="get" class="header_top">
             <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
         </form>
     </header>
     <form action="member_confirm.php" method="post">
         <div class="confirm_form">
+            <div class="id">
+                <p>ID</p>
+                <span><?php if ($_SESSION['confirm'] == "登録") {echo "登録後に自動採番";} else {echo $_POST['id'];} ?></span>
+            </div>
             <div class="name">
                 <p>氏名</p>
                 <span><?php echo htmlspecialchars($_POST["name_sei"] . "　" . $_POST["name_mei"]); ?></span>
@@ -131,9 +139,12 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                 } ?>
             </div>
             <div class="submit">
-                <input type="submit" name="confirm" value="登録完了" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了') {
-                                                                                                echo "disabled = true;";
-                                                                                            } ?>">
+                <input 
+                    type="submit" 
+                    name="confirm" 
+                    value="<?php if ($_SESSION['confirm'] == "登録") {echo "登録完了"; } else {echo "編集完了"; } ?>" 
+                    class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了') {echo "disabled = true;";} ?>"
+                >
             </div>
         </div>
     </form>
