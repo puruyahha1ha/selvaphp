@@ -389,6 +389,7 @@ try {
                 <th>性別</th>
                 <th>住所</th>
                 <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
+                <th>編集</th>
             </tr>
             <?php foreach ($records as $val) : ?>
                 <tr>
@@ -401,6 +402,7 @@ try {
                         } ?></td>
                     <td><?php echo $val['pref_name'] . $val['address']; ?></td>
                     <td><?php echo $val['created_at'] ?></td>
+                    <td><a href="member.php?confirm=編集">編集</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
