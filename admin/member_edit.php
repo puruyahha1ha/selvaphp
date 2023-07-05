@@ -146,7 +146,7 @@ try {
             <!-- ID -->
             <div class="id">
                 <p>ID</p>
-                <p>登録後に自動採番</p>
+                <p><?php echo $record['id']; ?></p>
             </div>
             <!-- 氏名 -->
             <div class="name">
