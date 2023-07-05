@@ -156,8 +156,8 @@ try {
                 <div class="search_row">
                     <p>性別</p>
                     <div class="search_input">
-                        <input type="checkbox" name="man" value="1"><label for="man">男性</label>
-                        <input type="checkbox" name="woman" value="2"><label for="woman">女性</label>
+                        <input type="checkbox" name="man" value="1"><label>男性</label>
+                        <input type="checkbox" name="woman" value="2"><label>女性</label>
                     </div>
                 </div>
                 <div class="search_row">
