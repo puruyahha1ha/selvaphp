@@ -198,10 +198,12 @@ th {
 .password_check,
 .email {
     display: flex;
+    align-items: center;
+    margin: 10px;
 }
 
 .regist_form {
-    margin: 30px 35%;
+    margin: 30px 28%;
 }
 
 .password_regist p,
