@@ -8,6 +8,13 @@ if ($_GET['confirm'] == 'トップへ戻る') {
     header('Location: top.php', true, 307);
     exit;
 }
+if ($_GET['confirm'] == '会員登録') {
+    $_SESSION['search'] = [];
+    $_SESSION['id_sort'] = [];
+    $_SESSION['create_sort'] = [];
+    header('Location: member_regist.php', true, 307);
+    exit;
+}
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -289,7 +296,7 @@ try {
     </header>
 
     <main>
-        <form action="member.php" method="get">
+        <form action="member.php" method="get" class="member_submit">
             <input type="submit" name="confirm" value="会員登録" class="button_submit">
         </form>
         <form action="member.php" method="post">
