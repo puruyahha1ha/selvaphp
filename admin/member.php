@@ -107,7 +107,7 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST, $post, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
     } elseif (isset($_GET['page_id'])) {
 
         $now = $_GET['page_id'];
@@ -154,7 +154,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, $_POST, $post, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
     } else {
 
         // 初期表示
@@ -173,7 +173,7 @@ try {
 
         $range = 2;
 
-        var_dump($tatal_count, $_POST, $post, $_GET);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
