@@ -88,10 +88,6 @@ try {
             $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
-        // sqlを保存
-        $save_sql = $sql;
-        $save_count_sql = $count_sql;
-
         // 初回検索時
         $sql .= " ORDER BY id ASC LIMIT 10";
 
@@ -140,12 +136,38 @@ try {
 
         if (isset($_SESSION['search'])) {
 
-            $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
+            // SQL文を準備
+            $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
+            $count_sql = "SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL";
 
-            $prepare = $pdo->prepare($save_sql);
-            $count = $pdo->prepare($save_count_sql);
-            var_dump($save_sql,$save_count_sql);
+            if (isset($_SESSION['search']['id'])) {
+                $sql .= " AND id = :id";
+                $count_sql .= " AND id = :id";
+            }
+            if (isset($_SESSION['search']['man']) && isset($_SESSION['search']['woman'])) {
+                $sql .= " AND (gender = :man OR gender = :woman)";
+                $count_sql .= " AND (gender = :man OR gender = :woman)";
+            } elseif (isset($_SESSION['search']['man']) && empty($_SESSION['search']['woman'])) {
+                $sql .= " AND gender = :man";
+                $count_sql .= " AND gender = :man";
+            } elseif (empty($_SESSION['search']['man']) && isset($_SESSION['search']['woman'])) {
+                $sql .= " AND gender = :woman";
+                $count_sql .= " AND gender = :woman";
+            }
+            if (isset($_SESSION['search']['pref_name'])) {
+                $sql .= " AND pref_name = :pref_name";
+                $count_sql .= " AND pref_name = :pref_name";
+            }
+            if (isset($_SESSION['search']['free_word'])) {
+                $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
+                $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
+            }
 
+            $sql .= " ORDER BY id ASC LIMIT :start, :max;";
+
+            $prepare = $pdo->prepare($sql);
+            $count = $pdo->prepare($count_sql);
+    
 
             if (isset($_SESSION['search']['id'])) {
                 $prepare->bindValue(':id', $_SESSION['search']['id'], PDO::PARAM_INT);
