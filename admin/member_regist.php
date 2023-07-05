@@ -341,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </div>
             <!-- パスワード -->
-            <div class="password">
+            <div class="password_regist">
                 <p>パスワード</p>
                 <input type="password" name="password" value="<?php if (!empty($posts['password'])) {
                                                                     echo htmlspecialchars($posts['password']);

@@ -165,3 +165,12 @@ th {
     height: 70px;
     border-radius: 10px;
 }
+.password_regist,
+.id,
+.name,
+.gender,
+.address,
+.password_check,
+.email {
+    display: flex;
+}
