@@ -15,6 +15,13 @@ if ($_GET['confirm'] == '会員登録') {
     header('Location: member_regist.php', true, 307);
     exit;
 }
+if ($_GET['confirm'] == '編集') {
+    $_SESSION['search'] = [];
+    $_SESSION['id_sort'] = [];
+    $_SESSION['create_sort'] = [];
+    header('Location: member_edit.php', true, 307);
+    exit;
+}
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
