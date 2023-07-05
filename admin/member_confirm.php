@@ -108,7 +108,7 @@ if ($_POST['confirm'] === '前に戻る') {
                 <input type="hidden" name="pref_name" value="<?php echo $_POST["pref_name"]; ?>">
                 <input type="hidden" name="address" value="<?php echo $_POST["address"]; ?>">
             </div>
-            <div class="password">
+            <div class="password_regist">
                 <p>パスワード</p>
                 <span>セキュリティのため非表示</span>
                 <input type="hidden" name="password" value="<?php echo $_POST["password"]; ?>">
