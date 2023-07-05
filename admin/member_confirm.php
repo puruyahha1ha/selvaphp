@@ -86,46 +86,50 @@ if ($_POST['confirm'] === '前に戻る') {
 <body>
     <h1>会員情報確認画面</h1>
     <form action="member_confirm.php" method="post">
-        <div class="name">
-            <p>氏名</p>
-            <span><?php echo htmlspecialchars($_POST["name_sei"] . "　" . $_POST["name_mei"]); ?></span>
-            <input type="hidden" name="name_sei" value="<?php echo $_POST["name_sei"]; ?>">
-            <input type="hidden" name="name_mei" value="<?php echo $_POST["name_mei"]; ?>">
-        </div>
-        <div class="gender">
-            <p>性別</p>
-            <span><?php if ($_POST["gender"] === '1') {
-                        echo '男性';
-                    } elseif ($_POST["gender"] === '2') {
-                        echo '女性';
-                    } ?></span>
-            <input type="hidden" name="gender" value="<?php echo $_POST["gender"]; ?>">
-        </div>
-        <div class="address">
-            <p>住所</p>
-            <span><?php echo htmlspecialchars($_POST["pref_name"] . $_POST["address"]); ?></span>
-            <input type="hidden" name="pref_name" value="<?php echo $_POST["pref_name"]; ?>">
-            <input type="hidden" name="address" value="<?php echo $_POST["address"]; ?>">
-        </div>
-        <div class="password">
-            <p>パスワード</p>
-            <span>セキュリティのため非表示</span>
-            <input type="hidden" name="password" value="<?php echo $_POST["password"]; ?>">
-            <input type="hidden" name="password_check" value="<?php echo $_POST["password_check"]; ?>">
-        </div>
-        <div class="email">
-            <p>メールアドレス</p>
-            <span class="email_color"><?php echo htmlspecialchars($_POST["email"]); ?></span>
-            <input type="hidden" name="email" value="<?php echo $_POST["email"]; ?>">
-        </div>
-        <div class="error">
-            <?php if (!empty($error)) {
-                echo $error;
-            } ?>
-        </div>
-        <div class="submit">
-            <input type="submit" name="confirm" value="登録完了" class="button" onclick="<?php if ($_POST['confirm'] === '登録完了') {echo "disabled = true;";} ?>">
-            <input type="submit" name="confirm" value="前に戻る" class="button_back">
+        <div class="confirm_form">
+            <div class="name">
+                <p>氏名</p>
+                <span><?php echo htmlspecialchars($_POST["name_sei"] . "　" . $_POST["name_mei"]); ?></span>
+                <input type="hidden" name="name_sei" value="<?php echo $_POST["name_sei"]; ?>">
+                <input type="hidden" name="name_mei" value="<?php echo $_POST["name_mei"]; ?>">
+            </div>
+            <div class="gender">
+                <p>性別</p>
+                <span><?php if ($_POST["gender"] === '1') {
+                            echo '男性';
+                        } elseif ($_POST["gender"] === '2') {
+                            echo '女性';
+                        } ?></span>
+                <input type="hidden" name="gender" value="<?php echo $_POST["gender"]; ?>">
+            </div>
+            <div class="address">
+                <p>住所</p>
+                <span><?php echo htmlspecialchars($_POST["pref_name"] . $_POST["address"]); ?></span>
+                <input type="hidden" name="pref_name" value="<?php echo $_POST["pref_name"]; ?>">
+                <input type="hidden" name="address" value="<?php echo $_POST["address"]; ?>">
+            </div>
+            <div class="password">
+                <p>パスワード</p>
+                <span>セキュリティのため非表示</span>
+                <input type="hidden" name="password" value="<?php echo $_POST["password"]; ?>">
+                <input type="hidden" name="password_check" value="<?php echo $_POST["password_check"]; ?>">
+            </div>
+            <div class="email">
+                <p>メールアドレス</p>
+                <span class="email_color"><?php echo htmlspecialchars($_POST["email"]); ?></span>
+                <input type="hidden" name="email" value="<?php echo $_POST["email"]; ?>">
+            </div>
+            <div class="error">
+                <?php if (!empty($error)) {
+                    echo $error;
+                } ?>
+            </div>
+            <div class="submit">
+                <input type="submit" name="confirm" value="登録完了" class="button" onclick="<?php if ($_POST['confirm'] === '登録完了') {
+                                                                                                echo "disabled = true;";
+                                                                                            } ?>">
+                <input type="submit" name="confirm" value="前に戻る" class="button_back">
+            </div>
         </div>
     </form>
 </body>
