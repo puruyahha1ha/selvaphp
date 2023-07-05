@@ -81,28 +81,28 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                 // 重複がない場合
                 if (!empty($password)) {
                     $update = $pdo->prepare("UPDATE members SET name_sei=:name_sei, name_mei=:name_mei, gender=:gender, pref_name=:pref_name, address=:address, password=:password, email=:email WHERE id=:id");
-                    $prepare->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
-                    $prepare->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
-                    $prepare->bindValue(':gender', $gender, PDO::PARAM_STR);
-                    $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
-                    $prepare->bindValue(':address', $address, PDO::PARAM_STR);
-                    $prepare->bindValue(':password', $password, PDO::PARAM_STR);
-                    $prepare->bindValue(':email', $email, PDO::PARAM_STR);
-                    $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-                    $prepare->execute();
+                    $update->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
+                    $update->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
+                    $update->bindValue(':gender', $gender, PDO::PARAM_STR);
+                    $update->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+                    $update->bindValue(':address', $address, PDO::PARAM_STR);
+                    $update->bindValue(':password', $password, PDO::PARAM_STR);
+                    $update->bindValue(':email', $email, PDO::PARAM_STR);
+                    $update->bindValue(':id', $id, PDO::PARAM_INT);
+                    $update->execute();
 
                     header('Location: member.php', true, 307);
                     exit;
                 } else {
                     $update = $pdo->prepare("UPDATE members SET name_sei=:name_sei, name_mei=:name_mei, gender=:gender, pref_name=:pref_name, address=:address, email=:email WHERE id=:id");
-                    $prepare->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
-                    $prepare->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
-                    $prepare->bindValue(':gender', $gender, PDO::PARAM_STR);
-                    $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
-                    $prepare->bindValue(':address', $address, PDO::PARAM_STR);
-                    $prepare->bindValue(':email', $email, PDO::PARAM_STR);
-                    $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-                    $prepare->execute();
+                    $update->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
+                    $update->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
+                    $update->bindValue(':gender', $gender, PDO::PARAM_STR);
+                    $update->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+                    $update->bindValue(':address', $address, PDO::PARAM_STR);
+                    $update->bindValue(':email', $email, PDO::PARAM_STR);
+                    $update->bindValue(':id', $id, PDO::PARAM_INT);
+                    $update->execute();
 
                     header('Location: member.php', true, 307);
                     exit;
