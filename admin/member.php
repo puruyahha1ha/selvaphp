@@ -84,7 +84,7 @@ try {
 
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($prepare, $records);
+        var_dump($records,$pages);
 
         $now = 1;
         $range = 3;
