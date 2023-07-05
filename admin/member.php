@@ -3,6 +3,7 @@ session_start();
 
 if ($_GET['confirm'] == 'トップへ戻る') {
     $_SESSION['search'] = [];
+    $_SESSION['ok'] = [];
     header('Location: top.php', true, 307);
     exit;
 }
@@ -127,8 +128,8 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
-    } elseif (isset($_GET['page_id']) || isset($_GET['id_sort']) || isset($_GET['create_sort'])) {
+
+    } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
         $now = $_GET['page_id'];
@@ -139,7 +140,7 @@ try {
             $create_sort = $_GET['create_sort'];
         }
 
-        if (isset($_SESSION['search'])) {
+        if (isset($_SESSION['search']) || isset($_GET['id_sort']) || isset($_GET['create_sort'])) {
 
             // SQL文を準備
             $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
@@ -238,7 +239,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
+        var_dump($tatal_count, );
     } else {
 
         // 初期表示
@@ -257,7 +258,6 @@ try {
 
         $range = 2;
 
-        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
