@@ -116,8 +116,8 @@ try {
         }
         if (isset($man) && isset($woman)) {
             $prepare->bindValue(':man', $man, PDO::PARAM_STR);
-            $prepare->bindValue(':woman', $man, PDO::PARAM_STR);
-            $count->bindValue(':man', $woman, PDO::PARAM_STR);
+            $prepare->bindValue(':woman', $woman, PDO::PARAM_STR);
+            $count->bindValue(':man', $man, PDO::PARAM_STR);
             $count->bindValue(':woman', $woman, PDO::PARAM_STR);
             var_dump("a");
         } elseif (isset($man) && empty($woman)) {
