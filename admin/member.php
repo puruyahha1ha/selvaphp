@@ -98,7 +98,7 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST);
+        var_dump($tatal_count, $_POST, $_GET);
     } elseif (isset($_GET['page_id'])) {
 
         $now = $_GET['page_id'];
@@ -115,7 +115,7 @@ try {
             $range = 1;
         }
 
-        var_dump($_POST,$_GET);
+        var_dump($tatal_count, $_POST, $_GET);
 
     } else {
 
@@ -135,7 +135,7 @@ try {
 
         $range = 2;
         
-        var_dump($_POST,$_GET);
+        var_dump($tatal_count, $_POST, $_GET);
     }
 
 
