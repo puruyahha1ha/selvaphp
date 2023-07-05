@@ -19,7 +19,8 @@ if ($_GET['confirm'] == '編集') {
     $_SESSION['search'] = [];
     $_SESSION['id_sort'] = [];
     $_SESSION['create_sort'] = [];
-    header('Location: member_edit.php', true, 307);
+    $id = $_GET['id'];
+    header("Location: member_edit.php?id={$id}", true, 307);
     exit;
 }
 try {
@@ -143,7 +144,6 @@ try {
 
         $now = 1;
         $range = 2;
-
     } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
@@ -151,12 +151,10 @@ try {
         if (isset($_GET['id_sort'])) {
             $_SESSION['id_sort'] = $_GET['id_sort'];
             $_SESSION['create_sort'] = null;
-
         }
         if (isset($_GET['create_sort'])) {
             $_SESSION['create_sort'] = $_GET['create_sort'];
             $_SESSION['id_sort'] = null;
-
         }
 
         if (isset($_SESSION['search']) || isset($_GET['id_sort']) || isset($_GET['create_sort'])) {
@@ -271,7 +269,6 @@ try {
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
         $range = 2;
-
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
@@ -391,11 +388,19 @@ try {
 
         <table>
             <tr>
-                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
+                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "desc") {
+                                                                    echo "asc";
+                                                                } else {
+                                                                    echo "desc";
+                                                                } ?>" class="sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
                 <th>住所</th>
-                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
+                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "desc") {
+                                                                        echo "asc";
+                                                                    } else {
+                                                                        echo "desc";
+                                                                    } ?>" class="sort">▼</a></th>
                 <th>編集</th>
             </tr>
             <?php foreach ($records as $val) : ?>
@@ -409,7 +414,7 @@ try {
                         } ?></td>
                     <td><?php echo $val['pref_name'] . $val['address']; ?></td>
                     <td><?php echo $val['created_at'] ?></td>
-                    <td><a href="member.php?confirm=編集">編集</a></td>
+                    <td><a href="member.php?confirm=編集&id=<?php echo $val['id']; ?>">編集</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
