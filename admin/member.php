@@ -66,6 +66,7 @@ try {
 
         // sqlを保存
         $save_sql = $sql;
+        $save_count_sql = $count_sql;
 
         // 初回検索時
         $sql .= " ORDER BY id ASC LIMIT 10";
@@ -109,6 +110,7 @@ try {
         $range = 2;
         var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
     } elseif (isset($_GET['page_id'])) {
+        // ページング押下処理
 
         $now = $_GET['page_id'];
 
@@ -117,28 +119,42 @@ try {
             $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
 
             $prepare = $pdo->prepare($save_sql);
+            $count = $pdo->prepare($save_count_sql);
+
 
             if (isset($post['id'])) {
                 $prepare->bindValue(':id', $post['id'], PDO::PARAM_INT);
+                $count->bindValue(':id', $post['id'], PDO::PARAM_INT);
             }
             if (isset($post['man']) && isset($post['woman'])) {
                 $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+                $count->bindValue(':man', $post['man'], PDO::PARAM_STR);
                 $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+                $count->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
             } elseif (isset($post['man']) && empty($post['woman'])) {
                 $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+                $count->bindValue(':man', $post['man'], PDO::PARAM_STR);
             } elseif (empty($post['man']) && isset($post['woman'])) {
                 $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+                $count->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
             }
             if (isset($post['pref_name'])) {
                 $prepare->bindValue(':pref_name', $post['pref_name'], PDO::PARAM_STR);
+                $count->bindValue(':pref_name', $post['pref_name'], PDO::PARAM_STR);
             }
             if (isset($post['free_word'])) {
                 $prepare->bindValue(':free_word',  '%' . $post['free_word'] . '%', PDO::PARAM_STR);
+                $count->bindValue(':free_word',  '%' . $post['free_word'] . '%', PDO::PARAM_STR);
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
             $prepare->execute();
             $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+            $count->execute();
+            $tatal_count = $count->fetch(PDO::FETCH_ASSOC);
+            $pages = ceil($tatal_count['count'] / $max_view);
+    
         } else {
 
             $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
@@ -146,6 +162,12 @@ try {
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
             $prepare->execute();
             $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+            $count = $pdo->prepare('SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL');
+            $count->execute();
+            $tatal_count = $count->fetch();
+            $pages = ceil($tatal_count['count'] / $max_view);
+    
         }
 
         if ($now == 1 || $now == $pages) {
