@@ -6,7 +6,6 @@ if ($_GET['confirm'] == 'トップへ戻る') {
     header('Location: top.php', true, 307);
     exit;
 }
-$_SESSION["ok"][0] = "test";
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -129,10 +128,16 @@ try {
         $now = 1;
         $range = 2;
         var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
-    } elseif (isset($_GET['page_id'])) {
+    } elseif (isset($_GET['page_id']) || isset($_GET['id_sort']) || isset($_GET['create_sort'])) {
         // ページング押下処理
 
         $now = $_GET['page_id'];
+        if (isset($_GET['id_sort'])) {
+            $id_sort = $_GET['id_sort'];
+        }
+        if (isset($_GET['create_sort'])) {
+            $create_sort = $_GET['create_sort'];
+        }
 
         if (isset($_SESSION['search'])) {
 
@@ -163,11 +168,17 @@ try {
                 $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
             }
 
-            $sql .= " ORDER BY id ASC LIMIT :start, :max;";
+            if (isset($id_sort)) {
+                $sql .= " ORDER BY id :id_sort LIMIT :start, :max;";
+            } elseif (isset($create_sort)) {
+                $sql .= " ORDER BY created_at :create_sort LIMIT :start, :max;";
+            } else {
+                $sql .= " ORDER BY id ASC LIMIT :start, :max;";
+            }
 
             $prepare = $pdo->prepare($sql);
             $count = $pdo->prepare($count_sql);
-    
+
 
             if (isset($_SESSION['search']['id'])) {
                 $prepare->bindValue(':id', $_SESSION['search']['id'], PDO::PARAM_INT);
@@ -192,6 +203,12 @@ try {
             if (isset($_SESSION['search']['free_word'])) {
                 $prepare->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
                 $count->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
+            }
+            if (isset($id_sort)) {
+                $prepare->bindValue(':id_sort', $id_sort, PDO::PARAM_STR);
+            }
+            if (isset($create_sort)) {
+                $prepare->bindValue(':create_sort', $create_sort, PDO::PARAM_STR);
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
@@ -357,11 +374,11 @@ try {
 
         <table>
             <tr>
-                <th>ID<a href="./member.php?page_id=1&sort=asc" class="sort">▼</a></th>
+                <th>ID<a href="./member.php?page_id=1&sort=<?php if ($_SESSION['id_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="id_sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
                 <th>住所</th>
-                <th>登録日時</th>
+                <th>登録日時<a href="./member.php?page_id=1&sort=<?php if ($_SESSION['id_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="create_sort">▼</a></th>
             </tr>
             <?php foreach ($records as $val) : ?>
                 <tr>
