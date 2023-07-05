@@ -157,6 +157,8 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                         } else {
                             echo $_POST['id'];
                         } ?></span>
+                <input type="hidden" name="id" value="<?php echo $_POST["id"]; ?>">
+
             </div>
             <div class="name">
                 <p>氏名</p>
