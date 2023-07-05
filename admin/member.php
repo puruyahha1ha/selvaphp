@@ -2,7 +2,7 @@
 session_start();
 
 if ($_GET['confirm'] == 'トップへ戻る') {
-    $post = [];
+    $_SESSION['search'] = [];
     header('Location: top.php', true, 307);
     exit;
 }
@@ -36,19 +36,29 @@ try {
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
         // 検索条件を保存
         if (!empty($_POST['id'])) {
-            $post['id'] = $_POST['id'];
+            $_SESSION['search']['id'] = $_POST['id'];
+        } else {
+            $_SESSION['search']['id'] = "";
         }
         if (!empty($_POST['man'])) {
-            $post['man'] = $_POST['man'];
+            $_SESSION['search']['man'] = $_POST['man'];
+        } else {
+            $_SESSION['search']['man'] = "";
         }
         if (!empty($_POST['woman'])) {
-            $post['woman'] = $_POST['woman'];
+            $_SESSION['search']['woman'] = $_POST['woman'];
+        } else {
+            $_SESSION['search']['woman'] = "";
         }
         if (!empty($_POST['pref_name'])) {
-            $post['pref_name'] = $_POST['pref_name'];
+            $_SESSION['search']['pref_name'] = $_POST['pref_name'];
+        } else {
+            $_SESSION['search']['pref_name'] = "";
         }
         if (!empty($_POST['free_word'])) {
-            $post['free_word'] = $_POST['free_word'];
+            $_SESSION['search']['free_word'] = $_POST['free_word'];
+        } else {
+            $_SESSION['search']['free_word'] = "";
         }
 
         // SQL文を準備
@@ -122,13 +132,13 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
+        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
     } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
         $now = $_GET['page_id'];
 
-        if (isset($post)) {
+        if (isset($_SESSION['search'])) {
 
             $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
 
@@ -136,29 +146,29 @@ try {
             $count = $pdo->prepare($save_count_sql);
 
 
-            if (isset($post['id'])) {
-                $prepare->bindValue(':id', $post['id'], PDO::PARAM_INT);
-                $count->bindValue(':id', $post['id'], PDO::PARAM_INT);
+            if (isset($_SESSION['search']['id'])) {
+                $prepare->bindValue(':id', $_SESSION['search']['id'], PDO::PARAM_INT);
+                $count->bindValue(':id', $_SESSION['search']['id'], PDO::PARAM_INT);
             }
-            if (isset($post['man']) && isset($post['woman'])) {
-                $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
-                $count->bindValue(':man', $post['man'], PDO::PARAM_STR);
-                $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
-                $count->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
-            } elseif (isset($post['man']) && empty($post['woman'])) {
-                $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
-                $count->bindValue(':man', $post['man'], PDO::PARAM_STR);
-            } elseif (empty($post['man']) && isset($post['woman'])) {
-                $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
-                $count->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+            if (isset($_SESSION['search']['man']) && isset($_SESSION['search']['woman'])) {
+                $prepare->bindValue(':man', $_SESSION['search']['man'], PDO::PARAM_STR);
+                $count->bindValue(':man', $_SESSION['search']['man'], PDO::PARAM_STR);
+                $prepare->bindValue(':woman', $_SESSION['search']['woman'], PDO::PARAM_STR);
+                $count->bindValue(':woman', $_SESSION['search']['woman'], PDO::PARAM_STR);
+            } elseif (isset($_SESSION['search']['man']) && empty($_SESSION['search']['woman'])) {
+                $prepare->bindValue(':man', $_SESSION['search']['man'], PDO::PARAM_STR);
+                $count->bindValue(':man', $_SESSION['search']['man'], PDO::PARAM_STR);
+            } elseif (empty($_SESSION['search']['man']) && isset($_SESSION['search']['woman'])) {
+                $prepare->bindValue(':woman', $_SESSION['search']['woman'], PDO::PARAM_STR);
+                $count->bindValue(':woman', $_SESSION['search']['woman'], PDO::PARAM_STR);
             }
-            if (isset($post['pref_name'])) {
-                $prepare->bindValue(':pref_name', $post['pref_name'], PDO::PARAM_STR);
-                $count->bindValue(':pref_name', $post['pref_name'], PDO::PARAM_STR);
+            if (isset($_SESSION['search']['pref_name'])) {
+                $prepare->bindValue(':pref_name', $_SESSION['search']['pref_name'], PDO::PARAM_STR);
+                $count->bindValue(':pref_name', $_SESSION['search']['pref_name'], PDO::PARAM_STR);
             }
-            if (isset($post['free_word'])) {
-                $prepare->bindValue(':free_word',  '%' . $post['free_word'] . '%', PDO::PARAM_STR);
-                $count->bindValue(':free_word',  '%' . $post['free_word'] . '%', PDO::PARAM_STR);
+            if (isset($_SESSION['search']['free_word'])) {
+                $prepare->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
+                $count->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
@@ -168,7 +178,6 @@ try {
             $count->execute();
             $tatal_count = $count->fetch(PDO::FETCH_ASSOC);
             $pages = ceil($tatal_count['count'] / $max_view);
-    
         } else {
 
             $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
@@ -181,7 +190,6 @@ try {
             $count->execute();
             $tatal_count = $count->fetch();
             $pages = ceil($tatal_count['count'] / $max_view);
-    
         }
 
         if ($now == 1 || $now == $pages) {
@@ -190,7 +198,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
+        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
     } else {
 
         // 初期表示
@@ -209,7 +217,7 @@ try {
 
         $range = 2;
 
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
+        var_dump($tatal_count, $_POST, $_SESSION['search'], $_GET, $now, $pages, $range, $_SESSION);
     }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
