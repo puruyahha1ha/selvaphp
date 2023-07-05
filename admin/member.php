@@ -8,6 +8,9 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
 
+    // 表示件数
+    $max_view = 10;
+
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];
     }
@@ -25,8 +28,9 @@ try {
     }
 
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
-        // SQL文をセット
+        // SQL文を準備
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
+
         if (isset($id)) {
             $sql .= " AND id = :id";
         }
@@ -43,6 +47,11 @@ try {
         if (isset($free_word)) {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
+
+        // 検索条件を保存
+        $save_sql = $sql;
+
+        $sql .= " ORDER BY id ASC LIMIT 10";
 
         $prepare = $pdo->prepare($sql);
         if (isset($id)) {
@@ -63,12 +72,15 @@ try {
             $prepare->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
         }
 
+
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare, $records);
+
+        $now = 1;
+        $range = 3;
     } else {
 
-        $max_view = 10;
         $count = $pdo->prepare('SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL');
         $count->execute();
         $tatal_count = $count->fetch();
