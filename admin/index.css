@@ -124,10 +124,10 @@ th {
     background-color: rgb(185, 185, 185);
 }
 .under_page {
-    text-align: end;
+    text-align: center;
+    margin: 20px 0 20px 350px;
 }
 .pagenation {
-    width: 10px;
-    height: 10px;
     border: 1px solid black;
+    text-decoration: none;
 }
