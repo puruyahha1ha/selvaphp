@@ -86,9 +86,6 @@ if ($_POST['confirm'] === '前に戻る') {
 <body>
     <header>
         <h2>会員登録</h2>
-        <form action="member.php" action="get" class="header_top">
-            <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
-        </form>
     </header>
     <form action="member_confirm.php" method="post">
         <div class="confirm_form">
