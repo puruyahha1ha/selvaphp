@@ -207,17 +207,9 @@ try {
                 $prepare->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
                 $count->bindValue(':free_word',  '%' . $_SESSION['search']['free_word'] . '%', PDO::PARAM_STR);
             }
-            if (isset($_SESSION['id_sort'])) {
-                $prepare->bindValue(':id_sort', $_SESSION['id_sort'], PDO::PARAM_INT);
-                var_dump("a");
-            }
-            if (isset($_SESSION['create_sort'])) {
-                $prepare->bindValue(':create_sort', $_SESSION['create_sort'], PDO::PARAM_INT);
-                var_dump("b");
-            }
+
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
-            var_dump($prepare,$now, $max_view);
             $prepare->execute();
             $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
@@ -243,7 +235,7 @@ try {
         } else {
             $range = 1;
         }
-
+        var_dump($prepare,$now, $max_view);
         var_dump($tatal_count, $_SESSION);
     } else {
 
