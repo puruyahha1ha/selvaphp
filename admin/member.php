@@ -357,7 +357,7 @@ try {
 
         <table>
             <tr>
-                <th>ID<input type="submit" name="id_sort" value="▼"></th>
+                <th>ID<a href="./member.php?page_id=1&sort=asc" class="sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
                 <th>住所</th>
