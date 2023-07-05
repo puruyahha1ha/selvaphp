@@ -83,7 +83,7 @@ try {
 
 
         $prepare->execute();
-        $records = $prepare->fetchAll();
+        $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
         var_dump($prepare, $records);
 
         $now = 1;
