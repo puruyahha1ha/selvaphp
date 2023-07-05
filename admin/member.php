@@ -44,10 +44,6 @@ try {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
-        // ページに応じてコメントを取得
-        $limit = 10;
-        $offset = ((int)$now - 1) * 10;
-        $sql .= " LIMIT :limit OFFSET :offset;";
         $prepare = $pdo->prepare($sql);
         if (isset($id)) {
             $prepare->bindValue(':id', $id, PDO::PARAM_INT);
@@ -67,22 +63,9 @@ try {
             $prepare->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
         }
 
-        $prepare_comment->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $prepare_comment->bindValue(':offset', $offset, PDO::PARAM_INT);
-
         $prepare->execute();
         $records = $prepare->fetchAll();
         var_dump($prepare, $records);
-        // $id_sort = "ASC";
-        // if (isset($_POST['id_sort'])) {
-        //     if ($id_sort === "ASC") {
-        //         $id_sort = "DESC";
-        //         $sql .= " ORDER BY id DESC";
-        //     } else {
-        //         $id_sort = "DESC";
-        //         $sql .= " ORDER BY id ASC";
-        //     }
-        // }
     } else {
 
         $max_view = 10;
