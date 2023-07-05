@@ -144,6 +144,7 @@ try {
 
             $prepare = $pdo->prepare($save_sql);
             $count = $pdo->prepare($save_count_sql);
+            var_dump($save_sql,$save_count_sql);
 
 
             if (isset($_SESSION['search']['id'])) {
