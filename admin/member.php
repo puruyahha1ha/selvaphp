@@ -90,7 +90,7 @@ try {
         }
 
         // 初回検索時
-        $sql .= " ORDER BY id ASC LIMIT 10";
+        $sql .= " ORDER BY id DESC LIMIT 10";
 
         $prepare = $pdo->prepare($sql);
         $count = $pdo->prepare($count_sql);
@@ -223,7 +223,7 @@ try {
             $pages = ceil($tatal_count['count'] / $max_view);
         } else {
 
-            $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
+            $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id DESC LIMIT :start, :max;');
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
             $prepare->execute();
@@ -249,7 +249,7 @@ try {
         $pages = ceil($tatal_count['count'] / $max_view);
         $now = 1;
 
-        $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id ASC LIMIT :start, :max;');
+        $prepare = $pdo->prepare('SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL ORDER BY id DESC LIMIT :start, :max;');
 
         $prepare->bindValue(':start', $now - 1, PDO::PARAM_INT);
         $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
@@ -374,11 +374,11 @@ try {
 
         <table>
             <tr>
-                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "asc") {echo "desc";} else {echo "asc";}?>" class="sort">▼</a></th>
+                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
                 <th>住所</th>
-                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "asc") {echo "desc";} else {echo "asc";}?>" class="sort">▼</a></th>
+                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
             </tr>
             <?php foreach ($records as $val) : ?>
                 <tr>
