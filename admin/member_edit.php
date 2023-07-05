@@ -101,7 +101,7 @@ try {
 
     $pdo = new PDO($dsn, $user, $password);
 
-    $id = $_GET['id'];
+    $id = isset($_GET['id']) ? $_GET['id'] : $_POST['id'];
 
     // SQL文をセット
     $prepare = $pdo->prepare('SELECT * FROM members WHERE id = :id');
