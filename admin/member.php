@@ -95,11 +95,10 @@ try {
 
         $prepare->execute();
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($records, $pages, $tatal_count);
 
         $now = 1;
         $range = 2;
-        var_dump($_POST);
+        var_dump($tatal_count, $_POST);
     } elseif (isset($_GET['page_id'])) {
 
         $now = $_GET['page_id'];
