@@ -27,7 +27,13 @@ h1 {
 }
 
 .login_id p,
-.password p {
+.password p,
+.id p,
+.name p,
+.gender p,
+.address p,
+.password_check p,
+.email p {
     margin-right: 15px;
     padding-top: 5px;
 }
