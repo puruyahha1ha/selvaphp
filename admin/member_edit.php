@@ -142,7 +142,7 @@ try {
             <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
         </form>
     </header>
-    <form action="member_regist.php" method="post">
+    <form action="member_edit.php" method="post">
         <div class="regist_form">
             <!-- ID -->
             <div class="id">
