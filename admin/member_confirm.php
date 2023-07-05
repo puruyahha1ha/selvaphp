@@ -5,8 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: member_regist.php");
     exit;
 }
+if ($_GET['confirm'] === '一覧へ戻る') {
+    header('Location: member.php', true, 307);
+    exit;
+}
 
-if ($_POST['confirm'] === '登録完了') {
+if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了') {
 
     try {
         $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
@@ -65,10 +69,7 @@ if ($_POST['confirm'] === '登録完了') {
         return;
     }
 }
-if ($_POST['confirm'] === '前に戻る') {
-    header('Location: member_regist.php', true, 307);
-    exit;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +87,9 @@ if ($_POST['confirm'] === '前に戻る') {
 <body>
     <header>
         <h2>会員登録</h2>
+        <form action="member.php" action="get" class="header_top">
+            <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
+        </form>
     </header>
     <form action="member_confirm.php" method="post">
         <div class="confirm_form">
@@ -130,7 +134,6 @@ if ($_POST['confirm'] === '前に戻る') {
                 <input type="submit" name="confirm" value="登録完了" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了') {
                                                                                                 echo "disabled = true;";
                                                                                             } ?>">
-                <input type="submit" name="confirm" value="前に戻る" class="button_submit">
             </div>
         </div>
     </form>
