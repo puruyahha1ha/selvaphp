@@ -6,7 +6,7 @@ if ($_GET['confirm'] == 'トップへ戻る') {
     header('Location: top.php', true, 307);
     exit;
 }
-
+$_SESSION["ok"][0] = "test";
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -122,7 +122,7 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range);
+        var_dump($tatal_count, $_POST, $post, $_GET,$now, $pages,$range,$_SESSION);
     } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
