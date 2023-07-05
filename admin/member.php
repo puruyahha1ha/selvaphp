@@ -28,6 +28,9 @@ try {
     }
 
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
+        // 検索条件を保存
+        $post = $_POST;
+
         // SQL文を準備
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
         $count_sql = "SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL";
@@ -70,8 +73,8 @@ try {
         }
         if (isset($man) && isset($woman)) {
             $prepare->bindValue(':man', $man, PDO::PARAM_STR);
-            $prepare->bindValue(':man', $man, PDO::PARAM_STR);
-            $count->bindValue(':woman', $woman, PDO::PARAM_STR);
+            $prepare->bindValue(':woman', $man, PDO::PARAM_STR);
+            $count->bindValue(':man', $woman, PDO::PARAM_STR);
             $count->bindValue(':woman', $woman, PDO::PARAM_STR);
         } elseif (isset($man) && empty($woman)) {
             $prepare->bindValue(':man', $man, PDO::PARAM_STR);
@@ -106,6 +109,23 @@ try {
         $save_sql .= " ORDER BY id ASC LIMIT :start, :max;";
 
         $prepare = $pdo->prepare($save_sql);
+        if (isset($post['id'])) {
+            $prepare->bindValue(':id', $post['id'], PDO::PARAM_INT);
+        }
+        if (isset($post['man']) && isset($post['woman'])) {
+            $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+            $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+        } elseif (isset($post['man']) && empty($post['woman'])) {
+            $prepare->bindValue(':man', $post['man'], PDO::PARAM_STR);
+        } elseif (empty($post['man']) && isset($post['woman'])) {
+            $prepare->bindValue(':woman', $post['woman'], PDO::PARAM_STR);
+        }
+        if (isset($pref_name)) {
+            $prepare->bindValue(':pref_name', $pref_name, PDO::PARAM_STR);
+        }
+        if (isset($free_word)) {
+            $prepare->bindValue(':free_word',  '%' . $free_word . '%', PDO::PARAM_STR);
+        }
         $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
         $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
 
@@ -116,7 +136,6 @@ try {
         }
 
         var_dump($tatal_count, $_POST, $_GET);
-
     } else {
 
         // 初期表示
@@ -134,11 +153,9 @@ try {
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
         $range = 2;
-        
+
         var_dump($tatal_count, $_POST, $_GET);
     }
-
-
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
