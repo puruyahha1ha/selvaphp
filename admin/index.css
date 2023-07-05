@@ -215,3 +215,13 @@ th {
 .email p {
     width: 130px;
 }
+.password_regist span,
+.id span,
+.name span,
+.gender span,
+.address span,
+.password_check span,
+.email span {
+    padding: auto;
+    margin: 5px;
+}
