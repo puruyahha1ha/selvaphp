@@ -244,17 +244,27 @@ try {
             <?php endforeach; ?>
         </table>
         <div class="under_page">
-            <?php
-            //ページネーションを表示
-            for ($n = 1; $n <= $pages; $n++) {
-                if ($n == $now) {
-                    echo "<span class='pagenation_now'>$now</span>";
-                } else {
-                    echo "<a href='./member.php?page_id=$n' class='pagenation'>$n</a>";
-                }
-            }
-            var_dump($now);
-            ?>
+            <?php if ($now >= 2) : ?>
+                <a href="./member.php?page_id=<?php echo ($now - 1); ?>" class="pagenation">前へ＞</a>
+            <?php else : ?>
+                <span></span>
+            <?php endif; ?>
+
+            <?php for ($n = 1; $n <= $pages; $n++) : ?>
+                <?php if ($n >= $now - $range && $n <= $now + $range) : ?>
+                    <?php if ($n == $now) : ?>
+                        <span class='pagenation_now'><?php echo $now; ?></span>
+                    <?php else : ?>
+                        <a href='./member.php?page_id=<?php echo $n; ?>' class='pagenation'><?php echo $n; ?></a>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($now < $max_page) : ?>
+                <a href="./member.php?page_id=<?php echo ($now + 1); ?>" class="pagenation">次へ＞</a>
+            <?php else : ?>
+                <span></span>
+            <?php endif; ?>
         </div>
 
     </main>
