@@ -150,3 +150,7 @@ th {
     width: 60px;
     margin-left: 20px;
 }
+.sort {
+    text-decoration: none;
+    color: black;
+}
