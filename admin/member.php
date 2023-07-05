@@ -35,7 +35,21 @@ try {
 
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
         // 検索条件を保存
-        $post = $_POST;
+        if (!empty($_POST['id'])) {
+            $post['id'] = $_POST['id'];
+        }
+        if (!empty($_POST['man'])) {
+            $post['man'] = $_POST['man'];
+        }
+        if (!empty($_POST['woman'])) {
+            $post['woman'] = $_POST['woman'];
+        }
+        if (!empty($_POST['pref_name'])) {
+            $post['pref_name'] = $_POST['pref_name'];
+        }
+        if (!empty($_POST['free_word'])) {
+            $post['free_word'] = $_POST['free_word'];
+        }
 
         // SQL文を準備
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
