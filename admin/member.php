@@ -248,11 +248,12 @@ try {
             //ページネーションを表示
             for ($n = 1; $n <= $pages; $n++) {
                 if ($n === $now) {
-                    echo "<span class='pagenation'>$now</span>";
+                    echo "<span class='pagenation_now'>$now</span>";
                 } else {
                     echo "<a href='./member.php?page_id=$n' class='pagenation'>$n</a>";
                 }
             }
+            var_dump($now);
             ?>
         </div>
 

@@ -126,8 +126,15 @@ th {
 .under_page {
     text-align: center;
     margin: 20px 0 20px 350px;
+    display: flex;
+    justify-content: center;
 }
-.pagenation {
+.pagenation ,.pagenation_now{
     border: 1px solid black;
     text-decoration: none;
+    color: black;
+    width: 25px;
+}
+.pagenation_now {
+    background-color: rgb(185, 185, 185);
 }
