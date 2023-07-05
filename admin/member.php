@@ -239,7 +239,7 @@ try {
             $range = 1;
         }
 
-        var_dump($tatal_count, );
+        var_dump($tatal_count, $id_sort,$create_sort);
     } else {
 
         // 初期表示
