@@ -144,6 +144,7 @@ try {
 
         $now = 1;
         $range = 2;
+        var_dump($sql,$man,$woman);
     } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
