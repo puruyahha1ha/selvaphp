@@ -188,14 +188,14 @@ try {
                 $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
             }
 
-            if ($_SESSION['id_sort'] == "desc") {
-                $sql .= " ORDER BY id DESC LIMIT :start, :max;";
+            if ($_SESSION['id_sort'] == "asc") {
+                $sql .= " ORDER BY id ASC LIMIT :start, :max;";
             } elseif ($_SESSION['create_sort'] == "desc") {
                 $sql .= " ORDER BY created_at DESC LIMIT :start, :max;";
             } elseif ($_SESSION['create_sort'] == "asc") {
                 $sql .= " ORDER BY created_at ASC LIMIT :start, :max;";
             } else {
-                $sql .= " ORDER BY id ASC LIMIT :start, :max;";
+                $sql .= " ORDER BY id DESC LIMIT :start, :max;";
             }
 
             $prepare = $pdo->prepare($sql);
