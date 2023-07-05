@@ -249,7 +249,7 @@ try {
                 if ( $n === $now ){
                     echo "<span style='padding: 5px;'>$now</span>";
                 }else{
-                    echo "<a href='./home.php?page_id=$n' style='padding: 5px;'>$n</a>";
+                    echo "<a href='./member.php?page_id=$n' style='padding: 5px;'>$n</a>";
                 }
             }
         ?>
