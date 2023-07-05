@@ -99,6 +99,7 @@ try {
 
         $now = 1;
         $range = 2;
+        var_dump($_POST);
     } elseif (isset($_GET['page_id'])) {
 
         $now = $_GET['page_id'];
@@ -114,6 +115,8 @@ try {
         } else {
             $range = 1;
         }
+
+        var_dump($_POST,$_GET);
 
     } else {
 
@@ -132,7 +135,8 @@ try {
         $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
         $range = 2;
-
+        
+        var_dump($_POST,$_GET);
     }
 
 
