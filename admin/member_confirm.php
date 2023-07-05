@@ -48,7 +48,7 @@ if ($_POST['confirm'] === '登録完了') {
                 $prepare->bindValue(':email', $email, PDO::PARAM_STR);
 
                 $prepare->execute();
-                header('Location: complete.php', true, 307);
+                header('Location: member.php', true, 307);
                 exit;
             } else {
                 // DBにメールアドレスがある場合
@@ -64,6 +64,10 @@ if ($_POST['confirm'] === '登録完了') {
         echo 'DB接続エラー:' . $e->getMessage();
         return;
     }
+}
+if ($_POST['confirm'] === '前に戻る') {
+    header('Location: member_regist.php', true, 307);
+    exit;
 }
 ?>
 
@@ -124,6 +128,7 @@ if ($_POST['confirm'] === '登録完了') {
                 <input type="submit" name="confirm" value="登録完了" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了') {
                                                                                                 echo "disabled = true;";
                                                                                             } ?>">
+                <input type="submit" name="confirm" value="前に戻る" class="button_submit">
             </div>
         </div>
     </form>
