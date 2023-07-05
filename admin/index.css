@@ -90,73 +90,97 @@ span {
     border-radius: 10px;
     border-color: cornflowerblue;
 }
+
 .search_form {
     margin: 50px 35%;
     border: black solid 2px;
 }
+
 .search_row {
     display: flex;
     border-bottom: black solid 1px;
 }
+
 .search_row p {
     width: 120px;
     padding: 10px 5px;
     border-right: black solid 1px;
 }
+
 .search_input {
     padding: 5px 0 5px 50px;
 }
+
 select {
     width: 160px;
 }
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
 table {
     margin: auto;
     text-align: center;
 }
-th, td {
+
+th,
+td {
     padding: 8px;
 }
+
 th {
     background-color: rgb(185, 185, 185);
 }
+
 .under_page {
     text-align: center;
     margin: 20px 0 20px 350px;
     display: flex;
     justify-content: center;
 }
+
 .under_page span {
     padding: 0;
     margin: 0;
 }
-.pagenation ,.pagenation_now, .pagenation_prev, .pagenation_next{
+
+.pagenation,
+.pagenation_now,
+.pagenation_prev,
+.pagenation_next {
     border: 1px solid black;
     text-decoration: none;
     color: black;
     width: 25px;
 }
+
 .pagenation_now {
     background-color: rgb(185, 185, 185);
 }
+
 .pagenation_prev {
     width: 60px;
     margin-right: 20px;
 }
+
 .pagenation_next {
     width: 60px;
     margin-left: 20px;
 }
+
 .sort {
     text-decoration: none;
     color: black;
 }
+
 .member_submit {
     margin: 20px 35%;
 }
+
 .button_submit {
     color: white;
     background-color: cornflowerblue;
@@ -165,6 +189,7 @@ th {
     height: 70px;
     border-radius: 10px;
 }
+
 .password_regist,
 .id,
 .name,
@@ -174,6 +199,17 @@ th {
 .email {
     display: flex;
 }
+
 .regist_form {
     margin: 30px 35%;
+}
+
+.password_regist p,
+.id p,
+.name p,
+.gender p,
+.address p,
+.password_check p,
+.email p {
+    width: 130px;
 }
