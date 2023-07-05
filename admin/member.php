@@ -213,6 +213,7 @@ try {
             }
             $prepare->bindValue(':start', ($now - 1) * $max_view, PDO::PARAM_INT);
             $prepare->bindValue(':max', $max_view, PDO::PARAM_INT);
+            var_dump($prepare);
             $prepare->execute();
             $records = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
