@@ -3,7 +3,8 @@ session_start();
 
 if ($_GET['confirm'] == 'トップへ戻る') {
     $_SESSION['search'] = [];
-    $_SESSION['ok'] = [];
+    $_SESSION['id_sort'] = [];
+    $_SESSION['create_sort'] = [];
     header('Location: top.php', true, 307);
     exit;
 }
@@ -239,8 +240,6 @@ try {
         } else {
             $range = 1;
         }
-        var_dump($prepare,$now, $max_view);
-        var_dump($tatal_count, $_SESSION);
     } else {
 
         // 初期表示
