@@ -289,6 +289,9 @@ try {
     </header>
 
     <main>
+        <form action="member.php" method="get">
+            <input type="submit" name="confirm" value="会員登録" class="button_submit">
+        </form>
         <form action="member.php" method="post">
             <div class="search_form">
                 <div class="search_row">

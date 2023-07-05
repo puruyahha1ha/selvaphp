@@ -154,3 +154,11 @@ th {
     text-decoration: none;
     color: black;
 }
+.button_submit {
+    color: white;
+    background-color: cornflowerblue;
+    font-weight: 20px;
+    width: 250px;
+    height: 70px;
+    border-radius: 10px;
+}
