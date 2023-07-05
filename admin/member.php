@@ -252,7 +252,7 @@ try {
         </table>
         <div class="under_page">
             <?php if ($now >= 2) : ?>
-                <a href="./member.php?page_id=<?php echo ($now - 1); ?>" class="pagenation">前へ＞</a>
+                <a href="./member.php?page_id=<?php echo ($now - 1); ?>" class="pagenation_prev">前へ＞</a>
             <?php else : ?>
                 <span></span>
             <?php endif; ?>
@@ -268,7 +268,7 @@ try {
             <?php endfor; ?>
 
             <?php if ($now < $pages) : ?>
-                <a href="./member.php?page_id=<?php echo ($now + 1); ?>" class="pagenation">次へ＞</a>
+                <a href="./member.php?page_id=<?php echo ($now + 1); ?>" class="pagenation_next">次へ＞</a>
             <?php else : ?>
                 <span></span>
             <?php endif; ?>

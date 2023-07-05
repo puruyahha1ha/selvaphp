@@ -133,7 +133,7 @@ th {
     padding: 0;
     margin: 0;
 }
-.pagenation ,.pagenation_now{
+.pagenation ,.pagenation_now, .pagenation_prev, .pagenation_next{
     border: 1px solid black;
     text-decoration: none;
     color: black;
@@ -141,4 +141,12 @@ th {
 }
 .pagenation_now {
     background-color: rgb(185, 185, 185);
+}
+.pagenation_prev {
+    width: 60px;
+    margin-right: 20px;
+}
+.pagenation_next {
+    width: 60px;
+    margin-left: 20px;
 }
