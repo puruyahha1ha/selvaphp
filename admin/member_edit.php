@@ -53,20 +53,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // パスワードのバリデーション
-    if (!preg_match("/^[a-zA-Z0-9]+$/", $record['password'])) {
+    if ($record['password'] == "") {
+    } elseif ((mb_strlen($record['password']) < 8 || mb_strlen($record['password']) > 20) && $errors['password'] !== "※パスワードは必須入力です") {
+        $errors['password_length'] = '※パスワードは８〜２０字以内で入力してください';
+    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $record['password'])) {
         $errors['password'] = '※パスワードは半角英数字のみを入力してください';
     }
-    if ((mb_strlen($record['password']) < 8 || mb_strlen($record['password']) > 20) && $errors['password'] !== "※パスワードは必須入力です") {
-        $errors['password_length'] = '※パスワードは８〜２０字以内で入力してください';
-    }
+
 
     // パスワード確認のバリデーション
-    if (!preg_match("/^[a-zA-Z0-9]+$/", $record['password_check'])) {
+    if ($record['password_check'] == "") {
+    } elseif (mb_strlen($record['password_check']) < 8 || mb_strlen($record['password_check']) > 20) {
+        $errors['password_check_length'] = '※パスワード確認は８〜２０字以内で入力してください';
+    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $record['password_check'])) {
         $errors['password_check'] = '※パスワード確認は半角英数字のみを入力してください';
     }
-    if ((mb_strlen($record['password_check']) < 8 || mb_strlen($record['password_check']) > 20) && $errors['password_check'] !== "※パスワード確認は必須入力です") {
-        $errors['password_check_length'] = '※パスワード確認は８〜２０字以内で入力してください';
-    }
+
 
     // パスワードの一致チェック
     if ($record['password'] !== $record['password_check']) {
@@ -83,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email_filter'] = '※有効なメールアドレスを入力してください';
     }
 
-    var_dump($_POST,$record);
+    var_dump($_POST, $record);
     if ($record['confirm'] === '前に戻る') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
@@ -109,7 +111,6 @@ try {
     $prepare->execute();
 
     $record = $prepare->fetch(PDO::FETCH_ASSOC);
-
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
@@ -144,7 +145,9 @@ try {
             <!-- ID -->
             <div class="id">
                 <p>ID</p>
-                <input type="text" name="id" value="<?php if (!empty($record['id'])) {echo $record['id'];} ?>">
+                <input type="text" name="id" value="<?php if (!empty($record['id'])) {
+                                                        echo $record['id'];
+                                                    } ?>">
             </div>
             <!-- 氏名 -->
             <div class="name">
