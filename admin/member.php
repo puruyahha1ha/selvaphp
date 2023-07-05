@@ -38,27 +38,27 @@ try {
         if (!empty($_POST['id'])) {
             $_SESSION['search']['id'] = $_POST['id'];
         } else {
-            $_SESSION['search']['id'] = "";
+            $_SESSION['search']['id'] = null;
         }
         if (!empty($_POST['man'])) {
             $_SESSION['search']['man'] = $_POST['man'];
         } else {
-            $_SESSION['search']['man'] = "";
+            $_SESSION['search']['man'] = null;
         }
         if (!empty($_POST['woman'])) {
             $_SESSION['search']['woman'] = $_POST['woman'];
         } else {
-            $_SESSION['search']['woman'] = "";
+            $_SESSION['search']['woman'] = null;
         }
         if (!empty($_POST['pref_name'])) {
             $_SESSION['search']['pref_name'] = $_POST['pref_name'];
         } else {
-            $_SESSION['search']['pref_name'] = "";
+            $_SESSION['search']['pref_name'] = null;
         }
         if (!empty($_POST['free_word'])) {
             $_SESSION['search']['free_word'] = $_POST['free_word'];
         } else {
-            $_SESSION['search']['free_word'] = "";
+            $_SESSION['search']['free_word'] = null;
         }
 
         // SQL文を準備
