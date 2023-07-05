@@ -65,10 +65,6 @@ if ($_POST['confirm'] === '登録完了') {
         return;
     }
 }
-if ($_POST['confirm'] === '前に戻る') {
-    header('Location: member_regist.php', true, 307);
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -125,10 +121,9 @@ if ($_POST['confirm'] === '前に戻る') {
                 } ?>
             </div>
             <div class="submit">
-                <input type="submit" name="confirm" value="登録完了" class="button" onclick="<?php if ($_POST['confirm'] === '登録完了') {
+                <input type="submit" name="confirm" value="登録完了" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了') {
                                                                                                 echo "disabled = true;";
                                                                                             } ?>">
-                <input type="submit" name="confirm" value="前に戻る" class="button_back">
             </div>
         </div>
     </form>
