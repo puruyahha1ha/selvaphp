@@ -53,9 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // パスワードのバリデーション
-    if (empty($record['password'])) {
-        $errors['password'] = '※パスワードは必須入力です';
-    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $record['password'])) {
+    if (!preg_match("/^[a-zA-Z0-9]+$/", $record['password'])) {
         $errors['password'] = '※パスワードは半角英数字のみを入力してください';
     }
     if ((mb_strlen($record['password']) < 8 || mb_strlen($record['password']) > 20) && $errors['password'] !== "※パスワードは必須入力です") {
@@ -63,9 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // パスワード確認のバリデーション
-    if (empty($record['password_check'])) {
-        $errors['password_check'] = '※パスワード確認は必須入力です';
-    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $record['password_check'])) {
+    if (!preg_match("/^[a-zA-Z0-9]+$/", $record['password_check'])) {
         $errors['password_check'] = '※パスワード確認は半角英数字のみを入力してください';
     }
     if ((mb_strlen($record['password_check']) < 8 || mb_strlen($record['password_check']) > 20) && $errors['password_check'] !== "※パスワード確認は必須入力です") {
