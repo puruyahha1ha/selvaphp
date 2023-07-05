@@ -30,26 +30,35 @@ try {
     if (!empty($_POST['confirm']) && $_POST['confirm'] === '検索する') {
         // SQL文を準備
         $sql = "SELECT id, name_sei, name_mei, gender, pref_name, address, created_at FROM members WHERE deleted_at IS NULL";
+        $count_sql = "SELECT COUNT(*) AS count FROM members WHERE deleted_at IS NULL";
 
         if (isset($id)) {
             $sql .= " AND id = :id";
+            $count_sql .= " AND id = :id";
         }
         if (isset($man) && isset($woman)) {
             $sql .= " AND (gender = :man OR gender = :woman)";
+            $count_sql .= " AND (gender = :man OR gender = :woman)";
         } elseif (isset($man) && empty($woman)) {
             $sql .= " AND gender = :man";
+            $count_sql .= " AND gender = :man";
         } elseif (empty($man) && isset($woman)) {
             $sql .= " AND gender = :woman";
+            $count_sql .= " AND gender = :woman";
         }
         if (isset($pref_name)) {
             $sql .= " AND pref_name = :pref_name";
+            $count_sql .= " AND pref_name = :pref_name";
         }
         if (isset($free_word)) {
             $sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
+            $count_sql .= " AND (name_sei LIKE :free_word OR name_mei LIKE :free_word OR email LIKE :free_word)";
         }
 
-        // 検索条件を保存
-        $save_sql = $sql;
+        $count = $pdo->prepare($count_sql);
+        $count->execute();
+        $tatal_count = $count->fetch(PDO::FETCH_ASSOC);
+        $pages = ceil($tatal_count['count'] / $max_view);
 
         $sql .= " ORDER BY id ASC LIMIT 10";
 
