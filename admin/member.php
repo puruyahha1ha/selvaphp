@@ -374,11 +374,11 @@ try {
 
         <table>
             <tr>
-                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($_SESSION['id_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
+                <th>ID<a href="./member.php?page_id=1&id_sort=<?php if ($id_sort == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
                 <th>氏名</th>
                 <th>性別</th>
                 <th>住所</th>
-                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($_SESSION['create_sort'] == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
+                <th>登録日時<a href="./member.php?page_id=1&create_sort=<?php if ($create_sort == "desc") {echo "asc";} else {echo "desc";}?>" class="sort">▼</a></th>
             </tr>
             <?php foreach ($records as $val) : ?>
                 <tr>
