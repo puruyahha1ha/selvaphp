@@ -5,6 +5,32 @@ if ($_GET['confirm'] == '編集') {
     header("Location: member_edit.php?id={$id}", true, 307);
     exit;
 }
+if ($_GET['confirm'] == '削除') {
+    try {
+        $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
+        $user = 'root';
+        $password = 'kazuto060603';
+    
+        $pdo = new PDO($dsn, $user, $password);
+
+        $id = $_GET['id'];
+    
+        // SQL文をセット
+        $prepare = $pdo->prepare('UPDATE members SET deleted_at=now() WHERE id = :id');
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
+    
+    } catch (PDOException $e) {
+        if (!empty($pdo)) {
+            $db->rollback();
+        }
+        echo 'DB接続エラー:' . $e->getMessage();
+        return;
+    }
+    $id = $_GET['id'];
+    header("Location: member_edit.php?id={$id}", true, 307);
+    exit;
+}
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
