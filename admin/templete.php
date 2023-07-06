@@ -1,1 +1,3 @@
-<form action="" method="post"></form>
+<form action="" method="post">
+    <input type="submit" value="aaaa">
+</form>
