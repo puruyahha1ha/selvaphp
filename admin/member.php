@@ -153,7 +153,7 @@ try {
 
         $now = 1;
         $range = 2;
-        var_dump($sql,$man,$woman);
+        var_dump($sql, $man, $woman);
     } elseif (isset($_GET['page_id'])) {
         // ページング押下処理
 
@@ -417,7 +417,7 @@ try {
             <?php foreach ($records as $val) : ?>
                 <tr>
                     <td><?php echo $val['id']; ?></td>
-                    <td><?php echo $val['name_sei'] . '　' . $val['name_mei']; ?></td>
+                    <td><a href="member.php?confirm=詳細&id=<?php echo $val['id']; ?>"><?php echo $val['name_sei'] . '　' . $val['name_mei']; ?></a></td>
                     <td><?php if ($val['gender'] === '1') {
                             echo '男性';
                         } else {
