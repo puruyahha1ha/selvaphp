@@ -13,7 +13,7 @@
                 <?php if ($_SESSION['confirm'] == "登録") {
                     echo "<p>登録後に自動採番</p>";
                 } else {
-                    echo "<p><?php if (!empty({$posts['id']})) {echo {$posts['id']};} ?></p><br>";
+                    echo "<p>{$posts['id']}</p><br>";
                     echo "<input type='hidden' name='id' value='{$posts['id']}'>";
                 } ?>
             </div>
@@ -254,8 +254,8 @@
             <!-- パスワード確認 -->
             <div class="password_check">
                 <p>パスワード確認</p>
-                <input type="password" name="password_check" value="<?php if (!empty($posts['password_check'])) {
-                                                                        echo htmlspecialchars($posts['password_check']);
+                <input type="password" name="password_check" value="<?php if (!empty($posts['password'])) {
+                                                                        echo htmlspecialchars($posts['password']);
                                                                     } ?>">
             </div>
             <!-- エラーメッセージ -->
