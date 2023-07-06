@@ -80,6 +80,7 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
             if (!$record) {
                 // 重複がない場合
                 if (!empty($password)) {
+                    // パスワードの記載がある
                     $update = $pdo->prepare("UPDATE members SET name_sei=:name_sei, name_mei=:name_mei, gender=:gender, pref_name=:pref_name, address=:address, password=:password, email=:email WHERE id=:id");
                     $update->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
                     $update->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
@@ -91,9 +92,11 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                     $update->bindValue(':id', $id, PDO::PARAM_INT);
                     $update->execute();
 
+                    $_SESSION['confirm'] = "";
                     header('Location: member.php', true, 307);
                     exit;
                 } else {
+                    // パスワードの記載がない
                     $update = $pdo->prepare("UPDATE members SET name_sei=:name_sei, name_mei=:name_mei, gender=:gender, pref_name=:pref_name, address=:address, email=:email WHERE id=:id");
                     $update->bindValue(':name_sei', $name_sei, PDO::PARAM_STR);
                     $update->bindValue(':name_mei', $name_mei, PDO::PARAM_STR);
@@ -104,6 +107,7 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                     $update->bindValue(':id', $id, PDO::PARAM_INT);
                     $update->execute();
 
+                    $_SESSION['confirm'] = "";
                     header('Location: member.php', true, 307);
                     exit;
                 }

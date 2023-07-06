@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['confirm'] = '登録';
+var_dump($_SESSION);
 
 // エラーメッセージの初期化
 $errors = [];
