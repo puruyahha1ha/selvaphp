@@ -262,7 +262,7 @@
                                                                         echo htmlspecialchars($posts['password_check']);
                                                                     } else {
                                                                         echo htmlspecialchars($posts['password']);
-                                                                    }>">
+                                                                    } ?>">
             </div>
             <!-- エラーメッセージ -->
             <div class="error">
