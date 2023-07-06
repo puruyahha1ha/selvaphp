@@ -1,6 +1,10 @@
 <body>
     <header>
-        <h2>会員登録</h2>
+        <h2><?php if ($_SESSION['confirm'] == "登録") {
+                echo "会員登録";
+            } else {
+                echo "会員編集";
+            } ?></h2>
         <form action="member.php" action="get" class="header_top">
             <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
         </form>
