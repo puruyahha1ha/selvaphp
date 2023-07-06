@@ -145,9 +145,12 @@ try {
             <!-- ID -->
             <div class="id">
                 <p>ID</p>
-                <input type="text" name="id" value="<?php if (!empty($record['id'])) {
-                                                        echo $record['id'];
-                                                    } ?>">
+                <p><?php if (!empty($record['id'])) {
+                        echo $record['id'];
+                    } ?></p>
+                <input type="hidden" name="id" value="<?php if (!empty($record['id'])) {
+                                                            echo $record['id'];
+                                                        } ?>">
             </div>
             <!-- 氏名 -->
             <div class="name">
