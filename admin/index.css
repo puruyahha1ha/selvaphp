@@ -241,3 +241,6 @@ th {
     align-items: center;
     justify-content: center;
 }
+.submit a {
+    text-decoration: none;
+}
