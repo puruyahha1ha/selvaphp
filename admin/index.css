@@ -39,6 +39,7 @@ h1 {
 .submit {
     text-align: center;
     margin: 100px 0;
+
 }
 
 .button {
@@ -241,6 +242,13 @@ th {
     align-items: center;
     justify-content: center;
 }
-.submit a {
+.submit_detail a {
     text-decoration: none;
+}
+
+.submit_detail {
+    text-align: center;
+    margin: 100px 0;
+    display: flex;
+    justify-content: space-evenly;
 }
