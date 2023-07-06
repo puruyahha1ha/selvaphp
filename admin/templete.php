@@ -258,9 +258,11 @@
             <!-- パスワード確認 -->
             <div class="password_check">
                 <p>パスワード確認</p>
-                <input type="password" name="password_check" value="<?php if (!empty($posts['password'])) {
+                <input type="password" name="password_check" value="<?php if (!empty($posts['password_check'])) {
+                                                                        echo htmlspecialchars($posts['password_check']);
+                                                                    } else {
                                                                         echo htmlspecialchars($posts['password']);
-                                                                    } ?>">
+                                                                    }>">
             </div>
             <!-- エラーメッセージ -->
             <div class="error">
