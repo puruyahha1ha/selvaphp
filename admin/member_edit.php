@@ -85,6 +85,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (!filter_var($posts['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email_filter'] = '※有効なメールアドレスを入力してください';
+    } elseif (isset($posts['email'])) {
+        // メールアドレスの存在チェック
+        try {
+            $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
+            $user = 'root';
+            $password = 'kazuto060603';
+
+            $pdo = new PDO($dsn, $user, $password);
+
+            // 該当のID以外に同じメールアドレスがないかのチェック 
+            $prepare = $pdo->prepare('SELECT * FROM members WHERE id <> :id AND email = :email');
+            $prepare->bindValue(':id', $id, PDO::PARAM_STR);
+            $prepare->bindValue(':email', $email, PDO::PARAM_STR);
+            $prepare->execute();
+
+            $record = $prepare->fetch(PDO::FETCH_ASSOC);
+
+            if (isset($record)) {
+                // DBにメールアドレスがある場合
+                $errors['email_filter'] = '※このメールアドレスはすでに使用されています';
+            }
+        } catch (PDOException $e) {
+            if (!empty($pdo)) {
+                $db->rollback();
+            }
+            echo 'DB接続エラー:' . $e->getMessage();
+            return;
+        }
     }
 
     if ($posts['confirm'] === '前に戻る') {
