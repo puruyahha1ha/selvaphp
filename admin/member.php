@@ -23,6 +23,14 @@ if ($_GET['confirm'] == '編集') {
     header("Location: member_edit.php?id={$id}", true, 307);
     exit;
 }
+if ($_GET['confirm'] == '詳細') {
+    $_SESSION['search'] = [];
+    $_SESSION['id_sort'] = [];
+    $_SESSION['create_sort'] = [];
+    $id = $_GET['id'];
+    header("Location: member_detail.php?id={$id}", true, 307);
+    exit;
+}
 try {
     $dsn = 'mysql:dbname=mysql;host=localhost;charset=utf8;';
     $user = 'root';
@@ -404,6 +412,7 @@ try {
                                                                         echo "desc";
                                                                     } ?>" class="sort">▼</a></th>
                 <th>編集</th>
+                <th>詳細</th>
             </tr>
             <?php foreach ($records as $val) : ?>
                 <tr>
@@ -417,6 +426,7 @@ try {
                     <td><?php echo $val['pref_name'] . $val['address']; ?></td>
                     <td><?php echo $val['created_at'] ?></td>
                     <td><a href="member.php?confirm=編集&id=<?php echo $val['id']; ?>">編集</a></td>
+                    <td><a href="member.php?confirm=詳細&id=<?php echo $val['id']; ?>">詳細</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
