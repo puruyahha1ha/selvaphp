@@ -2,7 +2,7 @@
 session_start();
 var_dump($_SESSION);
 //直リンクされた場合リダイレクト
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+if ($_SERVER["REQUEST_METHOD"] !== "POST" || $_SERVER["REQUEST_METHOD"] !== "GET" ) {
     header("Location: member_regist.php");
     exit;
 }
