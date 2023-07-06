@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = 'kazuto060603';
 
             $pdo = new PDO($dsn, $user, $password);
-            
+
             $id = $posts['id'];
             $email = $posts['email'];
 
@@ -122,8 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($posts['confirm'] === '前に戻る') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
-        $_SESSION['confirm'] = '編集';
-
         // エラーの有無チェック
         header('Location: member_confirm.php', true, 307);
         exit;
@@ -144,7 +142,10 @@ try {
     $prepare->bindValue(':id', $id, PDO::PARAM_INT);
     $prepare->execute();
 
-    $posts = $prepare->fetch(PDO::FETCH_ASSOC);
+
+    if (empty($posts)) {
+        $posts = $prepare->fetch(PDO::FETCH_ASSOC);
+    }
 } catch (PDOException $e) {
     if (!empty($pdo)) {
         $db->rollback();
