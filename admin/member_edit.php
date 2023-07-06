@@ -87,10 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email_filter'] = '※有効なメールアドレスを入力してください';
     }
 
-    var_dump($_POST, $posts);
     if ($posts['confirm'] === '前に戻る') {
         // member_confirm.phpからの遷移時は画面を維持
     } elseif (empty($errors)) {
+        $_SESSION['confirm'] = '編集';
+
         // エラーの有無チェック
         header('Location: member_confirm.php', true, 307);
         exit;
