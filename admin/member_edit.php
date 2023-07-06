@@ -93,6 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = 'kazuto060603';
 
             $pdo = new PDO($dsn, $user, $password);
+            
+            $id = $posts['id'];
+            $email = $posts['email'];
 
             // 該当のID以外に同じメールアドレスがないかのチェック 
             $prepare = $pdo->prepare('SELECT * FROM members WHERE id <> :id AND email = :email');
