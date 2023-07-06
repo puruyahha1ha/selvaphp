@@ -126,7 +126,15 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
         return;
     }
 }
-
+if ($_POST['confirm'] === '前に戻る') {
+    if ($_SESSION['confirm'] == "登録") {
+        header('Location: member_regist.php', true, 307);
+        exit;
+    } else {
+        header('Location: member_edit.php', true, 307);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -209,6 +217,7 @@ if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了'
                                                             } ?>" class="button_re" onclick="<?php if ($_POST['confirm'] === '登録完了' || $_POST['confirm'] === '編集完了') {
                                                                                                     echo "disabled = true;";
                                                                                                 } ?>">
+                <input type="submit" name="confirm" value="前に戻る">
             </div>
         </div>
     </form>
