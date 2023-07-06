@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $record = $prepare->fetch(PDO::FETCH_ASSOC);
 
-            if (isset($record)) {
+            if (!empty($record)) {
                 // DBにメールアドレスがある場合
                 $errors['email_filter'] = '※このメールアドレスはすでに使用されています';
             }
