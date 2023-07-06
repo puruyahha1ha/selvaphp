@@ -2,10 +2,10 @@
 session_start();
 var_dump($_SESSION);
 //直リンクされた場合リダイレクト
-// if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-//     header("Location: member_regist.php");
-//     exit;
-// }
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: member_regist.php");
+    exit;
+}
 if ($_GET['confirm'] === '一覧へ戻る') {
     header('Location: member.php', true, 307);
     exit;

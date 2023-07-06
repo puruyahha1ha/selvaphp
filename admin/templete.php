@@ -9,17 +9,17 @@
             <input type="submit" name="confirm" value="一覧へ戻る" class="button_header">
         </form>
     </header>
-    <form action="member_regist.php" method="post">
+    <form action="" method="post">
         <div class="regist_form">
             <!-- ID -->
             <div class="id">
                 <p>ID</p>
-                <?php if ($_SESSION['confirm'] == "登録") {
-                    echo "<p>登録後に自動採番</p>";
-                } else {
-                    echo "<p>{$posts['id']}</p><br>";
-                    echo "<input type='hidden' name='id' value='{$posts['id']}'>";
-                } ?>
+                <?php if ($_SESSION['confirm'] == "登録") : ?>
+                    <p>登録後に自動採番</p>
+                <?php else : ?>
+                    <p><?php echo $posts['id']; ?></p>
+                    <input type='hidden' name='id' value="<?php echo $posts['id']; ?>">
+                <?php endif; ?>
             </div>
             <!-- 氏名 -->
             <div class="name">
