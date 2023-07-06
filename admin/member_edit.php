@@ -1,7 +1,6 @@
 <?php
 session_start();
 $_SESSION['confirm'] = '編集';
-var_dump($_SESSION);
 // エラーメッセージの初期化
 $errors = [];
 if ($_GET['confirm'] === '一覧へ戻る') {
@@ -109,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // DBにメールアドレスがある場合
                 $errors['email_filter'] = '※このメールアドレスはすでに使用されています';
             }
-            var_dump($record);
         } catch (PDOException $e) {
             if (!empty($pdo)) {
                 $db->rollback();
