@@ -78,7 +78,9 @@ try {
             <span class="email_color"><?php echo htmlspecialchars($record["email"]); ?></span>
         </div>
         <div class="submit">
-            <a href="member_detail.php?confirm=編集&id=<?php echo $record['id']; ?>" class="button_re">編集</a>
+            <a href="member_detail.php?confirm=編集&id=<?php echo $record['id']; ?>">
+                <div class="button_re">編集</div>
+            </a>
         </div>
     </div>
 </body>
