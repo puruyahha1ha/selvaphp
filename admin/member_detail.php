@@ -28,7 +28,7 @@ if ($_GET['confirm'] == '削除') {
         return;
     }
     $id = $_GET['id'];
-    header("Location: member_edit.php?id={$id}", true, 307);
+    header("Location: member.php?id={$id}", true, 307);
     exit;
 }
 try {
