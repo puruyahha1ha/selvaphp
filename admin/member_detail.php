@@ -79,7 +79,7 @@ try {
         </div>
         <div class="submit">
             <a href="member_detail.php?confirm=編集&id=<?php echo $record['id']; ?>">
-                <div class="button_re">編集</div>
+                <div class="edit_button">編集</div>
             </a>
         </div>
     </div>
